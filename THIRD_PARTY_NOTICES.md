@@ -1,7 +1,8 @@
 # Third-party notices and data attribution
 
-This project contains no bundled third-party JavaScript libraries. It reads
-data from public APIs at build time:
+This project bundles **Leaflet 1.9.4** (BSD-2-Clause) for the interactive map.
+It reads data from public APIs at build time, and the built HTML requests map
+tiles from the selected basemap provider at view time:
 
 | Source | Data | License / terms | Attribution |
 | --- | --- | --- | --- |
@@ -11,6 +12,9 @@ data from public APIs at build time:
 | [Frankfurter](https://frankfurter.dev/) | Reference exchange rates (ECB) | ECB data, see project terms | Link to frankfurter.dev |
 | [Nager.Date](https://date.nager.at/) | Public holidays | MIT / public data, see project terms | Link to date.nager.at |
 | [TikHub](https://tikhub.io/) (optional, off by default) | Public Xiaohongshu note metadata when the user supplies a key and consents to per-request billing | Third-party API; platform terms and copyright/privacy obligations apply | Link to the note and label the source as community/UGC |
+| [Esri World Street Map](https://www.esri.com/) | Default basemap raster tiles | Esri terms of use; attribution required | "Tiles © Esri" plus data providers shown in the map |
+| [Amap / 高德地图](https://www.amap.com/) | Optional Chinese-label basemap tiles | Amap terms of use; attribution required | "© 高德地图" in the map |
+| [OpenStreetMap tiles](https://www.openstreetmap.org/) | Optional OSM basemap tiles | ODbL data; OSM tile usage policy | "© OpenStreetMap contributors" and a link to openstreetmap.org |
 
 Rate limits and caching obligations are enforced by the provider layer:
 
@@ -24,3 +28,20 @@ Rate limits and caching obligations are enforced by the provider layer:
 
 TikHub is not affiliated with this project. Users are responsible for complying
 with TikHub's terms, Xiaohongshu's platform terms, copyright, and privacy law.
+
+
+## Bundled libraries
+
+### Leaflet 1.9.4
+
+- Path: `vendor/leaflet/leaflet.js`, `vendor/leaflet/leaflet.css`
+- License: BSD-2-Clause (see `vendor/leaflet/LICENSE`)
+- Copyright: 2010-2023 Volodymyr Agafonkin; 2010-2011 CloudMade
+- Source: https://leafletjs.com/ (npm package `leaflet@1.9.4`)
+- Purpose: pan/zoom map, markers, popups, tile layers. It is inlined into the
+  single-file HTML at build time.
+
+The basemap tiles are **not** bundled. They are requested by the browser from
+the selected provider (Esri by default; Amap or OSM optional). Map providers may
+change URLs or terms; the generated HTML includes provider attribution and a
+visible selector so the user can switch or use the address-list fallback.

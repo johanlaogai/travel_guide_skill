@@ -10,13 +10,7 @@ import {
   formatRangeCents,
   summarizeBudget,
 } from '../core/money.mjs';
-import {
-  CONFIDENCE_LABELS,
-  PROVIDER_LABELS,
-  bestConfidence,
-  sourceCoverage,
-  sourceIndex,
-} from '../core/provenance.mjs';
+import { sourceIndex } from '../core/provenance.mjs';
 import { allItems } from '../core/trip.mjs';
 import { WEATHER_CODES } from '../data/providers/open-meteo.mjs';
 import { renderMap, DAY_COLORS } from './map.mjs';
@@ -26,8 +20,7 @@ import {
   escapeAttr,
   escapeHtml,
   safeUrl,
-  sourceChipsHtml,
-  sourceBadgeHtml,
+  sourceLinksHtml,
 } from './sources.mjs';
 import { loadAssets } from './assets.mjs';
 
@@ -71,9 +64,8 @@ const BUDGET_LABELS = {
 };
 
 export async function renderHtml(trip, { now = new Date(), publicMode = false } = {}) {
-  const { css, js } = await loadAssets();
+  const { css, js, leafletCss, leafletJs } = await loadAssets();
   const sources = sourceIndex(trip);
-  const coverage = sourceCoverage(trip);
   const currency = trip.meta.budget.currency || 'CNY';
   const items = allItems(trip);
   const anchors = items.filter((item) => item.type === 'anchor');
@@ -81,6 +73,8 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
   const ics = buildIcs(trip, { now });
   const budget = safeBudget(trip, currency);
   const dataJson = JSON.stringify(trip).replaceAll('<', '\\u003c').replaceAll('\u2028', '\\u2028').replaceAll('\u2029', '\\u2029');
+  const inlineStyle = (text) => String(text).replaceAll('</style>', '<\\/style>');
+  const inlineScript = (text) => String(text).replaceAll('</script>', '<\\/script>');
   const description = (trip.overview?.summary || `${trip.meta.destination.name} ${trip.meta.days} 天行程`).slice(0, 160);
   const dayTabs = [
     `<button class="day-tab is-active" data-day-filter="all">全部 <span class="tab-count">${items.length}</span></button>`,
@@ -104,15 +98,16 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
 <meta name="description" content="${escapeAttr(description)}">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data: https:; font-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <title>${escapeHtml(trip.meta.title)} · Travel Guide</title>
-<style>${css}</style>
+<style>${inlineStyle(leafletCss)}${inlineStyle(css)}</style>
 </head>
 <body>
 <div class="page">
   <header class="hero">
     <div class="hero-top">
-      <div class="brand"><span class="brand-mark" aria-hidden="true">◐</span> Travel Guide <span class="brand-ver">v0.1</span></div>
+      <div class="brand"><span class="brand-mark" aria-hidden="true">◐</span> Travel Guide <span class="brand-ver">v0.2</span></div>
       <div class="actions">
         <button class="btn btn-icon" type="button" data-action="theme" aria-label="切换主题" title="切换主题"><svg data-theme-icon class="icon-theme" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="icon-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path></g><path class="icon-moon" d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"></path></svg></button>
+        <button class="btn btn-edit" type="button" data-action="edit" aria-pressed="false" aria-label="编辑行程" title="编辑行程"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg><span class="btn-label">编辑</span></button>
         <button class="btn" type="button" data-action="print">打印 / PDF</button>
         <button class="btn" type="button" data-action="ics">下载日历</button>
       </div>
@@ -129,14 +124,21 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
       ${trip.meta.interests?.length ? `<span>${escapeHtml(trip.meta.interests.join(' · '))}</span>` : ''}
     </div>
     <div class="hero-stats">
-      <div class="stat"><strong>${anchors.length}</strong><span>计划锚点</span></div>
+      <div class="stat"><strong data-hero-anchors>${anchors.length}</strong><span>计划锚点</span></div>
       <div class="stat"><strong>${budget.ok ? formatRangeCents(budget.minCents, budget.maxCents, budget.currency) : '待补'}</strong><span>预算区间</span></div>
-      <div class="stat"><strong>${coverage.sources}</strong><span>来源记录</span></div>
-      <div class="stat"><strong>${coverage.official}</strong><span>官方来源</span></div>
     </div>
     ${trip.meta.demo ? `<div class="banner"><strong>示例数据</strong><span>这是用快照数据生成的演示行程；营业时间、票价、预约等动态信息请在出行前用官方页面复核。</span></div>` : ''}
     ${publicMode || trip.meta.publicMode ? `<div class="banner is-public"><strong>公开分享版</strong><span>已移除姓名、电话、订单号等个人信息；请仍注意不要公开住宿房间号等细节。</span></div>` : ''}
+    <div id="draft-banner" class="banner is-draft" hidden><strong>本地修改</strong><span>已载入保存在这个浏览器里的修改；要分享修改版，请导出 JSON 后重新构建。</span><button class="banner-action" type="button" data-action="reset-draft">恢复初始</button></div>
   </header>
+
+  <div id="edit-bar" class="edit-bar no-print" hidden>
+    <span>编辑模式：修改只保存在本机，不会上传。</span>
+    <div class="edit-bar-actions">
+      <button class="btn btn-small" type="button" data-action="export-json">导出 JSON</button>
+      <button class="btn btn-small" type="button" data-action="reset-draft">恢复初始</button>
+    </div>
+  </div>
 
   <nav class="day-tabs" aria-label="按天筛选">${dayTabs}</nav>
 
@@ -159,27 +161,24 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
       <div id="empty-state" class="empty-state">没有匹配的项目。试试清空搜索或切回“全部”。</div>
     </section>
 
-    <aside class="sidebar" aria-label="地图与来源">
+    <aside class="sidebar" aria-label="地图与行前信息">
       <div class="map-card">
         <div class="map-head">
-          <div><h2>地图</h2><p>${map.points} 个可落图地点 · WGS84</p></div>
+          <div><h2>地图</h2><p>点击图钉查看当天安排</p></div>
           <div class="map-controls">
+            <select id="basemap-select" class="basemap-select" aria-label="切换地图底图" title="切换底图">
+              <option value="esri">Esri 街道</option>
+              <option value="amap">高德中文</option>
+              <option value="osm">OpenStreetMap</option>
+            </select>
             <button class="map-btn" type="button" data-map-zoom="in" aria-label="放大地图" title="放大">+</button>
             <button class="map-btn" type="button" data-map-zoom="out" aria-label="缩小地图" title="缩小">−</button>
             <button class="map-btn" type="button" data-map-zoom="reset" aria-label="重置地图" title="重置">↺</button>
           </div>
         </div>
-        <div class="map-frame">${map.svg}</div>
+        <div class="map-frame">${map.html}</div>
         ${map.empty ? '' : `<div class="map-legend">${(trip.days ?? []).map((day, index) => `<span class="legend-item day-c${index + 1}"><span class="legend-dot" aria-hidden="true"></span>Day ${index + 1}</span>`).join('')}</div>`}
-        <div class="map-foot">自绘示意图，不是导航底图。高德链接按名称搜索，避免 WGS84/GCJ-02 偏移；Google/OSM 使用 WGS84 坐标。</div>
-      </div>
-
-      <div class="source-summary">
-        <h2>来源覆盖</h2>
-        <p>${coverage.sourced}/${coverage.anchored} 个锚点/餐饮有来源记录</p>
-        <div class="coverage-bar"><span style="width:${coverage.sourcedPct}%"></span></div>
-        <p class="micro">官方 ${coverage.official} · 预报 ${coverage.byConfidence.forecast ?? 0} · 社区 ${coverage.byConfidence.community ?? 0} · 待核实 ${coverage.byConfidence.unverified ?? 0}</p>
-        <p class="micro">数据截止：${escapeHtml(trip.provenance?.lastCheckedAt || trip.meta.updatedAt || trip.meta.generatedAt || '未记录')}</p>
+        <div class="map-foot">底图：Esri / 高德 / OSM，仅地图瓦片请求网络。地图用于看顺序，不替代导航。</div>
       </div>
 
       ${trip.overview?.risks?.length ? `<div class="panel">
@@ -204,11 +203,6 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
     ${renderBooking(trip, sources)}
   </section>
 
-  <section class="sources-section" aria-labelledby="sources-title">
-    <div class="section-head"><h2 id="sources-title" class="section-title">数据来源与时效</h2><p>${coverage.sources} 条记录 · 点开可复核</p></div>
-    ${renderSources(trip)}
-  </section>
-
   <section class="emergency-section" aria-labelledby="emergency-title">
     <div class="section-head"><h2 id="emergency-title" class="section-title">紧急与实用信息</h2><p>出发前请再核对当地号码</p></div>
     ${renderEmergency(trip)}
@@ -216,14 +210,17 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
 
   <footer class="footer">
     <div class="attrib">${attributionHtml()}</div>
-    <div>由 travel-guide v0.1.0 生成 · ${escapeHtml(new Date(now).toISOString())} · 行程数据来自 trip.json，HTML 不发起网络请求。</div>
+    <div>由 travel-guide v0.2.0 生成 · ${escapeHtml(new Date(now).toISOString())} · 行程数据来自 trip.json；仅地图底图请求瓦片，行程数据不联网。</div>
     <div>信息会变化；营业时间、票价、预约、交通管制等以官方当日公告为准。本工具不提供下单、支付、实时导航或签证法律意见。</div>
-    <div class="no-print">来源说明与未核实项见 <code>sources.md</code>；重新生成：<code>travel-guide build --trip trip.json</code></div>
+    <div>来源链接在各行程卡片上；完整来源记录随 build 生成在 <code>sources.md</code>。重新生成：<code>travel-guide build --trip trip.json</code></div>
   </footer>
 </div>
+${renderEditorDialogs(currency)}
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 <script type="application/json" id="trip-data">${dataJson}</script>
 <script type="text/plain" id="ics-data">${escapeHtml(ics)}</script>
-<script>${js.replaceAll('</script>', '<\\/script>')}</script>
+<script>${inlineScript(leafletJs)}</script>
+<script>${inlineScript(js)}</script>
 </body>
 </html>`;
 }
@@ -232,12 +229,16 @@ function renderDay(day, index, trip, sources, currency) {
   const items = day.items ?? [];
   const weather = renderWeather(day, sources);
   const transitMinutes = items.reduce((sum, item) => sum + (Number(item.transit?.durationMin) || 0), 0);
-  return `<section class="day day-c${index + 1}" id="day-${index + 1}" data-day="${index + 1}">
+  return `<section class="day day-c${index + 1}" id="day-${index + 1}" data-day="${index + 1}" data-day-index="${index}">
     <header class="day-head">
       <div class="day-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</div>
-      <div>
+      <div class="day-title-wrap">
         <h2>${escapeHtml(day.title || `Day ${index + 1}`)}</h2>
         <p class="day-sub">${escapeHtml(formatDateZh(day.date, { withYear: false }))} ${escapeHtml(day.weekday ?? '')}${day.area ? ` · ${escapeHtml(day.area)}` : ''}</p>
+        <div class="day-actions edit-only">
+          <button type="button" class="btn btn-small" data-edit-day="${index}">编辑这天</button>
+          <button type="button" class="btn btn-small" data-add-item="${index}">+ 添加项目</button>
+        </div>
       </div>
       ${weather}
     </header>
@@ -250,22 +251,21 @@ function renderDay(day, index, trip, sources, currency) {
 
 function renderWeather(day, sources) {
   const weather = day.weather;
-  if (!weather) return `<div class="day-weather"><span class="weather-label">天气待补</span><span class="source-badge is-empty">无来源</span></div>`;
+  if (!weather) return `<div class="day-weather"><span class="weather-label">天气待补</span></div>`;
   const icon = WEATHER_CODES[weather.weatherCode]?.icon ?? 'cloud';
   const source = weather.sourceId ? sources.get(weather.sourceId) : null;
+  const sourceUrl = safeUrl(source?.url);
   return `<div class="day-weather">
     <div class="weather-icon" aria-hidden="true">${weatherIcon(icon)}</div>
     <strong>${weather.high != null ? `${Math.round(weather.high)}°` : '—'}${weather.low != null ? ` / ${Math.round(weather.low)}°` : ''}</strong>
     <span class="weather-label">${escapeHtml(weather.summary ?? '天气')}${weather.climate ? ' · 气候' : ''}</span>
     ${weather.precipitationProbability != null ? `<span class="weather-label">降雨 ${weather.precipitationProbability}%</span>` : ''}
-    ${source ? sourceBadgeHtml(source) : '<span class="source-badge is-empty">无来源</span>'}
+    ${sourceUrl ? `<a class="weather-source" href="${escapeAttr(sourceUrl)}" target="_blank" rel="noopener noreferrer" data-external title="打开 Open-Meteo 来源">天气来源</a>` : ''}
   </div>`;
 }
 
 function renderItem(item, day, dayIndex, trip, sources, currency) {
   const place = item.place ?? {};
-  const itemSources = (item.sourceIds ?? []).map((id) => sources.get(id)).filter(Boolean);
-  const confidence = item.confidence || bestConfidence(itemSources) || 'unverified';
   const type = item.type ?? 'other';
   const time = item.start && item.end ? `${item.start}–${item.end}` : (item.start ?? '');
   let duration = '';
@@ -273,16 +273,22 @@ function renderItem(item, day, dayIndex, trip, sources, currency) {
     try { duration = formatDuration(durationMinutes(item.start, item.end)); } catch { duration = ''; }
   }
   const search = [item.title, place.name, place.address, item.notes, item.booking?.note, ...(item.tags ?? [])].filter(Boolean).join(' ');
+  const hasCoord = Number.isFinite(place.lat) && Number.isFinite(place.lon);
   const links = [];
-  if (place.lat != null && place.lon != null) {
+  if (hasCoord) {
     links.push(`<button type="button" data-focus-item="${escapeAttr(item.id)}">地图定位</button>`);
-    links.push(`<a href="https://www.openstreetmap.org/?mlat=${Number(place.lat)}&mlon=${Number(place.lon)}#map=16/${Number(place.lat)}/${Number(place.lon)}" target="_blank" rel="noopener noreferrer">OSM</a>`);
-    links.push(`<a href="https://www.google.com/maps/search/?api=1&query=${Number(place.lat)},${Number(place.lon)}" target="_blank" rel="noopener noreferrer">Google</a>`);
+    links.push(`<a href="https://www.openstreetmap.org/?mlat=${Number(place.lat)}&mlon=${Number(place.lon)}#map=16/${Number(place.lat)}/${Number(place.lon)}" target="_blank" rel="noopener noreferrer" data-external>OSM</a>`);
+    links.push(`<a href="https://www.google.com/maps/search/?api=1&query=${Number(place.lat)},${Number(place.lon)}" target="_blank" rel="noopener noreferrer" data-external>Google</a>`);
   }
   if (place.name) {
     const query = encodeURIComponent(`${place.name} ${trip.meta.destination.name}`);
-    links.push(`<a href="https://www.amap.com/search?query=${query}" target="_blank" rel="noopener noreferrer">高德搜索</a>`);
+    links.push(`<a href="https://www.amap.com/search?query=${query}" target="_blank" rel="noopener noreferrer" data-external>高德搜索</a>`);
   }
+  links.push(`<button type="button" class="edit-only" data-edit-item="${escapeAttr(item.id)}">编辑</button>`);
+  links.push(`<button type="button" class="edit-only" data-move-item="${escapeAttr(item.id)}" data-move-dir="up" aria-label="上移">上移</button>`);
+  links.push(`<button type="button" class="edit-only" data-move-item="${escapeAttr(item.id)}" data-move-dir="down" aria-label="下移">下移</button>`);
+  links.push(`<button type="button" class="edit-only is-danger" data-delete-item="${escapeAttr(item.id)}">删除</button>`);
+
   const chips = [];
   if (item.cost?.amount != null) {
     chips.push(`<span class="chip-static is-cost">${escapeHtml(formatCents(Number(item.cost.amount) * 100, item.cost.currency ?? currency))}</span>`);
@@ -293,13 +299,12 @@ function renderItem(item, day, dayIndex, trip, sources, currency) {
   if (item.transit) {
     chips.push(`<span class="chip-static">${escapeHtml(TRANSIT_LABELS[item.transit.mode] ?? item.transit.mode)} ${item.transit.durationMin ?? '?'} 分钟</span>`);
   }
-  if (confidence) {
-    chips.push(`<span class="chip-static${confidence === 'unverified' ? ' is-warn' : ''}">${escapeHtml(CONFIDENCE_LABELS[confidence] ?? confidence)}</span>`);
-  }
   const transit = item.transit
     ? `<div class="transit-line"><span>从上一站</span><span class="transit-mode">${escapeHtml(TRANSIT_LABELS[item.transit.mode] ?? item.transit.mode)}</span><span>${item.transit.durationMin ?? '?'} 分钟</span>${item.transit.distanceKm ? `<span>· ${item.transit.distanceKm} km</span>` : ''}${item.transit.note ? `<span>· ${escapeHtml(item.transit.note)}</span>` : ''}</div>`
     : '';
-  const booking = item.booking?.required ? `<div class="transit-line"><span>预约</span><span>${escapeHtml(BOOKING_STATUS_LABELS[item.booking.status] ?? item.booking.status ?? '待确认')}</span>${item.booking.deadline ? `<span>· 截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}${safeUrl(item.booking.url) ? `· <a href="${escapeAttr(safeUrl(item.booking.url))}" target="_blank" rel="noopener noreferrer">官方链接</a>` : ''}</div>` : '';
+  const bookingUrl = safeUrl(item.booking?.url);
+  const booking = item.booking?.required ? `<div class="transit-line"><span>预约</span><span>${escapeHtml(BOOKING_STATUS_LABELS[item.booking.status] ?? item.booking.status ?? '待确认')}</span>${item.booking.deadline ? `<span>· 截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}${bookingUrl ? `· <a href="${escapeAttr(bookingUrl)}" target="_blank" rel="noopener noreferrer" data-external>官方链接</a>` : ''}</div>` : '';
+  const sourceLinks = sourceLinksHtml(trip, item.sourceIds ?? []);
   return `<article class="item type-${escapeAttr(type)}" id="item-${escapeAttr(item.id)}" data-item-id="${escapeAttr(item.id)}" data-day="${dayIndex + 1}" data-type="${escapeAttr(type)}" data-search="${escapeAttr(search)}">
     <div class="item-rail"><span class="item-time">${escapeHtml(time)}</span><span class="item-duration">${escapeHtml(duration)}</span><span class="item-dot" aria-hidden="true"></span></div>
     <div class="item-card">
@@ -309,8 +314,8 @@ function renderItem(item, day, dayIndex, trip, sources, currency) {
       ${transit}
       ${booking}
       ${chips.length ? `<div class="chips">${chips.join('')}</div>` : ''}
-      ${item.sourceIds?.length ? `<div class="sources-row">${sourceChipsHtml(trip, item.sourceIds)}</div>` : '<div class="sources-row"><span class="source-badge is-empty">无来源</span></div>'}
       ${item.notes ? `<p class="item-notes">${escapeHtml(item.notes)}</p>` : ''}
+      ${sourceLinks}
       ${links.length ? `<div class="item-actions">${links.join('')}</div>` : ''}
     </div>
   </article>`;
@@ -367,30 +372,65 @@ function renderBooking(trip, sources) {
   const items = trip.bookingChecklist ?? [];
   return `<div class="check-panel">
     <div class="section-head"><h2 class="section-title">预约与行前确认</h2><span class="check-progress"><span data-progress-text="booking">0/${items.length}</span><span class="bar" data-progress-for="booking"><span></span></span></span></div>
-    ${items.length ? `<ul class="check-list">${items.map((item) => `<li class="check-item"><input type="checkbox" data-persist="booking:${escapeAttr(item.id)}" aria-label="${escapeAttr(item.label)}"${item.status === 'done' ? ' checked' : ''}><span>${escapeHtml(item.label)}${item.required ? ' <span class="chip-static is-booking">必做</span>' : ''}${safeUrl(item.url) ? ` <a href="${escapeAttr(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">官方</a>` : ''}${item.sourceIds?.length ? `<span class="sources-row">${sourceChipsHtml(trip, item.sourceIds, 2)}</span>` : ''}</span>${item.deadline ? `<span class="deadline" data-deadline="${escapeAttr(item.deadline)}">${escapeHtml(item.deadline)}</span>` : ''}</li>`).join('')}</ul>` : '<p class="check-empty">还没有预约项。热门博物馆/观景台通常需要提前预约。</p>'}
+    ${items.length ? `<ul class="check-list">${items.map((item) => `<li class="check-item"><input type="checkbox" data-persist="booking:${escapeAttr(item.id)}" aria-label="${escapeAttr(item.label)}"${item.status === 'done' ? ' checked' : ''}><span>${escapeHtml(item.label)}${item.required ? ' <span class="chip-static is-booking">必做</span>' : ''}${safeUrl(item.url) ? ` <a href="${escapeAttr(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer" data-external>官方</a>` : ''}</span>${item.deadline ? `<span class="deadline" data-deadline="${escapeAttr(item.deadline)}">${escapeHtml(item.deadline)}</span>` : ''}</li>`).join('')}</ul>` : '<p class="check-empty">还没有预约项。热门博物馆/观景台通常需要提前预约。</p>'}
   </div>`;
 }
 
-function renderSources(trip) {
-  const sources = trip.sources ?? [];
-  if (!sources.length) return `<div class="budget-empty">还没有来源记录。先运行 <code>enrich</code>，或手动补 <code>sources</code>。</div>`;
-  const counts = {};
-  for (const source of sources) counts[source.confidence] = (counts[source.confidence] ?? 0) + 1;
-  const filters = ['all', 'official', 'verified', 'forecast', 'community', 'estimate', 'unverified']
-    .filter((key) => key === 'all' || counts[key])
-    .map((key) => `<button class="chip${key === 'all' ? ' is-active' : ''}" type="button" data-source-filter="${key}">${key === 'all' ? '全部' : escapeHtml(CONFIDENCE_LABELS[key] ?? key)} ${key === 'all' ? sources.length : counts[key]}</button>`)
+
+function renderEditorDialogs(currency) {
+  const typeOptions = Object.entries(TYPE_LABELS).map(([value, label]) => `<option value="${escapeAttr(value)}">${escapeHtml(label)}</option>`).join('');
+  const transitOptions = Object.entries(TRANSIT_LABELS).map(([value, label]) => `<option value="${escapeAttr(value)}">${escapeHtml(label)}</option>`).join('');
+  const categoryOptions = Object.entries(CATEGORY_LABELS).map(([value, label]) => `<option value="${escapeAttr(value)}">${escapeHtml(label)}</option>`).join('');
+  const currencyOptions = ['CNY', 'USD', 'EUR', 'JPY', 'THB', 'SGD']
+    .map((value) => `<option value="${value}"${value === currency ? ' selected' : ''}>${value}</option>`)
     .join('');
-  const rows = sources.map((source) => {
-    const url = /^https?:\/\//i.test(source.url ?? '')
-      ? `<a href="${escapeAttr(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.url)}</a>`
-      : `<span>${escapeHtml(source.url || '无链接')}</span>`;
-    return `<div class="source-row" data-confidence="${escapeAttr(source.confidence)}">
-      <span class="confidence-pill" data-confidence="${escapeAttr(source.confidence)}"><span class="badge-dot"></span>${escapeHtml(CONFIDENCE_LABELS[source.confidence] ?? source.confidence)}</span>
-      <div><div class="src-title">${escapeHtml(source.title || '(无标题)')}</div><div class="src-meta">${escapeHtml(PROVIDER_LABELS[source.provider] ?? source.provider)} · ${escapeHtml(source.transport)} · ${escapeHtml(source.retrievedAt)} · ${escapeHtml(source.license)}${source.rawHash ? ` · ${escapeHtml(String(source.rawHash).slice(0, 14))}` : ''}</div><div class="src-meta">${url}</div></div>
-      <span class="src-provider">${escapeHtml(source.kind)}</span>
-    </div>`;
-  }).join('');
-  return `<div class="chips" style="margin-bottom:10px">${filters}</div><div class="sources-table">${rows}</div>`;
+  return `<dialog id="item-dialog" class="editor-dialog" aria-labelledby="item-dialog-title">
+  <form id="item-form" class="editor-form" novalidate>
+    <div class="editor-head"><div><p class="editor-kicker">编辑行程</p><h2 id="item-dialog-title">修改这一项</h2></div><button class="editor-close" type="button" data-editor-cancel aria-label="关闭">×</button></div>
+    <input type="hidden" id="f-item-id">
+    <div class="form-grid">
+      <label class="field"><span>类型</span><select id="f-type">${typeOptions}</select></label>
+      <label class="field field-wide"><span>标题</span><input id="f-title" type="text" maxlength="120" required placeholder="例如：云南省博物馆"></label>
+      <label class="field"><span>开始</span><input id="f-start" type="time" required></label>
+      <label class="field"><span>结束</span><input id="f-end" type="time" required></label>
+      <label class="field field-wide"><span>地点名</span><input id="f-place-name" type="text" maxlength="120" placeholder="云南省博物馆"></label>
+      <label class="field field-wide"><span>地址</span><input id="f-place-address" type="text" maxlength="200" placeholder="广福路 6393 号"></label>
+      <label class="field"><span>纬度</span><input id="f-lat" type="number" step="any" min="-90" max="90" inputmode="decimal" placeholder="25.03889"></label>
+      <label class="field"><span>经度</span><input id="f-lon" type="number" step="any" min="-180" max="180" inputmode="decimal" placeholder="102.71833"></label>
+      <p class="field-hint field-wide">经纬度使用 WGS84；不填坐标时这项不会出现在地图上。</p>
+      <label class="field"><span>交通方式</span><select id="f-transit-mode"><option value="">不填</option>${transitOptions}</select></label>
+      <label class="field"><span>交通分钟</span><input id="f-transit-min" type="number" min="0" max="1440" step="1" inputmode="numeric"></label>
+      <label class="field"><span>距离 km</span><input id="f-distance-km" type="number" min="0" max="2000" step="0.1" inputmode="decimal"></label>
+      <label class="field"><span>费用金额</span><input id="f-cost-amount" type="number" min="0" step="0.01" inputmode="decimal"></label>
+      <label class="field"><span>币种</span><select id="f-cost-currency">${currencyOptions}</select></label>
+      <label class="field"><span>费用分类</span><select id="f-cost-category">${categoryOptions}</select></label>
+      <label class="field field-wide"><span>备注</span><textarea id="f-notes" rows="3" maxlength="800" placeholder="开放时间、注意事项、为什么这样排…"></textarea></label>
+      <label class="field"><span>开放时间</span><input id="f-opening-hours" type="text" maxlength="120" placeholder="09:00–17:00，周一闭馆"></label>
+      <label class="field"><span>票价</span><input id="f-ticket-price" type="text" maxlength="120" placeholder="免费 / ¥60"></label>
+      <label class="field field-wide"><span>预约链接</span><input id="f-booking-url" type="url" maxlength="500" placeholder="https://…"></label>
+      <label class="field"><span>预约截止</span><input id="f-booking-deadline" type="date"></label>
+      <label class="field field-check"><input id="f-booking-required" type="checkbox"><span>需要预约</span></label>
+    </div>
+    <p id="item-editor-error" class="form-error" role="alert" hidden></p>
+    <div class="editor-actions">
+      <button class="btn btn-danger" type="button" data-editor-delete>删除</button>
+      <span class="editor-spacer"></span>
+      <button class="btn" type="button" data-editor-cancel>取消</button>
+      <button class="btn btn-primary" type="button" data-editor-save>保存</button>
+    </div>
+  </form>
+</dialog>
+<dialog id="day-dialog" class="editor-dialog" aria-labelledby="day-dialog-title">
+  <form id="day-form" class="editor-form" novalidate>
+    <div class="editor-head"><div><p class="editor-kicker">编辑行程</p><h2 id="day-dialog-title">修改当天标题</h2></div><button class="editor-close" type="button" data-day-cancel aria-label="关闭">×</button></div>
+    <div class="form-grid">
+      <label class="field field-wide"><span>当天标题</span><input id="f-day-title" type="text" maxlength="80" required></label>
+      <label class="field field-wide"><span>区域</span><input id="f-day-area" type="text" maxlength="80" placeholder="例如：五华区 / 古城区"></label>
+    </div>
+    <p id="day-editor-error" class="form-error" role="alert" hidden></p>
+    <div class="editor-actions"><span class="editor-spacer"></span><button class="btn" type="button" data-day-cancel>取消</button><button class="btn btn-primary" type="button" data-day-save>保存</button></div>
+  </form>
+</dialog>`;
 }
 
 function renderEmergency(trip) {

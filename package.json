@@ -1,6 +1,6 @@
 {
   "name": "travel-guide-skill",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Verifiable, interactive travel-guide skill for DeepSeek Harness",
   "type": "module",

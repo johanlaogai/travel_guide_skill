@@ -203,6 +203,21 @@ GET https://www.wikidata.org/w/api.php
 - `--refresh`：绕过 TTL 重新拉取。
 - `TRAVEL_GUIDE_PROXY`/`HTTPS_PROXY`：通过 `curl` 子进程走代理（零 npm 依赖）；不打印代理凭证。
 
+## 8.5 底图瓦片（查看 HTML 时）
+
+地图不是数据事实源，只是展示层；Leaflet 1.9.4 已内联，瓦片由浏览器在查看时请求。
+
+| 底图 | URL 模板 | 坐标 | 归属 | 说明 |
+| --- | --- | --- | --- | --- |
+| Esri World Street Map（默认） | `https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}` | WGS84 | “Tiles © Esri” | 无需 key；本机实测可达 |
+| 高德中文 | `https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}` | GCJ-02 | “© 高德地图” | 需把 WGS84 点转 GCJ-02；非官方 key，仅底图展示 |
+| OpenStreetMap | `https://tile.openstreetmap.org/{z}/{x}/{y}.png` | WGS84 | “© OpenStreetMap contributors” | 遵守 OSM tile 使用政策；本机可能不可达 |
+
+- 瓦片请求不受 `connect-src 'none'` 限制，因为 `<img>` 走 `img-src`；CSP 仍阻止 `fetch`/XHR。
+- 瓦片失败时 Leaflet 显示提示；无坐标或无瓦片时回退到地址列表。
+- 需要在 Esri/高德/OSM 之间切换时，HTML 右上角底图选择器会写入 `localStorage`。
+- 公开分享前确认底图供应商条款；底图不是 OpenStreetMap 数据，不要混淆归属。
+
 ## 9. 归属清单
 
 HTML footer 与 `sources.md` 会自动带：

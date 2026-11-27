@@ -1,6 +1,6 @@
 ---
 name: travel-guide
-description: 规划、复刻、修订和交付可核验的旅行行程：从攻略链接/截图提取地点，按地理位置与交通排程，查天气/开放/预约/预算，输出单文件交互 HTML（地图、清单、预算、ICS、来源徽章）。Use when the user asks for a trip plan, itinerary, travel guide, 攻略复刻, 行程修订, 行前检查, or 旅游记账.
+description: 规划、复刻、修订和交付可核验的旅行行程：从攻略链接/截图提取地点，按地理位置与交通排程，查天气/开放/预约/预算，输出单文件交互 HTML（真实地图、可编辑、清单、预算、ICS、卡片内来源链接）。Use when the user asks for a trip plan, itinerary, travel guide, 攻略复刻, 行程修订, 行前检查, or 旅游记账.
 ---
 
 # Travel Guide
@@ -167,7 +167,7 @@ node bin/travel-guide.mjs expenses --trip <trip.json> --csv expenses.csv --settl
 - `estimate`：交通时长/预算/节奏等启发式。
 - `unverified`：明确未核验，HTML 红色徽章。
 
-HTML 会显示来源徽章和“数据来源与时效”面板；`sources.md` 是完整台账。
+HTML 把来源链接放在每条行程卡片内；`sources.md` 是完整台账。顶部「编辑」可就地修改/新增/删除/排序并导出 `trip.json`，修改只存浏览器 localStorage。
 
 ## 数据源与合规
 

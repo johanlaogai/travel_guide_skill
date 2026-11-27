@@ -2,7 +2,7 @@
 
 ## 一句话
 
-`trip.json` 是唯一事实源；Node CLI 做校验、数据融合和渲染；`index.html` 是构建产物，构建后不联网。
+`trip.json` 是唯一事实源；Node CLI 做校验、数据融合和渲染；`index.html` 是构建产物，构建后行程数据不联网，只有底图瓦片会请求第三方。
 
 ```
 用户/agent
@@ -42,10 +42,15 @@ trip.json ──enrich──► providers ──► sources[] + days[].weather +
 | `src/data/providers/*` | 各数据源适配器 |
 | `src/data/enrich.mjs` | 地理编码→天气→POI→Wiki→汇率/假期 |
 | `src/render/html.mjs` | 单文件 HTML |
-| `src/render/map.mjs` | 自绘 SVG 地图 |
+| `src/render/map.mjs` | Leaflet 地图壳、点收集、无坐标回退 |
 | `src/render/ics.mjs` | UTC VEVENT |
 | `src/render/markdown.mjs` | Markdown/来源台账 |
-| `src/render/sources.mjs` | 徽章/归属/转义 |
+| `src/render/sources.mjs` | 卡片内来源链接/归属/转义 |
+| `src/render/assets.mjs` | 读取并内联 CSS/Leaflet/客户端脚本 |
+| `src/render/assets/timeline.js` | 编辑后客户端重渲染时间线 |
+| `src/render/assets/map.js` | Leaflet 初始化、底图切换、筛选、focusItem |
+| `src/render/assets/editor.js` | 编辑 dialog、草稿、导出/恢复 |
+| `src/render/assets/app.js` | 筛选/地图联动/主题/外链回退/清单/ICS |
 
 ## 来源模型
 
@@ -92,12 +97,15 @@ trip.json ──enrich──► providers ──► sources[] + days[].weather +
 
 ## 渲染
 
-- HTML 内联 CSS/JS，无外部脚本；
-- CSP：`default-src 'none'; connect-src 'none'; img-src data: https:`；
-- `trip` JSON 内嵌到 `<script type="application/json">`，`<` 转义；
+- HTML 内联 CSS/JS 和 Leaflet 1.9.4（BSD-2-Clause），无外部脚本；
+- CSP：`default-src 'none'; connect-src 'none'; img-src data: https:`；只允许地图瓦片作为图片加载；
+- `trip` JSON 内嵌到 `<script type="application/json">`，`<` 转义；编辑草稿存 `localStorage`，不上传；
 - ICS 内嵌到 `<script type="text/plain">`，下载用 Blob；
-- 地图是等距投影 SVG，WGS84；高德深链按名称搜索，避免 GCJ-02；
-- 所有用户数据 `escapeHtml`/`escapeAttr`；链接只允许 http(s)（来源徽章/预约链接）。
+- 地图默认 Esri World Street Map（WGS84）；高德底图在客户端做 WGS84→GCJ-02；OSM 可选；瓦片失败或无坐标时显示地址列表；
+- 来源链接放在行程卡片内：官方/天气为 `data-external` 超链接，手工整理项显示不可点“行程整理”；不再渲染来源覆盖统计、来源表或来源筛选；
+- 外链统一事件委托：`window.open` 被拦截时回退 `location.href`；“地图定位”调用 Leaflet `focusItem`；
+- 编辑模式支持修改/新增/删除/上移/下移和改当天标题；新增项自动补 `src-editor-manual` 来源；导出 `trip.json`，恢复初始删除草稿并刷新；
+- 所有用户数据 `escapeHtml`/`escapeAttr`；链接只允许 http(s)。
 
 ## 构建
 

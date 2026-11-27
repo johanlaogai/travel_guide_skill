@@ -1,6 +1,6 @@
 # travel-guide
 
-一个面向 [DeepSeek Harness](https://github.com/deepseek-ai) 的**可核验旅行规划 skill**：把目的地、日期和偏好，变成一份带来源台账、可离线打开、可交互的单文件 HTML 行程。
+一个面向 [DeepSeek Harness](https://github.com/deepseek-ai) 的**可核验旅行规划 skill**：把目的地、日期和偏好，变成一份带来源台账、可离线打开、可交互、可就地编辑的单文件 HTML 行程。
 
 不是“让模型写一段攻略”。每条营业时间、票价、预约规则都能点回来源；查不到就标“待核实”，不猜。
 
@@ -11,13 +11,13 @@
 - **修订**：加/删地点、换天、带老人小孩、改预算后，重算交通与检查项。
 - **行前检查**：天气、闭馆、预约、证件、保险、行李、紧急信息。
 - **记账分账**：CSV 记账，按分计算，多人等分余数确定性分配，输出最少转账。
-- **交付**：单文件交互 HTML + Markdown + ICS + 来源台账 + 构建回执。
+- **交付**：单文件交互 HTML（真实地图、可编辑/导出）+ Markdown + ICS + 来源台账 + 构建回执。
 
 主产物：
 
 ```
 dist/
-├── index.html          # 单文件交互页：地图、切天、筛选、预算、清单、来源、打印、ICS
+├── index.html          # 单文件交互页：真实地图、切天、筛选、预算、清单、编辑、打印、ICS
 ├── itinerary.md        # 可复制到聊天/文档
 ├── sources.md          # 完整来源台账
 ├── trip.ics            # 日历
@@ -128,15 +128,17 @@ node bin/travel-guide.mjs doctor
 
 ## 交互 HTML
 
-`index.html` 是自包含文件：
+`index.html` 是自包含文件，Leaflet 1.9.4 内联，地图瓦片在查看时按需加载：
 
-- 自绘 SVG 地图（WGS84），不依赖 Leaflet/瓦片；高德深链按名称搜索，避免 GCJ-02 偏移；
-- 按天切换、按类型筛选、搜索、地图与卡片联动、深链接；
+- **真实地图**：默认 Esri World Street Map（WGS84），可切高德中文底图（自动 WGS84→GCJ-02）或 OSM；支持缩放、拖动、重置、按天/类型/搜索筛选和卡片联动；瓦片失败或无坐标时回退到地址列表；
+- **可就地编辑**：顶部「编辑」→ 修改/新增/删除/上移/下移行程项、改当天标题；修改只存本机 `localStorage`，刷新保留；可导出 `trip.json` 或恢复初始版本；导出的新锚点自动带“用户在 HTML 中编辑”来源；
+- 按天切换、按类型筛选、搜索、深链接；
 - 预算环形图与分类区间；
 - 行李/预约清单，勾选状态存 `localStorage`；
-- 来源徽章与来源筛选、官方/预报/社区/待核实；
+- **来源放在卡片上**：官方/天气来源是可点击的超链接；只有手工整理、没有官方链接的项显示不可点的“行程整理”，不再有单独的来源覆盖统计或来源表；
+- 外链点击优先新标签打开，被浏览器拦截时回退当前页；“地图定位”直接聚焦地图 marker；
 - 明/暗主题、打印/PDF、ICS 下载；
-- CSP：`connect-src 'none'`，构建后不发起网络请求；
+- CSP 允许地图图片（`img-src data: https:`），但禁止 `connect-src`；行程数据不联网，只有底图瓦片会请求第三方；
 - 字体用系统 CJK 字体栈，不打包字体、不发字体请求；纯 Linux/容器若缺中文字体，请安装 Noto Sans CJK（如 `fonts-noto-cjk`）。
 
 浏览器验收清单见 [references/delivery.md](references/delivery.md)。
@@ -154,7 +156,9 @@ src/
 │   ├── providers/       # Open-Meteo/Nominatim/Overpass/Wikimedia/Frankfurter/Nager/TikHub
 │   ├── context.mjs      # cache + limiter + UA
 │   └── enrich.mjs       # 数据融合
-└── render/              # HTML/SVG 地图/ICS/Markdown/来源徽章
+└── render/              # HTML/Leaflet 地图壳/ICS/Markdown/来源链接
+    └── assets/          # 内联 CSS + timeline/map/editor/app 客户端脚本
+vendor/leaflet/          # Leaflet 1.9.4（BSD-2-Clause，内联进 HTML）
 schemas/                 # trip/source JSON Schema
 references/              # skill 的分主题操作手册
 docs/                    # 数据源、TikHub、架构
@@ -181,7 +185,8 @@ npm run demo      # 离线演示
 - `--public` 会清空紧急联系人、删除订单/确认号、脱敏电话/邮箱/证件号，并在 HTML 顶部显示“公开分享版”。
 - `trips/`、`.travel-guide-cache/`、`.env`、`*.private.*` 默认被 `.gitignore` 忽略。
 - TikHub Key 只从 `TIKHUB_API_KEY` 读取，不写入 `trip.json`、HTML、日志或 git。
-- HTML 构建后不发起网络请求；但来源链接是外部链接，点击后受目标站点隐私政策约束。
+- 生成的 HTML 不向本 skill 的服务器发送行程数据；查看地图时浏览器会向所选底图供应商请求瓦片，来源/地图外链也受目标站点隐私政策约束。
+- 编辑内容只保存在浏览器 `localStorage`，不会自动上传；导出 `trip.json` 后自行决定是否分享。
 
 ## 不做什么
 

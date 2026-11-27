@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { loadTrip } from '../src/core/trip.mjs';
 import { renderHtml } from '../src/render/html.mjs';
 import { renderMap } from '../src/render/map.mjs';
+import { sourceLinksHtml } from '../src/render/sources.mjs';
 import { buildIcs } from '../src/render/ics.mjs';
 import { buildMarkdown, buildSourcesMarkdown } from '../src/render/markdown.mjs';
 import { sha256 } from '../src/core/ids.mjs';
@@ -18,16 +19,22 @@ const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const TRIP = path.join(ROOT, 'examples/guangzhou-3d/trip.json');
 const NOW = '2026-11-27T00:00:00.000Z';
 
-test('渲染：单文件 HTML、SVG 地图、Markdown 与 ICS 都包含关键内容', async () => {
+test('渲染：单文件 HTML、Leaflet 地图、Markdown 与 ICS 都包含关键内容', async () => {
   const trip = await loadTrip(TRIP);
   const now = new Date(NOW);
   const html = await renderHtml(trip, { now });
   assert.match(html, /^<!doctype html>/);
   assert.match(html, /Content-Security-Policy/);
   assert.match(html, /connect-src 'none'/);
-  assert.match(html, /id="map-svg"/);
-  assert.match(html, /map-marker/);
-  assert.match(html, /data-confidence/);
+  assert.match(html, /id="trip-map"/);
+  assert.match(html, /id="map-feedback"/);
+  assert.match(html, /data-action="edit"/);
+  assert.match(html, /id="item-dialog"/);
+  assert.match(html, /data-external/);
+  assert.match(html, /source-link/);
+  assert.doesNotMatch(html, /id="map-svg"/);
+  assert.doesNotMatch(html, /id="sources-section"/);
+  assert.doesNotMatch(html, /来源覆盖/);
   assert.match(html, /广州/);
   assert.match(html, /data-action="ics"/);
   assert.match(html, /ics-data/);
@@ -35,7 +42,22 @@ test('渲染：单文件 HTML、SVG 地图、Markdown 与 ICS 都包含关键内
   const map = renderMap(trip);
   assert.equal(map.empty ?? false, false);
   assert.ok(map.points > 0);
-  assert.match(map.svg, /data-type="anchor"/);
+  assert.match(map.html, /id="trip-map"/);
+  assert.match(map.html, /map-feedback/);
+  assert.doesNotMatch(map.html, /<svg[^>]*class="map-svg"/);
+
+  const official = trip.sources.find((source) => source.provider === 'official');
+  const manual = trip.sources.find((source) => !source.url && source.provider === 'manual');
+  if (official) {
+    const officialLinks = sourceLinksHtml(trip, [official.id, official.id]);
+    assert.match(officialLinks, /data-external/);
+    assert.equal((officialLinks.match(/class="source-link"/g) ?? []).length, 1);
+  }
+  if (manual) {
+    const manualLinks = sourceLinksHtml(trip, [manual.id]);
+    assert.match(manualLinks, /source-manual/);
+    assert.doesNotMatch(manualLinks, /<a /);
+  }
 
   const markdown = buildMarkdown(trip);
   assert.match(markdown, /广州/);
@@ -72,7 +94,7 @@ test('CLI：check --strict 通过，build 原子产物与回执哈希正确', as
     const html = await fs.readFile(path.join(outDir, 'index.html'), 'utf8');
     const ics = await fs.readFile(path.join(outDir, 'trip.ics'), 'utf8');
     const receipt = JSON.parse(await fs.readFile(path.join(outDir, 'build-receipt.json'), 'utf8'));
-    assert.match(html, /id="map-svg"/);
+    assert.match(html, /id="trip-map"/);
     assert.match(ics, /^BEGIN:VCALENDAR/);
     assert.equal(receipt.outputs['index.html'], sha256(html));
     assert.equal(receipt.outputs['trip.ics'], sha256(ics));
