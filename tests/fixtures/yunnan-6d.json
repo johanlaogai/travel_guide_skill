@@ -1,0 +1,2274 @@
+{
+  "schemaVersion": "0.1",
+  "meta": {
+    "id": "云南-6d-20261205",
+    "title": "云南 6 天 5 晚：昆明—大理—丽江",
+    "destination": {
+      "name": "云南（昆明—大理—丽江）",
+      "country": "CN",
+      "admin1": "云南",
+      "lat": 25.03889,
+      "lon": 102.71833,
+      "timezone": "Asia/Shanghai",
+      "coordSystem": "WGS84"
+    },
+    "origin": "",
+    "startDate": "2026-12-05",
+    "endDate": "2026-12-10",
+    "days": 6,
+    "travelers": 2,
+    "budget": {
+      "currency": "CNY",
+      "level": "mid",
+      "totalMin": 6900,
+      "totalMax": 10000
+    },
+    "pace": "balanced",
+    "interests": [
+      "博物馆",
+      "古城",
+      "洱海",
+      "雪山",
+      "本地饮食"
+    ],
+    "constraints": [
+      "2 人",
+      "不赶路",
+      "公共交通 + 打车",
+      "建议丽江出"
+    ],
+    "generatedAt": "2026-11-27T03:11:34.609Z",
+    "updatedAt": "2026-11-27T03:20:00.000Z",
+    "generator": "travel-guide/0.1.0"
+  },
+  "overview": {
+    "summary": "6 天 5 晚，昆明进、丽江出：昆明 1 晚看省博和老街，大理 2 晚看三塔、喜洲和洱海，丽江 2 晚看古城和玉龙雪山。每天 2 个锚点，留足转场和吃饭时间。",
+    "background": "这条线适合第一次去云南、两名成年人、不想每天换酒店。昆明—大理—丽江都有动车，城市之间约 1.5–2 小时；丽江海拔约 2400 米，玉龙雪山更高，行程把雪山放在倒数第二天，先适应再上山。",
+    "highlights": [
+      "云南省博物馆",
+      "崇圣寺三塔",
+      "喜洲古镇",
+      "洱海生态廊道",
+      "丽江古城",
+      "玉龙雪山",
+      "白沙古镇",
+      "玉湖村"
+    ],
+    "risks": [
+      "玉龙雪山海拔高，索道可能因大风临时停运",
+      "12 月昼夜温差大，丽江清晨接近 0℃",
+      "省博周一闭馆；本行程周一已在大理，不影响",
+      "车次、票价、预约规则以官方当日公告为准",
+      "建议丽江出；若必须昆明往返，第 6 天需加约 3.5 小时动车"
+    ],
+    "guide": {
+      "intro": {
+        "title": "为什么是昆明—大理—丽江",
+        "body": "6 天把三座城串成一条线：昆明看省博和老街，大理看三塔、喜洲和洱海，丽江看古城与玉龙雪山。每天 2 个锚点，留出交通和吃饭时间；第一次来云南，这条线比一次跑香格里拉或泸沽湖更稳。",
+        "sourceIds": [
+          "src-official-yn-culture",
+          "src-official-kunming-lodging"
+        ]
+      },
+      "sections": [
+        {
+          "id": "background",
+          "title": "背景：海拔与路线",
+          "body": "昆明约 1900 米、大理约 2000 米、丽江约 2400 米、玉龙雪山冰川公园约 4500 米。先在昆明住一晚、再去大理，最后上丽江，给身体适应时间；不要把雪山放在第一天。12 月早晚温差大，丽江清晨接近 0℃。",
+          "sourceIds": [
+            "src-official-yn-culture",
+            "src-official-yulong"
+          ]
+        },
+        {
+          "id": "culture",
+          "title": "文化：从古滇到南诏、纳西",
+          "body": "昆明看古滇青铜与西南联大；大理是南诏、大理国的中心，白族三坊一照壁、扎染和本主信仰都在日常里；丽江是茶马古道重镇，纳西东巴文、古城水系和纳西院落值得慢慢看。",
+          "sourceIds": [
+            "src-official-yn-culture",
+            "src-official-dali-lodging",
+            "src-official-lijiang-lodging"
+          ]
+        },
+        {
+          "id": "customs",
+          "title": "风俗：古城是生活区",
+          "body": "进入丽江大研、白沙、束河可能查验古城维护费（50 元/人，365 天内有效）。白族三道茶是待客礼，火把节/三月街按农历；拍老人、仪式和民居先征得同意。古城清晨和深夜是居民休息时间，别大声喧哗。",
+          "sourceIds": [
+            "src-official-lijiang-gwf",
+            "src-official-dali-lodging"
+          ]
+        }
+      ],
+      "food": [
+        {
+          "name": "过桥米线",
+          "description": "昆明老街/南强街一带常见；汤底烫，先下生肉再下菜，按店里顺序来。",
+          "sourceIds": [
+            "src-manual-food",
+            "src-official-yn-culture"
+          ]
+        },
+        {
+          "name": "汽锅鸡",
+          "description": "用汽锅蒸出的清汤鸡，适合 2 人点一小锅；口味清淡，别被“野生菌汽锅鸡”加价套路。",
+          "sourceIds": [
+            "src-manual-food"
+          ]
+        },
+        {
+          "name": "白族酸辣鱼",
+          "description": "大理洱海周边常见，酸辣开胃；先问清鱼的品种、重量和单价。",
+          "sourceIds": [
+            "src-manual-food",
+            "src-official-dali-lodging"
+          ]
+        },
+        {
+          "name": "乳扇/喜洲粑粑",
+          "description": "喜洲四方街周边小吃，甜咸都有；现烤现吃，别一次买太多。",
+          "sourceIds": [
+            "src-manual-food",
+            "src-official-dali-lodging"
+          ]
+        },
+        {
+          "name": "纳西腊排骨",
+          "description": "丽江常见火锅，偏咸；2 人点小锅，配蔬菜。",
+          "sourceIds": [
+            "src-manual-food",
+            "src-official-lijiang-lodging"
+          ]
+        },
+        {
+          "name": "鸡豆凉粉",
+          "description": "丽江街头小吃，煎/凉拌都可；选人多的店，避免久放。",
+          "sourceIds": [
+            "src-manual-food"
+          ]
+        }
+      ],
+      "photoSpots": [
+        {
+          "name": "翠湖—云南大学外围",
+          "area": "昆明",
+          "bestTime": "傍晚",
+          "tip": "湖面侧逆光；冬季拍红嘴鸥不要投喂。",
+          "sourceIds": [
+            "src-manual-kunming"
+          ]
+        },
+        {
+          "name": "崇圣寺三塔倒影池",
+          "area": "大理",
+          "bestTime": "上午，风小",
+          "tip": "倒影最完整；尊重宗教场所。",
+          "sourceIds": [
+            "src-official-chongsheng",
+            "src-official-dalisanta"
+          ]
+        },
+        {
+          "name": "喜洲稻田/转角楼",
+          "area": "大理",
+          "bestTime": "上午",
+          "tip": "不要踩稻田；转角楼人多时排队。",
+          "sourceIds": [
+            "src-manual-dali"
+          ]
+        },
+        {
+          "name": "洱海龙龛—才村",
+          "area": "大理",
+          "bestTime": "下午",
+          "tip": "顺光拍湖面；骑行注意风。",
+          "sourceIds": [
+            "src-manual-dali"
+          ]
+        },
+        {
+          "name": "黑龙潭得月楼",
+          "area": "丽江",
+          "bestTime": "上午，能见度高",
+          "tip": "玉龙雪山倒影看天气；风大时等一等。",
+          "sourceIds": [
+            "src-official-lijiang-lodging",
+            "src-manual-lijiang"
+          ]
+        },
+        {
+          "name": "蓝月谷",
+          "area": "丽江",
+          "bestTime": "中午前后",
+          "tip": "晴天颜色最好；不要下危险水边。",
+          "sourceIds": [
+            "src-official-yulong",
+            "src-manual-lijiang"
+          ]
+        }
+      ],
+      "pitfalls": [
+        {
+          "id": "yulong-cableway-wind",
+          "title": "玉龙雪山索道可能因大风停运",
+          "body": "门票和索道票分开预约，索道票通常提前 7 天在“丽江旅游集团”实名预约；大风会临时停运。不要把雪山日排成赶飞机日，出发前打 0888-5131068 确认。",
+          "severity": "high",
+          "category": "weather",
+          "appliesTo": [
+            "d5-yulong"
+          ],
+          "sourceIds": [
+            "src-official-yulong"
+          ]
+        },
+        {
+          "id": "lijiang-gwf-check",
+          "title": "丽江古城维护费可能查验",
+          "body": "大研、白沙、束河三片区域适用，50 元/人，365 天内有效。别信“不用交”的拉客话术；保留凭证，遇到查验配合。",
+          "severity": "medium",
+          "category": "ticket",
+          "sourceIds": [
+            "src-official-lijiang-gwf"
+          ]
+        },
+        {
+          "id": "low-price-tour",
+          "title": "警惕“政府补贴/免费游”低价团",
+          "body": "明显低于成本的团常靠购物返点；签合同前看清行程、购物店和自费项目。遇到强制购物，保留证据并拨打 12345/12301 投诉。",
+          "severity": "high",
+          "category": "scam",
+          "sourceIds": [
+            "src-official-mct",
+            "src-official-yn-culture"
+          ]
+        },
+        {
+          "id": "airport-black-car",
+          "title": "机场/车站不要跟拉客走",
+          "body": "昆明长水、丽江三义机场和车站都有正规出租/网约车/机场大巴；拒绝“便宜包车”“不用排队”的拉客，上车前确认计价/订单。",
+          "severity": "high",
+          "category": "transport",
+          "sourceIds": [
+            "src-official-ynairport",
+            "src-official-lijiangairport"
+          ]
+        },
+        {
+          "id": "wild-mushroom",
+          "title": "野生菌不要乱吃",
+          "body": "只吃熟悉品种和正规餐馆，别买路边不明菌子；出现恶心、呕吐、幻觉等症状立即就医，并保留食物样本/照片。",
+          "severity": "high",
+          "category": "health",
+          "sourceIds": [
+            "src-official-yncdc"
+          ]
+        },
+        {
+          "id": "altitude",
+          "title": "高海拔别逞强",
+          "body": "丽江和玉龙雪山海拔高，刚到不要剧烈运动、饮酒或长时间洗澡；慢走、多喝水，氧气瓶/防寒服按需，不要被高价“必须买”吓到。",
+          "severity": "medium",
+          "category": "health",
+          "sourceIds": [
+            "src-official-yulong",
+            "src-official-yncdc"
+          ]
+        },
+        {
+          "id": "erhai-rental",
+          "title": "洱海租车/骑行先确认押金和还车点",
+          "body": "租电动车/自行车先拍车况、问清押金、计价和还车点；不要骑进生态保护区或机动车道。拍照收费点先问价。",
+          "severity": "medium",
+          "category": "scam",
+          "sourceIds": [
+            "src-community-yunnan-notes",
+            "src-official-dali-lodging"
+          ]
+        },
+        {
+          "id": "ticket-scalper",
+          "title": "门票/索道别找黄牛",
+          "body": "省博、玉龙雪山等热门点只走官方预约渠道；所谓“内部票/免排队”多为加价或无效票。预约截止时间以官方为准。",
+          "severity": "medium",
+          "category": "ticket",
+          "sourceIds": [
+            "src-official-ynmuseum",
+            "src-official-yulong"
+          ]
+        },
+        {
+          "id": "menu-price",
+          "title": "点菜先问价，尤其是“时价”",
+          "body": "古城和景区周边先看菜单单价、称重方式；鱼/菌/腊排骨按重量计价时，确认后再下单。社区经验，不针对具体商家。",
+          "severity": "low",
+          "category": "food",
+          "sourceIds": [
+            "src-community-yunnan-notes",
+            "src-manual-food"
+          ]
+        }
+      ],
+      "tips": [
+        {
+          "title": "预约",
+          "body": "省博、玉龙雪山门票/索道、动车票都建议提前；把预约截止日记进日历。",
+          "sourceIds": [
+            "src-official-ynmuseum",
+            "src-official-yulong",
+            "src-official-12306"
+          ]
+        },
+        {
+          "title": "穿衣",
+          "body": "12 月早晚温差大：昆明薄外套，丽江/雪山加抓绒、防风外套；鞋子防滑。",
+          "sourceIds": [
+            "src-official-yulong"
+          ]
+        },
+        {
+          "title": "交通",
+          "body": "昆明—大理—丽江用动车最稳；站到景区留 30–60 分钟接驳，别把车次卡得太死。",
+          "sourceIds": [
+            "src-official-12306"
+          ]
+        },
+        {
+          "title": "文明",
+          "body": "古城是居民区；拍人先问，垃圾带走，别踩稻田、别投喂野生动物。",
+          "sourceIds": [
+            "src-official-yn-culture"
+          ]
+        }
+      ]
+    }
+  },
+  "days": [
+    {
+      "date": "2026-12-05",
+      "weekday": "周六",
+      "title": "昆明：省博、翠湖与老街",
+      "area": "昆明市·五华区",
+      "weather": {
+        "sourceId": "src-2882aa78",
+        "summary": "晴",
+        "weatherCode": 0,
+        "high": 21.9,
+        "low": 6.7,
+        "precipitationProbability": 0,
+        "precipitationSum": 0,
+        "sunrise": "07:39",
+        "sunset": "18:19",
+        "updatedAt": "2026-11-27T03:14:37.463Z",
+        "climate": false
+      },
+      "items": [
+        {
+          "id": "d1-arrive",
+          "type": "buffer",
+          "start": "11:30",
+          "end": "12:30",
+          "title": "抵达昆明 · 酒店寄存行李",
+          "place": {
+            "name": "昆明长水国际机场",
+            "address": "长水机场",
+            "lat": 25.10878,
+            "lon": 102.93972,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-ynairport"
+          ],
+          "confidence": "estimate",
+          "notes": "按中午前抵达排；晚到则删云南省博物馆。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d1-lunch",
+          "type": "meal",
+          "start": "13:15",
+          "end": "14:15",
+          "title": "昆明老街午饭：过桥米线/小吃",
+          "place": {
+            "name": "昆明老街",
+            "address": "五华区昆明老街",
+            "lat": 25.04285,
+            "lon": 102.70751,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-kunming"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 120,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 45,
+            "fromPrevious": true,
+            "distanceKm": 28
+          },
+          "notes": "机场到老街约 45 分钟；具体店以现场为准。"
+        },
+        {
+          "id": "d1-museum",
+          "type": "anchor",
+          "start": "14:45",
+          "end": "16:30",
+          "title": "云南省博物馆",
+          "place": {
+            "name": "云南省博物馆",
+            "address": "官渡区广福路 6393 号",
+            "lat": 24.95224,
+            "lon": 102.7522,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-ynmuseum",
+            "src-manual-kunming"
+          ],
+          "confidence": "official",
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 20,
+            "fromPrevious": true,
+            "distanceKm": 7
+          },
+          "notes": "09:00–17:00，16:30 停止入场，周一闭馆；需预约。",
+          "openingHours": "09:00–17:00（16:30 停止入场，周一闭馆）",
+          "booking": {
+            "required": true,
+            "status": "pending",
+            "deadline": "2026-12-04",
+            "url": "https://www.ynmuseum.org/",
+            "note": "以官网/公众号预约页为准。"
+          },
+          "detail": {
+            "description": "云南省博物馆是了解云南从古生物、青铜文明到多民族历史的最快入口；新馆展厅大，建议把重点放在“云南历史”和“青铜文明”。",
+            "highlights": [
+              "牛虎铜案等古滇国青铜器",
+              "南诏大理国佛教艺术",
+              "多民族服饰与生活展"
+            ],
+            "photoTip": "展厅内通常禁用闪光灯；馆外广场适合拍建筑线条。"
+          }
+        },
+        {
+          "id": "d1-cuihu",
+          "type": "anchor",
+          "start": "17:00",
+          "end": "18:00",
+          "title": "翠湖公园—云南大学外围",
+          "place": {
+            "name": "翠湖公园",
+            "address": "五华区翠湖南路",
+            "lat": 25.05149,
+            "lon": 102.70252,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-kunming"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 20,
+            "fromPrevious": true,
+            "distanceKm": 6
+          },
+          "notes": "免费开放；傍晚绕湖一圈，注意保暖。",
+          "detail": {
+            "description": "翠湖是昆明老城的水面与候鸟窗口，周边串联云南大学、讲武堂和老街；傍晚绕湖一圈，比打卡单个点更舒服。",
+            "highlights": [
+              "冬季红嘴鸥（按季节）",
+              "云南大学老校区外围",
+              "陆军讲武堂外观"
+            ],
+            "photoTip": "傍晚侧逆光拍湖面；拍鸟不要投喂或追逐。"
+          }
+        },
+        {
+          "id": "d1-dinner",
+          "type": "meal",
+          "start": "18:30",
+          "end": "19:30",
+          "title": "南强街巷晚饭",
+          "place": {
+            "name": "南强街巷",
+            "address": "五华区南强街",
+            "lat": 25.042,
+            "lon": 102.71,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-kunming"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 160,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 20,
+            "fromPrevious": true,
+            "distanceKm": 1.5
+          },
+          "notes": "夜市选择多；热门店错峰。"
+        },
+        {
+          "id": "d1-hotel",
+          "type": "hotel",
+          "start": "20:00",
+          "end": "20:30",
+          "title": "住昆明老街/南屏街一带",
+          "place": {
+            "name": "昆明老街—南屏街",
+            "address": "五华区",
+            "lat": 25.04,
+            "lon": 102.71,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-kunming-lodging"
+          ],
+          "confidence": "community",
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "fromPrevious": true,
+            "distanceKm": 0.6
+          },
+          "notes": "住这里方便第二天去昆明站；具体酒店另选。"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-06",
+      "weekday": "周日",
+      "title": "昆明→大理：三塔与古城",
+      "area": "大理市",
+      "weather": {
+        "sourceId": "src-224e9fc8",
+        "summary": "大致晴朗",
+        "weatherCode": 1,
+        "high": 18.5,
+        "low": 6.2,
+        "precipitationProbability": 4,
+        "precipitationSum": 0,
+        "sunrise": "07:51",
+        "sunset": "18:28",
+        "updatedAt": "2026-11-27T03:14:37.663Z",
+        "climate": false
+      },
+      "items": [
+        {
+          "id": "d2-station",
+          "type": "buffer",
+          "start": "07:30",
+          "end": "08:00",
+          "title": "昆明站候车",
+          "place": {
+            "name": "昆明站",
+            "address": "官渡区北京路",
+            "lat": 25.02056,
+            "lon": 102.72219,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-12306"
+          ],
+          "confidence": "estimate",
+          "notes": "按早班动车排；车次以 12306 为准。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d2-train",
+          "type": "transit",
+          "start": "08:05",
+          "end": "10:05",
+          "title": "昆明 → 大理（动车，约 2 小时）",
+          "place": {
+            "name": "大理站",
+            "address": "大理市",
+            "lat": 25.59194,
+            "lon": 100.24852,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-12306"
+          ],
+          "confidence": "estimate",
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.3,
+            "note": "站内候车/换乘；动车运行约 2 小时。"
+          },
+          "notes": "不锁定车次；提前 30 分钟到站。"
+        },
+        {
+          "id": "d2-transfer",
+          "type": "buffer",
+          "start": "10:40",
+          "end": "11:20",
+          "title": "大理站 → 酒店寄存行李",
+          "place": {
+            "name": "大理古城",
+            "address": "大理市古城区",
+            "lat": 25.69827,
+            "lon": 100.16249,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [],
+          "confidence": "estimate",
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 35,
+            "fromPrevious": true,
+            "distanceKm": 17
+          },
+          "notes": "大理站到古城约 35 分钟。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d2-lunch",
+          "type": "meal",
+          "start": "11:30",
+          "end": "12:30",
+          "title": "大理古城午饭：白族菜/米线",
+          "place": {
+            "name": "大理古城人民路",
+            "address": "大理市人民路",
+            "lat": 25.6983,
+            "lon": 100.1645,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-dali"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 140,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "fromPrevious": true,
+            "distanceKm": 0.8
+          },
+          "notes": "人民路—复兴路一带选择多。"
+        },
+        {
+          "id": "d2-chongsheng",
+          "type": "anchor",
+          "start": "13:00",
+          "end": "15:30",
+          "title": "崇圣寺三塔",
+          "place": {
+            "name": "崇圣寺三塔",
+            "address": "大理市崇圣寺三塔文化旅游区",
+            "lat": 25.70864,
+            "lon": 100.14656,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-chongsheng",
+            "src-official-dalisanta",
+            "src-manual-dali"
+          ],
+          "confidence": "official",
+          "cost": {
+            "amount": 150,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 15,
+            "fromPrevious": true,
+            "distanceKm": 3
+          },
+          "notes": "08:00–17:00；现场购票/扫码，刷身份证入园；票价以景区为准。",
+          "openingHours": "08:00–17:00",
+          "detail": {
+            "description": "崇圣寺三塔是大理的地标，三塔倒影池是经典机位；景区从山门到三塔有坡度，给 2–2.5 小时比较稳。",
+            "highlights": [
+              "三塔倒影池",
+              "南诏建极大钟",
+              "崇圣寺山门与苍山背景"
+            ],
+            "photoTip": "上午顺光、风小时倒影最完整；尊重宗教场所，不拍法会特写。"
+          }
+        },
+        {
+          "id": "d2-dali-old",
+          "type": "anchor",
+          "start": "16:00",
+          "end": "18:00",
+          "title": "大理古城（复兴路—人民路）",
+          "place": {
+            "name": "大理古城",
+            "address": "大理市古城区",
+            "lat": 25.69827,
+            "lon": 100.16249,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-dali"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 15,
+            "fromPrevious": true,
+            "distanceKm": 3
+          },
+          "notes": "古城免费；晚上人民路小店和餐馆多。",
+          "detail": {
+            "description": "大理古城适合慢慢走：复兴路是主轴，人民路更有生活气；不要把古城当成只有酒吧街，早上和傍晚更好逛。",
+            "highlights": [
+              "复兴路—五华楼",
+              "人民路小店与咖啡馆",
+              "苍山门/洱海门"
+            ],
+            "photoTip": "清晨拍空街，傍晚拍苍山光线；拍店主和路人先征得同意。"
+          }
+        },
+        {
+          "id": "d2-dinner",
+          "type": "meal",
+          "start": "18:30",
+          "end": "19:30",
+          "title": "大理古城晚饭",
+          "place": {
+            "name": "大理古城人民路",
+            "address": "大理市人民路",
+            "lat": 25.6983,
+            "lon": 100.1645,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-dali"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 180,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.4
+          },
+          "notes": "酸辣鱼/乳扇/饵块按口味选。"
+        },
+        {
+          "id": "d2-hotel",
+          "type": "hotel",
+          "start": "20:00",
+          "end": "20:30",
+          "title": "住大理古城南门/人民路一带",
+          "place": {
+            "name": "大理古城南门",
+            "address": "大理市",
+            "lat": 25.693,
+            "lon": 100.161,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-dali-lodging"
+          ],
+          "confidence": "community",
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "fromPrevious": true,
+            "distanceKm": 0.8
+          },
+          "notes": "古城内步行方便；具体酒店另选。"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-07",
+      "weekday": "周一",
+      "title": "大理：喜洲与洱海西岸",
+      "area": "大理市",
+      "weather": {
+        "sourceId": "src-224e9fc8",
+        "summary": "雾",
+        "weatherCode": 45,
+        "high": 16.7,
+        "low": 5.3,
+        "precipitationProbability": 14,
+        "precipitationSum": 0,
+        "sunrise": "07:52",
+        "sunset": "18:28",
+        "updatedAt": "2026-11-27T03:14:37.663Z",
+        "climate": false
+      },
+      "items": [
+        {
+          "id": "d3-depart",
+          "type": "buffer",
+          "start": "08:30",
+          "end": "09:10",
+          "title": "前往喜洲古镇",
+          "place": {
+            "name": "喜洲古镇",
+            "address": "大理市喜洲镇",
+            "lat": 25.85657,
+            "lon": 100.13001,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [],
+          "confidence": "estimate",
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 40,
+            "fromPrevious": true,
+            "distanceKm": 20
+          },
+          "notes": "也可坐班车；打车更省时。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d3-xizhou",
+          "type": "anchor",
+          "start": "09:15",
+          "end": "11:30",
+          "title": "喜洲古镇：四方街与白族民居",
+          "place": {
+            "name": "喜洲古镇",
+            "address": "大理市喜洲镇",
+            "lat": 25.85657,
+            "lon": 100.13001,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-dali"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.3
+          },
+          "notes": "古镇免费；严家大院等单点可能单独收费，按现场公告。",
+          "detail": {
+            "description": "喜洲比大理古城更安静，四方街、白族民居和稻田构成典型的洱海西岸生活；转角楼和稻田是热门机位。",
+            "highlights": [
+              "四方街",
+              "白族三坊一照壁民居",
+              "喜洲稻田（按季节）"
+            ],
+            "photoTip": "稻田机位不要踩踏农作物；上午光线柔和，下午风大。"
+          }
+        },
+        {
+          "id": "d3-lunch",
+          "type": "meal",
+          "start": "11:35",
+          "end": "12:35",
+          "title": "喜洲午饭：破酥粑粑/白族菜",
+          "place": {
+            "name": "喜洲四方街",
+            "address": "大理市喜洲镇",
+            "lat": 25.8562,
+            "lon": 100.1304,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-dali"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 100,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.3
+          },
+          "notes": "喜洲粑粑甜咸都有；具体店以现场为准。"
+        },
+        {
+          "id": "d3-transfer",
+          "type": "buffer",
+          "start": "13:05",
+          "end": "14:05",
+          "title": "前往洱海生态廊道（龙龛—才村）",
+          "place": {
+            "name": "龙龛码头",
+            "address": "大理市龙龛村",
+            "lat": 25.70106,
+            "lon": 100.20564,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [],
+          "confidence": "estimate",
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 30,
+            "fromPrevious": true,
+            "distanceKm": 15
+          },
+          "notes": "喜洲到龙龛约 30 分钟。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d3-erhai",
+          "type": "anchor",
+          "start": "14:10",
+          "end": "17:00",
+          "title": "洱海生态廊道：龙龛—才村骑行/步行",
+          "place": {
+            "name": "洱海生态廊道（龙龛段）",
+            "address": "大理市龙龛码头",
+            "lat": 25.70106,
+            "lon": 100.20564,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-dali"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.3
+          },
+          "notes": "廊道免费；租自行车/电动车按现场价；风大注意防晒。",
+          "detail": {
+            "description": "洱海生态廊道龙龛—才村段适合骑行或步行，湖面、苍山和村落连成一线；不要把它当成环湖全程，选一段就够。",
+            "highlights": [
+              "龙龛码头",
+              "才村湖岸",
+              "苍山洱海同框"
+            ],
+            "photoTip": "下午顺光拍湖面；骑行注意防晒和风，别下湖。"
+          }
+        },
+        {
+          "id": "d3-dinner",
+          "type": "meal",
+          "start": "17:30",
+          "end": "18:30",
+          "title": "才村/古城晚饭",
+          "place": {
+            "name": "才村码头",
+            "address": "大理市才村",
+            "lat": 25.72164,
+            "lon": 100.19262,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-dali"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 160,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "fromPrevious": true,
+            "distanceKm": 1
+          },
+          "notes": "才村小馆或回古城吃均可。"
+        },
+        {
+          "id": "d3-hotel",
+          "type": "hotel",
+          "start": "19:00",
+          "end": "19:30",
+          "title": "住大理古城/才村",
+          "place": {
+            "name": "大理古城",
+            "address": "大理市",
+            "lat": 25.69827,
+            "lon": 100.16249,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-dali-lodging"
+          ],
+          "confidence": "community",
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 15,
+            "fromPrevious": true,
+            "distanceKm": 5
+          },
+          "notes": "第二天早班动车去丽江，住古城离大理站更稳。"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-08",
+      "weekday": "周二",
+      "title": "大理→丽江：大研古城与黑龙潭",
+      "area": "丽江市·古城区",
+      "weather": {
+        "sourceId": "src-f15cb07f",
+        "summary": "晴",
+        "weatherCode": 0,
+        "high": 15,
+        "low": -0.5,
+        "precipitationProbability": 3,
+        "precipitationSum": 0,
+        "sunrise": "07:55",
+        "sunset": "18:25",
+        "updatedAt": "2026-11-27T03:14:37.861Z",
+        "climate": false
+      },
+      "items": [
+        {
+          "id": "d4-station",
+          "type": "buffer",
+          "start": "08:00",
+          "end": "08:30",
+          "title": "大理站候车",
+          "place": {
+            "name": "大理站",
+            "address": "大理市",
+            "lat": 25.59194,
+            "lon": 100.24852,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-12306"
+          ],
+          "confidence": "estimate",
+          "notes": "按早班动车排；车次以 12306 为准。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d4-train",
+          "type": "transit",
+          "start": "08:35",
+          "end": "10:00",
+          "title": "大理 → 丽江（动车，约 1.5 小时）",
+          "place": {
+            "name": "丽江站",
+            "address": "丽江市",
+            "lat": 26.81381,
+            "lon": 100.25093,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-12306"
+          ],
+          "confidence": "estimate",
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.3,
+            "note": "站内候车/换乘；动车运行约 1.5 小时。"
+          },
+          "notes": "不锁定车次；提前 30 分钟到站。"
+        },
+        {
+          "id": "d4-transfer",
+          "type": "buffer",
+          "start": "10:30",
+          "end": "11:15",
+          "title": "丽江站 → 酒店寄存行李",
+          "place": {
+            "name": "丽江古城",
+            "address": "古城区大研古城",
+            "lat": 26.8739,
+            "lon": 100.23528,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [],
+          "confidence": "estimate",
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 30,
+            "fromPrevious": true,
+            "distanceKm": 12
+          },
+          "notes": "丽江站到古城约 30 分钟。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d4-lunch",
+          "type": "meal",
+          "start": "11:30",
+          "end": "12:30",
+          "title": "丽江古城午饭：纳西菜/米线",
+          "place": {
+            "name": "丽江古城五一街",
+            "address": "古城区五一街",
+            "lat": 26.8742,
+            "lon": 100.2358,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-lijiang"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 140,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "fromPrevious": true,
+            "distanceKm": 0.8
+          },
+          "notes": "古城内选择多；避开最拥挤的主街。"
+        },
+        {
+          "id": "d4-lijiang-old",
+          "type": "anchor",
+          "start": "13:00",
+          "end": "15:30",
+          "title": "丽江古城（大研古城）",
+          "place": {
+            "name": "丽江古城",
+            "address": "古城区大研古城",
+            "lat": 26.8739,
+            "lon": 100.23528,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-lijiang-gwf",
+            "src-manual-lijiang"
+          ],
+          "confidence": "official",
+          "cost": {
+            "amount": 100,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.3
+          },
+          "notes": "古城维护费 50 元/人，365 天内有效；以现场查验为准。",
+          "ticketPrice": "古城维护费 50 元/人（365 天内有效）",
+          "detail": {
+            "description": "大研古城是纳西生活与茶马古道交叠的地方；避开正午旅行团，从五一街、七一街往狮子山方向走，能看见更安静的巷子。",
+            "highlights": [
+              "四方街",
+              "五一街/七一街",
+              "狮子山万古楼外观"
+            ],
+            "photoTip": "清晨和傍晚拍石板路；古城是居民区，别闯私宅。"
+          }
+        },
+        {
+          "id": "d4-heilongtan",
+          "type": "anchor",
+          "start": "16:00",
+          "end": "17:30",
+          "title": "黑龙潭公园",
+          "place": {
+            "name": "黑龙潭公园",
+            "address": "古城区民主路",
+            "lat": 26.89226,
+            "lon": 100.24037,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-lijiang-gwf",
+            "src-manual-lijiang"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 15,
+            "fromPrevious": true,
+            "distanceKm": 1.2
+          },
+          "notes": "古城维护费查验范围；拍玉龙雪山倒影看天气。",
+          "detail": {
+            "description": "黑龙潭公园以玉龙雪山倒影闻名，和大研古城连成一线；天气好时先看倒影，再慢慢逛古建筑。",
+            "highlights": [
+              "得月楼",
+              "五凤楼",
+              "玉龙雪山倒影（看天气）"
+            ],
+            "photoTip": "风小、能见度高时倒影最好；上午人少。"
+          }
+        },
+        {
+          "id": "d4-dinner",
+          "type": "meal",
+          "start": "18:00",
+          "end": "19:00",
+          "title": "丽江古城晚饭",
+          "place": {
+            "name": "丽江古城七一街",
+            "address": "古城区七一街",
+            "lat": 26.8736,
+            "lon": 100.2352,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-lijiang"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 180,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 15,
+            "fromPrevious": true,
+            "distanceKm": 1
+          },
+          "notes": "腊排骨/纳西烤肉按口味选。"
+        },
+        {
+          "id": "d4-hotel",
+          "type": "hotel",
+          "start": "19:30",
+          "end": "20:00",
+          "title": "住丽江古城北门/黑龙潭一带",
+          "place": {
+            "name": "丽江古城北门",
+            "address": "古城区",
+            "lat": 26.88,
+            "lon": 100.235,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-lijiang-lodging"
+          ],
+          "confidence": "community",
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "fromPrevious": true,
+            "distanceKm": 0.8
+          },
+          "notes": "第二天去玉龙雪山，北门出城更顺。"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-09",
+      "weekday": "周三",
+      "title": "丽江：玉龙雪山与蓝月谷",
+      "area": "玉龙县",
+      "weather": {
+        "sourceId": "src-f15cb07f",
+        "summary": "晴",
+        "weatherCode": 0,
+        "high": 18,
+        "low": 0.2,
+        "precipitationProbability": 4,
+        "precipitationSum": 0,
+        "sunrise": "07:56",
+        "sunset": "18:25",
+        "updatedAt": "2026-11-27T03:14:37.861Z",
+        "climate": false
+      },
+      "items": [
+        {
+          "id": "d5-depart",
+          "type": "buffer",
+          "start": "07:30",
+          "end": "08:20",
+          "title": "前往玉龙雪山新游客中心",
+          "place": {
+            "name": "玉龙雪山新游客中心",
+            "address": "玉龙县白沙镇",
+            "lat": 27.10132,
+            "lon": 100.25712,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [],
+          "confidence": "estimate",
+          "notes": "按 08:30 前后进山排；具体集合点以预约票为准。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d5-yulong",
+          "type": "anchor",
+          "start": "08:30",
+          "end": "12:30",
+          "title": "玉龙雪山：冰川公园索道/甘海子",
+          "place": {
+            "name": "玉龙雪山",
+            "address": "玉龙县",
+            "lat": 27.09841,
+            "lon": 100.1767,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-yulong",
+            "src-manual-lijiang"
+          ],
+          "confidence": "official",
+          "cost": {
+            "amount": 480,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "fromPrevious": true,
+            "distanceKm": 0.4,
+            "note": "新游客中心换乘景区交通；上山车程已计入前一项。"
+          },
+          "notes": "门票/索道需提前预约；海拔高，慢走，备氧气瓶；大风可能停运。",
+          "booking": {
+            "required": true,
+            "status": "pending",
+            "deadline": "2026-11-28",
+            "url": "https://www.lijiang.cn/article/167628.html",
+            "note": "门票：微信小程序“玉龙雪山服务”；索道：提前 7 天“丽江旅游集团”实名预约；咨询 0888-5131068。"
+          },
+          "detail": {
+            "description": "玉龙雪山冰川公园索道上升快，海拔高；门票和索道票分开预约，大风会临时停运。把这一天留足余量，不要赶飞机。",
+            "highlights": [
+              "冰川公园索道",
+              "甘海子草甸",
+              "蓝月谷（下午单独去）"
+            ],
+            "photoTip": "雪山反光强，带墨镜；高海拔别剧烈跑跳。"
+          }
+        },
+        {
+          "id": "d5-lunch",
+          "type": "meal",
+          "start": "12:40",
+          "end": "13:40",
+          "title": "景区简餐（甘海子）",
+          "place": {
+            "name": "甘海子",
+            "address": "玉龙雪山景区",
+            "lat": 27.10132,
+            "lon": 100.25712,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-lijiang"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 100,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "fromPrevious": true,
+            "distanceKm": 0.5
+          },
+          "notes": "景区餐饮选择有限，可自带补给。"
+        },
+        {
+          "id": "d5-bluelake",
+          "type": "anchor",
+          "start": "14:00",
+          "end": "15:45",
+          "title": "蓝月谷",
+          "place": {
+            "name": "蓝月谷",
+            "address": "玉龙县玉龙雪山景区",
+            "lat": 27.12924,
+            "lon": 100.24674,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-yulong",
+            "src-manual-lijiang"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "bus",
+            "durationMin": 20,
+            "fromPrevious": true,
+            "distanceKm": 8
+          },
+          "notes": "通常含在玉龙雪山景区交通内；以现场票务为准。",
+          "detail": {
+            "description": "蓝月谷在玉龙雪山脚下，水色来自矿物质；晴天颜色最好，阴天会偏灰。景区内步行距离不短，留 1.5 小时。",
+            "highlights": [
+              "镜潭湖",
+              "蓝月湖",
+              "雪山与彩林同框（按季节）"
+            ],
+            "photoTip": "中午前后颜色最亮；不要下到水边危险区域。"
+          }
+        },
+        {
+          "id": "d5-return",
+          "type": "buffer",
+          "start": "16:30",
+          "end": "17:30",
+          "title": "返回丽江市区/束河",
+          "place": {
+            "name": "束河古镇",
+            "address": "古城区束河",
+            "lat": 26.92347,
+            "lon": 100.20359,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [],
+          "confidence": "estimate",
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 45,
+            "fromPrevious": true,
+            "distanceKm": 30
+          },
+          "notes": "蓝月谷到束河约 45 分钟。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d5-dinner",
+          "type": "meal",
+          "start": "18:00",
+          "end": "19:00",
+          "title": "束河古镇晚饭",
+          "place": {
+            "name": "束河古镇",
+            "address": "古城区束河",
+            "lat": 26.92347,
+            "lon": 100.20359,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-lijiang"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 180,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "fromPrevious": true,
+            "distanceKm": 0.6
+          },
+          "notes": "束河比大研安静；晚上回酒店注意保暖。"
+        },
+        {
+          "id": "d5-hotel",
+          "type": "hotel",
+          "start": "19:30",
+          "end": "20:00",
+          "title": "住束河/丽江古城",
+          "place": {
+            "name": "束河古镇",
+            "address": "古城区束河",
+            "lat": 26.92347,
+            "lon": 100.20359,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-lijiang-lodging"
+          ],
+          "confidence": "community",
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.3
+          },
+          "notes": "最后两晚住同一处，减少搬行李。"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-10",
+      "weekday": "周四",
+      "title": "丽江：白沙、玉湖村与返程",
+      "area": "玉龙县",
+      "weather": {
+        "sourceId": "src-f15cb07f",
+        "summary": "晴",
+        "weatherCode": 0,
+        "high": 18,
+        "low": 1.9,
+        "precipitationProbability": 3,
+        "precipitationSum": 0,
+        "sunrise": "07:56",
+        "sunset": "18:26",
+        "updatedAt": "2026-11-27T03:14:37.861Z",
+        "climate": false
+      },
+      "items": [
+        {
+          "id": "d6-depart",
+          "type": "buffer",
+          "start": "08:30",
+          "end": "09:00",
+          "title": "前往白沙古镇",
+          "place": {
+            "name": "白沙古镇",
+            "address": "玉龙县白沙镇",
+            "lat": 26.95729,
+            "lon": 100.23392,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [],
+          "confidence": "estimate",
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 25,
+            "fromPrevious": true,
+            "distanceKm": 10
+          },
+          "notes": "从束河到白沙约 25 分钟。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        },
+        {
+          "id": "d6-baisha",
+          "type": "anchor",
+          "start": "09:05",
+          "end": "10:30",
+          "title": "白沙古镇：老街与白沙壁画外围",
+          "place": {
+            "name": "白沙古镇",
+            "address": "玉龙县白沙镇",
+            "lat": 26.95729,
+            "lon": 100.23392,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-lijiang"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.3
+          },
+          "notes": "古镇免费；白沙壁画/个别院落可能单独收费，按现场公告。",
+          "detail": {
+            "description": "白沙古镇比大研安静，白沙壁画是重点；目前主要看外围老街和壁画外围，进入保护区域以现场规定为准。",
+            "highlights": [
+              "白沙老街",
+              "白沙壁画外围",
+              "纳西小院"
+            ],
+            "photoTip": "清晨拍雪山背景下的老街；壁画保护区内通常禁闪光。"
+          }
+        },
+        {
+          "id": "d6-yuhu",
+          "type": "anchor",
+          "start": "11:00",
+          "end": "12:00",
+          "title": "玉湖村（石头村）",
+          "place": {
+            "name": "玉湖村",
+            "address": "玉龙县白沙镇玉湖村",
+            "lat": 27.01462,
+            "lon": 100.21263,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-lijiang"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 20,
+            "fromPrevious": true,
+            "distanceKm": 8
+          },
+          "notes": "雪山脚下村落；尊重当地生活，不进入未开放院落。",
+          "detail": {
+            "description": "玉湖村是玉龙雪山脚下的纳西石头村，适合在返程前留一段安静时间；海拔约 2700 米，走慢一点。",
+            "highlights": [
+              "石头民居",
+              "玉湖",
+              "雪山视角"
+            ],
+            "photoTip": "尊重村民生活，不随意推门入院；风大时注意保暖。"
+          }
+        },
+        {
+          "id": "d6-lunch",
+          "type": "meal",
+          "start": "12:05",
+          "end": "13:00",
+          "title": "玉湖村/白沙午饭",
+          "place": {
+            "name": "玉湖村",
+            "address": "玉龙县白沙镇",
+            "lat": 27.01462,
+            "lon": 100.21263,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-manual-food",
+            "src-manual-lijiang"
+          ],
+          "confidence": "community",
+          "cost": {
+            "amount": 100,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 5,
+            "fromPrevious": true,
+            "distanceKm": 0.3
+          },
+          "notes": "农家菜为主；选择明码标价的店。"
+        },
+        {
+          "id": "d6-airport",
+          "type": "buffer",
+          "start": "13:50",
+          "end": "14:50",
+          "title": "取行李，前往丽江机场/丽江站",
+          "place": {
+            "name": "丽江三义机场",
+            "address": "古城区七河镇",
+            "lat": 26.66895,
+            "lon": 100.24773,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": [
+            "src-official-lijiangairport",
+            "src-official-12306"
+          ],
+          "confidence": "estimate",
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 50,
+            "fromPrevious": true,
+            "distanceKm": 35
+          },
+          "notes": "建议买 16:00 后从丽江出发的航班/列车；若昆明往返，需另加 3.5 小时动车。",
+          "derived": true,
+          "derivation": "按地图距离与常见交通时间估算，出发前用导航复核。"
+        }
+      ],
+      "notes": "返程日不排固定晚餐，按航班在机场/市区解决；建议买 16:00 后的航班。"
+    }
+  ],
+  "discoveries": [],
+  "budget": [
+    {
+      "key": "transport",
+      "label": "交通",
+      "min": 1800,
+      "max": 2600,
+      "currency": "CNY"
+    },
+    {
+      "key": "lodging",
+      "label": "住宿",
+      "min": 2200,
+      "max": 3200,
+      "currency": "CNY"
+    },
+    {
+      "key": "food",
+      "label": "餐饮",
+      "min": 1600,
+      "max": 2200,
+      "currency": "CNY"
+    },
+    {
+      "key": "tickets",
+      "label": "门票",
+      "min": 900,
+      "max": 1300,
+      "currency": "CNY"
+    },
+    {
+      "key": "other",
+      "label": "其他",
+      "min": 400,
+      "max": 700,
+      "currency": "CNY"
+    }
+  ],
+  "packing": [
+    {
+      "id": "pack-id",
+      "label": "身份证/护照",
+      "category": "证件",
+      "essential": true
+    },
+    {
+      "id": "pack-phone",
+      "label": "手机与充电器",
+      "category": "电子",
+      "essential": true
+    },
+    {
+      "id": "pack-power",
+      "label": "充电宝（随身，不托运）",
+      "category": "电子",
+      "essential": true
+    },
+    {
+      "id": "pack-cash",
+      "label": "少量现金与银行卡",
+      "category": "支付",
+      "essential": true
+    },
+    {
+      "id": "pack-layer",
+      "label": "保暖外套/抓绒（丽江清晨 0℃ 左右）",
+      "category": "衣物",
+      "essential": true
+    },
+    {
+      "id": "pack-sun",
+      "label": "防晒霜/墨镜/帽子",
+      "category": "天气",
+      "essential": true
+    },
+    {
+      "id": "pack-lip",
+      "label": "润唇膏/保湿",
+      "category": "健康",
+      "essential": false
+    },
+    {
+      "id": "pack-shoes",
+      "label": "好走的鞋",
+      "category": "衣物",
+      "essential": true
+    },
+    {
+      "id": "pack-rain",
+      "label": "折叠伞/雨衣",
+      "category": "天气",
+      "essential": false
+    },
+    {
+      "id": "pack-med",
+      "label": "常用药/创可贴",
+      "category": "健康",
+      "essential": true
+    },
+    {
+      "id": "pack-alt",
+      "label": "氧气瓶/葡萄糖（按需，当地可买）",
+      "category": "健康",
+      "essential": false
+    },
+    {
+      "id": "pack-bottle",
+      "label": "水杯",
+      "category": "日用",
+      "essential": false
+    }
+  ],
+  "bookingChecklist": [
+    {
+      "id": "book-yulong",
+      "label": "玉龙雪山门票 + 索道（微信小程序）",
+      "required": true,
+      "status": "pending",
+      "deadline": "2026-11-28",
+      "url": "https://www.lijiang.cn/article/167628.html",
+      "sourceIds": [
+        "src-official-yulong"
+      ],
+      "note": "门票“玉龙雪山服务”；索道提前 7 天“丽江旅游集团”；同一证件 90 天限购 1 次。"
+    },
+    {
+      "id": "book-ynmuseum",
+      "label": "云南省博物馆预约",
+      "required": true,
+      "status": "pending",
+      "deadline": "2026-12-04",
+      "url": "https://www.ynmuseum.org/",
+      "sourceIds": [
+        "src-official-ynmuseum"
+      ],
+      "note": "周一闭馆；16:30 停止入场；以官网/公众号为准。"
+    },
+    {
+      "id": "book-train",
+      "label": "昆明→大理、大理→丽江动车票",
+      "required": true,
+      "status": "pending",
+      "deadline": "2026-11-28",
+      "url": "https://www.12306.cn/",
+      "sourceIds": [
+        "src-official-12306"
+      ],
+      "note": "按早班动车排；车次/票价以 12306 为准。"
+    },
+    {
+      "id": "book-hotel",
+      "label": "昆明 1 晚、大理 2 晚、丽江 2 晚住宿",
+      "required": false,
+      "status": "pending",
+      "deadline": "2026-11-30",
+      "note": "优先选可免费取消；大理住古城/才村，丽江住北门/束河。"
+    },
+    {
+      "id": "book-gwf",
+      "label": "丽江古城维护费（50 元/人，365 天有效）",
+      "required": false,
+      "status": "pending",
+      "deadline": "2026-12-08",
+      "url": "https://lijiang.gov.cn/ljsrmzf/c102144/202506/96e4d59273624376ba90e55dca35bbf6.shtml",
+      "sourceIds": [
+        "src-official-lijiang-gwf"
+      ],
+      "note": "进入大研/束河/白沙片区可能查验；以现场为准。"
+    },
+    {
+      "id": "book-chongsheng",
+      "label": "崇圣寺三塔门票（现场/扫码）",
+      "required": false,
+      "status": "pending",
+      "deadline": "2026-12-06",
+      "url": "https://www.dalitravel.cn/content/read/770.html",
+      "sourceIds": [
+        "src-official-chongsheng"
+      ],
+      "note": "08:00–17:00；支持刷身份证入园。"
+    }
+  ],
+  "emergency": {
+    "contacts": [
+      {
+        "label": "玉龙雪山景区咨询",
+        "value": "0888-5131068"
+      },
+      {
+        "label": "丽江旅游集团索道咨询",
+        "value": "0888-8889999"
+      },
+      {
+        "label": "报警 / 急救 / 火警",
+        "value": "110 / 120 / 119"
+      }
+    ],
+    "notes": [
+      "以上为公开服务电话，出发前再核验。",
+      "高海拔地区如有不适立即下撤并就医；不要独自进入未开放区域。"
+    ]
+  },
+  "sources": [
+    {
+      "id": "src-2882aa78",
+      "provider": "open-meteo",
+      "kind": "weather",
+      "title": "Open-Meteo 预报：昆明 2026-12-05–12-10",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=25.03889&longitude=102.71833&daily=weather_code%2Ctemperature_2m_max%2Ctemperature_2m_min%2Cprecipitation_probability_max%2Cprecipitation_sum%2Csunrise%2Csunset&timezone=Asia%2FShanghai&start_date=2026-12-05&end_date=2026-12-10",
+      "retrievedAt": "2026-11-27T03:14:37.462Z",
+      "transport": "live",
+      "license": "CC BY 4.0",
+      "confidence": "forecast",
+      "rawHash": "28a88b623951ba267e20e32f9157e5c3bd623ac0f20539c15e66cec1606eac66",
+      "note": "天气预报会变化；出行前请刷新。",
+      "label": "昆明天气（Open-Meteo）"
+    },
+    {
+      "id": "src-224e9fc8",
+      "provider": "open-meteo",
+      "kind": "weather",
+      "title": "Open-Meteo 预报：大理 2026-12-05–12-10",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=25.6935&longitude=100.1617&daily=weather_code%2Ctemperature_2m_max%2Ctemperature_2m_min%2Cprecipitation_probability_max%2Cprecipitation_sum%2Csunrise%2Csunset&timezone=Asia%2FShanghai&start_date=2026-12-05&end_date=2026-12-10",
+      "retrievedAt": "2026-11-27T03:14:37.663Z",
+      "transport": "live",
+      "license": "CC BY 4.0",
+      "confidence": "forecast",
+      "rawHash": "5cdca0c43d2150b1a2d628b6f561bd1436dc494e472896d947effb8750242a6e",
+      "note": "天气预报会变化；出行前请刷新。",
+      "label": "大理天气（Open-Meteo）"
+    },
+    {
+      "id": "src-f15cb07f",
+      "provider": "open-meteo",
+      "kind": "weather",
+      "title": "Open-Meteo 预报：丽江 2026-12-05–12-10",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=26.8721&longitude=100.233&daily=weather_code%2Ctemperature_2m_max%2Ctemperature_2m_min%2Cprecipitation_probability_max%2Cprecipitation_sum%2Csunrise%2Csunset&timezone=Asia%2FShanghai&start_date=2026-12-05&end_date=2026-12-10",
+      "retrievedAt": "2026-11-27T03:14:37.861Z",
+      "transport": "live",
+      "license": "CC BY 4.0",
+      "confidence": "forecast",
+      "rawHash": "8fa56243033bf5152fb15a3eaeed435bcd6184dabd64731a9493e1ab98d45d58",
+      "note": "天气预报会变化；出行前请刷新。",
+      "label": "丽江天气（Open-Meteo）"
+    },
+    {
+      "id": "src-official-ynmuseum",
+      "provider": "official",
+      "kind": "official",
+      "title": "云南省博物馆｜开放时间与预约",
+      "url": "https://www.ynmuseum.org/",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "live",
+      "license": "官方页面条款",
+      "confidence": "official",
+      "rawHash": "b1893dbc9046a33407d1b62aff8492576ac11cbae10317cc4020d50d42ed4195",
+      "note": "官网：09:00–17:00，16:30 停止入场，逢周一闭馆；预约入口以官网/公众号为准。",
+      "label": "云南省博物馆"
+    },
+    {
+      "id": "src-official-chongsheng",
+      "provider": "official",
+      "kind": "official",
+      "title": "大理旅游网｜崇圣寺三塔入园时间",
+      "url": "https://www.dalitravel.cn/content/read/770.html",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "live",
+      "license": "官方页面条款",
+      "confidence": "official",
+      "rawHash": "068b0739cc90d9776c0db23cc7a76b655e70196c66b23de5455df1019e37565f",
+      "note": "官方页面：崇圣寺三塔 08:00–17:00；现场购票/扫码，支持刷身份证入园；票价及临时调整以景区公告为准。",
+      "label": "崇圣寺三塔（大理旅游网）"
+    },
+    {
+      "id": "src-official-dalisanta",
+      "provider": "official",
+      "kind": "official",
+      "title": "崇圣寺三塔景区官网",
+      "url": "https://www.dalisanta.com/",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "live",
+      "license": "官方页面条款",
+      "confidence": "official",
+      "rawHash": "87d62140f4f4eaeeb8298ccd2a907860bdd41b0bd82930b9baebef2a7b17573f",
+      "note": "景区官网；开放时间与票务以官网/现场公告为准。",
+      "label": "崇圣寺三塔景区"
+    },
+    {
+      "id": "src-official-lijiang-gwf",
+      "provider": "official",
+      "kind": "official",
+      "title": "丽江古城维护费征收管理办法（2025-08-01 施行）",
+      "url": "https://lijiang.gov.cn/ljsrmzf/c102144/202506/96e4d59273624376ba90e55dca35bbf6.shtml",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "live",
+      "license": "官方页面条款",
+      "confidence": "official",
+      "rawHash": "dd220f25f866dfbe8574e81daa37666013b2644243db331d3098f42aa9ed982b",
+      "note": "丽江市政府：古城维护费 50 元/人/次，单次缴费 365 天内有效；免征范围见办法。",
+      "label": "丽江古城维护费"
+    },
+    {
+      "id": "src-official-yulong",
+      "provider": "official",
+      "kind": "official",
+      "title": "玉龙雪山景区游览提示（预订方式与大风停运）",
+      "url": "https://www.lijiang.cn/article/167628.html",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "live",
+      "license": "官方页面条款",
+      "confidence": "official",
+      "rawHash": "40c7a2d63669cfe60de7aca57c3954f545ac086e8106e22bcb34c09bbbd0f91c",
+      "note": "丽江市融媒体中心转载景区提示：门票用微信小程序“玉龙雪山服务”，索道票提前 7 天用“丽江旅游集团”实名预约；大风可能停运；咨询 0888-5131068。",
+      "label": "玉龙雪山官方提示"
+    },
+    {
+      "id": "src-official-12306",
+      "provider": "official",
+      "kind": "official",
+      "title": "中国铁路 12306",
+      "url": "https://www.12306.cn/",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "live",
+      "license": "官方页面条款",
+      "confidence": "official",
+      "rawHash": "b43fcbc5442465deee3f2bb7c920285b7f6c62aa63b902ba819978c8823de95c",
+      "note": "车次、时刻、票价与余票以 12306 为准；本行程只写大约时长，不锁定车次。",
+      "label": "12306 车次/车站"
+    },
+    {
+      "id": "src-manual-kunming",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "昆明点位与步行/打车时间（行程整理）",
+      "url": "manual://yunnan/kunming",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "license": "ODbL 1.0 (OSM/Photon)",
+      "confidence": "community",
+      "rawHash": "292063793bec453f1164cb8a3003888eb4e747d59719f2514e990b3e66fffa3c",
+      "note": "坐标由 OpenStreetMap/Photon 辅助定位并人工整理，非逐点实测；时间含缓冲。",
+      "label": "昆明点位（社区整理）"
+    },
+    {
+      "id": "src-manual-dali",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "大理点位与步行/打车时间（行程整理）",
+      "url": "manual://yunnan/dali",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "license": "ODbL 1.0 (OSM/Photon)",
+      "confidence": "community",
+      "rawHash": "7b7d040a0493308592280f4eef7bdda0691af24f9ce5f62ab085c42b68617629",
+      "note": "坐标由 OpenStreetMap/Photon 辅助定位并人工整理，非逐点实测；时间含缓冲。",
+      "label": "大理点位（社区整理）"
+    },
+    {
+      "id": "src-manual-lijiang",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "丽江点位与步行/打车时间（行程整理）",
+      "url": "manual://yunnan/lijiang",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "license": "ODbL 1.0 (OSM/Photon)",
+      "confidence": "community",
+      "rawHash": "58d10b063a7e01681d2e68d6c24d51f6f395e76064284e161b37cdcc2b974d31",
+      "note": "坐标由 OpenStreetMap/Photon 辅助定位并人工整理，非逐点实测；时间含缓冲。",
+      "label": "丽江点位（社区整理）"
+    },
+    {
+      "id": "src-manual-food",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "餐饮区域建议（非具体餐厅）",
+      "url": "manual://yunnan/food",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "e992fc6c684ee4f5a7b6f69ea213e01305476f8304fcd3af2b14a6eb3c0cfb64",
+      "note": "只给区域与菜系建议，不指定具体餐厅；营业、排队、价格以现场为准。",
+      "label": "餐饮区域（社区整理）"
+    },
+    {
+      "id": "src-manual-hotel",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "住宿区域建议",
+      "url": "manual://yunnan/hotel",
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "c5fbd1f15d6640dbf87bab7be0bcdaf283c96ffbd806bf66af687798c79cd182",
+      "note": "只给住宿区域建议；具体酒店按预算、取消政策和房型另选。"
+    },
+    {
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "rawHash": "",
+      "note": "",
+      "id": "src-official-ynairport",
+      "provider": "official",
+      "kind": "transport",
+      "title": "昆明长水国际机场",
+      "label": "昆明长水机场",
+      "url": "https://www.ynairport.com/",
+      "confidence": "official",
+      "license": "官方页面条款"
+    },
+    {
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "rawHash": "",
+      "note": "",
+      "id": "src-official-lijiangairport",
+      "provider": "official",
+      "kind": "transport",
+      "title": "丽江三义国际机场",
+      "label": "丽江三义机场",
+      "url": "https://www.lijiangairport.com/",
+      "confidence": "official",
+      "license": "官方页面条款"
+    },
+    {
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "rawHash": "",
+      "note": "",
+      "id": "src-official-kunming-lodging",
+      "provider": "official",
+      "kind": "lodging",
+      "title": "昆明市文化和旅游局｜住宿区域",
+      "label": "昆明住宿区域（市文旅局）",
+      "url": "https://whhlyj.km.gov.cn/",
+      "confidence": "official",
+      "license": "官方页面条款"
+    },
+    {
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "rawHash": "",
+      "note": "",
+      "id": "src-official-dali-lodging",
+      "provider": "official",
+      "kind": "lodging",
+      "title": "大理旅游网｜住宿与古城区域",
+      "label": "大理住宿区域（大理旅游网）",
+      "url": "https://www.dalitravel.cn/",
+      "confidence": "official",
+      "license": "官方页面条款"
+    },
+    {
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "rawHash": "",
+      "note": "",
+      "id": "src-official-lijiang-lodging",
+      "provider": "official",
+      "kind": "lodging",
+      "title": "丽江市人民政府｜住宿与古城区域",
+      "label": "丽江住宿区域（市政府）",
+      "url": "https://www.lijiang.gov.cn/",
+      "confidence": "official",
+      "license": "官方页面条款"
+    },
+    {
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "rawHash": "",
+      "note": "",
+      "id": "src-official-yn-culture",
+      "provider": "official",
+      "kind": "culture",
+      "title": "云南省文化和旅游厅",
+      "label": "云南省文旅厅",
+      "url": "https://dct.yn.gov.cn/",
+      "confidence": "official",
+      "license": "官方页面条款"
+    },
+    {
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "rawHash": "",
+      "note": "",
+      "id": "src-official-mct",
+      "provider": "official",
+      "kind": "safety",
+      "title": "文化和旅游部｜旅游消费提示",
+      "label": "文旅部旅游提示",
+      "url": "https://www.mct.gov.cn/",
+      "confidence": "official",
+      "license": "官方页面条款"
+    },
+    {
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "rawHash": "",
+      "note": "",
+      "id": "src-official-yncdc",
+      "provider": "official",
+      "kind": "safety",
+      "title": "云南省疾病预防控制中心｜野生菌与健康提示",
+      "label": "云南疾控健康提示",
+      "url": "https://www.yncdc.cn/",
+      "confidence": "official",
+      "license": "官方页面条款"
+    },
+    {
+      "retrievedAt": "2026-11-27T03:20:00.000Z",
+      "transport": "manual",
+      "rawHash": "",
+      "note": "社区经验，不是官方结论；只作提醒。",
+      "id": "src-community-yunnan-notes",
+      "provider": "manual",
+      "kind": "safety",
+      "title": "云南旅行者避坑经验（社区整理）",
+      "label": "旅行者经验（社区整理）",
+      "url": "manual://yunnan/community-notes",
+      "confidence": "community",
+      "license": "user-provided"
+    }
+  ],
+  "provenance": {
+    "policyVersion": "0.1",
+    "lastCheckedAt": "2026-11-27T03:20:00.000Z"
+  }
+}

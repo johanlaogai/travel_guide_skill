@@ -121,7 +121,7 @@ test('校验：广州示例 strict 通过，缺来源/官方动态事实/无饭�
 });
 
 test('校验：v0.3 来源完整、guide 与 derived 规则', async () => {
-  const trip = await loadTrip(path.join(ROOT, 'trips/yunnan-6d/trip.json'));
+  const trip = await loadTrip(path.join(ROOT, 'tests/fixtures/yunnan-6d.json'));
   const options = { strict: true, now: new Date('2026-11-27T00:00:00+08:00'), today: '2026-11-27' };
   const result = validateTrip(trip, options);
   assert.equal(result.ok, true, JSON.stringify(result.errors));
