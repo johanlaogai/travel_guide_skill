@@ -11,6 +11,13 @@ const TYPE_LABELS = {
   buffer: '缓冲',
 };
 
+const BOOKING_STATUS_LABELS = {
+  pending: '待预约',
+  booked: '已预约',
+  cancelled: '已取消',
+  done: '已完成',
+};
+
 const TRANSIT_LABELS = {
   walk: '步行',
   metro: '地铁',
@@ -25,6 +32,7 @@ const TRANSIT_LABELS = {
 export function buildMarkdown(trip) {
   const meta = trip.meta;
   const lines = [];
+  const sourceById = new Map((trip.sources ?? []).map((source) => [source.id, source]));
   lines.push(`# ${meta.title}`, '');
   lines.push(`**${meta.destination.name}** · ${formatRangeZh(meta.startDate, meta.endDate)} · ${meta.days} 天 · ${meta.travelers} 人`, '');
   if (trip.overview?.summary) lines.push(`> ${trip.overview.summary}`, '');
@@ -53,9 +61,16 @@ export function buildMarkdown(trip) {
         lines.push(`  - 交通：${TRANSIT_LABELS[item.transit.mode] ?? item.transit.mode} ${item.transit.durationMin ?? '?'} 分钟${item.transit.distanceKm ? `，约 ${item.transit.distanceKm} km` : ''}`);
       }
       if (item.cost?.amount != null) lines.push(`  - 费用：${formatCents(item.cost.amount * 100, item.cost.currency ?? meta.budget.currency)}`);
-      if (item.booking?.required) lines.push(`  - 预约：${item.booking.status ?? '待确认'}${item.booking.url ? ` ${item.booking.url}` : ''}`);
+      if (item.booking?.required) lines.push(`  - 预约：${BOOKING_STATUS_LABELS[item.booking.status] ?? item.booking.status ?? '待确认'}${item.booking.url ? ` ${item.booking.url}` : ''}`);
       if (item.notes) lines.push(`  - 备注：${item.notes}`);
-      if (item.sourceIds?.length) lines.push(`  - 来源：${item.sourceIds.join(', ')}`);
+      if (item.sourceIds?.length) {
+        const labels = item.sourceIds.map((id) => {
+          const source = sourceById.get(id);
+          if (!source) return id;
+          return /^https?:\/\//.test(source.url ?? '') ? `[${source.title}](${source.url})` : source.title;
+        });
+        lines.push(`  - 来源：${labels.join('；')}`);
+      }
     }
     lines.push('');
   }
