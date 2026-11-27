@@ -255,6 +255,7 @@ h1 {
 .day-tab:hover { color: var(--ink); background: color-mix(in srgb, var(--ink) 5%, transparent); }
 .day-tab.is-active { color: var(--ink); background: var(--card); border-color: var(--line); box-shadow: var(--shadow-soft); }
 .day-tab .tab-dot { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: var(--day-color, var(--accent)); }
+.day-tab .tab-count { margin-left: 6px; color: var(--faint); font-size: 10px; font-weight: 500; }
 
 .layout {
   display: grid;

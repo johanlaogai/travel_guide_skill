@@ -40,6 +40,13 @@ const TYPE_LABELS = {
   buffer: '缓冲',
 };
 
+const BOOKING_STATUS_LABELS = {
+  pending: '待预约',
+  booked: '已预约',
+  cancelled: '已取消',
+  done: '已完成',
+};
+
 const TRANSIT_LABELS = {
   walk: '步行',
   metro: '地铁',
@@ -79,7 +86,7 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
     `<button class="day-tab is-active" data-day-filter="all">全部 <span class="tab-count">${items.length}</span></button>`,
     ...(trip.days ?? []).map((day, index) => {
       const count = (day.items ?? []).length;
-      return `<button class="day-tab day-c${index + 1}" data-day-filter="${index + 1}"><span class="tab-dot" aria-hidden="true"></span>Day ${index + 1}<span class="tab-count">${count}</span></button>`;
+      return `<button class="day-tab day-c${index + 1}" data-day-filter="${index + 1}"><span class="tab-dot" aria-hidden="true"></span>Day ${index + 1}<span class="tab-count">${count}项</span></button>`;
     }),
   ].join('');
   const typeCounts = countTypes(items);
@@ -281,7 +288,7 @@ function renderItem(item, day, dayIndex, trip, sources, currency) {
     chips.push(`<span class="chip-static is-cost">${escapeHtml(formatCents(Number(item.cost.amount) * 100, item.cost.currency ?? currency))}</span>`);
   }
   if (item.booking?.required) {
-    chips.push(`<span class="chip-static is-booking">预约 ${escapeHtml(item.booking.status ?? '待确认')}</span>`);
+    chips.push(`<span class="chip-static is-booking">预约 ${escapeHtml(BOOKING_STATUS_LABELS[item.booking.status] ?? item.booking.status ?? '待确认')}</span>`);
   }
   if (item.transit) {
     chips.push(`<span class="chip-static">${escapeHtml(TRANSIT_LABELS[item.transit.mode] ?? item.transit.mode)} ${item.transit.durationMin ?? '?'} 分钟</span>`);
@@ -292,7 +299,7 @@ function renderItem(item, day, dayIndex, trip, sources, currency) {
   const transit = item.transit
     ? `<div class="transit-line"><span>从上一站</span><span class="transit-mode">${escapeHtml(TRANSIT_LABELS[item.transit.mode] ?? item.transit.mode)}</span><span>${item.transit.durationMin ?? '?'} 分钟</span>${item.transit.distanceKm ? `<span>· ${item.transit.distanceKm} km</span>` : ''}${item.transit.note ? `<span>· ${escapeHtml(item.transit.note)}</span>` : ''}</div>`
     : '';
-  const booking = item.booking?.required ? `<div class="transit-line"><span>预约</span><span>${escapeHtml(item.booking.status ?? '待确认')}</span>${item.booking.deadline ? `<span>· 截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}${safeUrl(item.booking.url) ? `· <a href="${escapeAttr(safeUrl(item.booking.url))}" target="_blank" rel="noopener noreferrer">官方链接</a>` : ''}</div>` : '';
+  const booking = item.booking?.required ? `<div class="transit-line"><span>预约</span><span>${escapeHtml(BOOKING_STATUS_LABELS[item.booking.status] ?? item.booking.status ?? '待确认')}</span>${item.booking.deadline ? `<span>· 截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}${safeUrl(item.booking.url) ? `· <a href="${escapeAttr(safeUrl(item.booking.url))}" target="_blank" rel="noopener noreferrer">官方链接</a>` : ''}</div>` : '';
   return `<article class="item type-${escapeAttr(type)}" id="item-${escapeAttr(item.id)}" data-item-id="${escapeAttr(item.id)}" data-day="${dayIndex + 1}" data-type="${escapeAttr(type)}" data-search="${escapeAttr(search)}">
     <div class="item-rail"><span class="item-time">${escapeHtml(time)}</span><span class="item-duration">${escapeHtml(duration)}</span><span class="item-dot" aria-hidden="true"></span></div>
     <div class="item-card">
