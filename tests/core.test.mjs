@@ -88,8 +88,10 @@ test('来源：稳定 id、校验、去重与覆盖统计', () => {
     days: [{ items: [{ type: 'anchor', sourceIds: [first.id] }, { type: 'buffer' }] }],
   });
   assert.equal(coverage.anchored, 1);
+  assert.equal(coverage.required, 2);
   assert.equal(coverage.sourced, 1);
-  assert.equal(coverage.sourcedPct, 100);
+  assert.equal(coverage.missing, 1);
+  assert.equal(coverage.sourcedPct, 50);
 });
 
 test('校验：广州示例 strict 通过，缺来源/官方动态事实/无饭点被拦', async () => {
@@ -116,4 +118,42 @@ test('校验：广州示例 strict 通过，缺来源/官方动态事实/无饭�
   noMeal.days[0].items = noMeal.days[0].items.filter((item) => item.type !== 'meal');
   const noMealResult = validateTrip(noMeal, options);
   assert.ok(noMealResult.errors.some((error) => error.code === 'STRICT_NO_MEAL'));
+});
+
+test('校验：v0.3 来源完整、guide 与 derived 规则', async () => {
+  const trip = await loadTrip(path.join(ROOT, 'trips/yunnan-6d/trip.json'));
+  const options = { strict: true, now: new Date('2026-11-27T00:00:00+08:00'), today: '2026-11-27' };
+  const result = validateTrip(trip, options);
+  assert.equal(result.ok, true, JSON.stringify(result.errors));
+  assert.ok(result.warnings.some((warning) => warning.code === 'NO_DINNER'));
+  const coverage = sourceCoverage(trip);
+  assert.equal(coverage.missing, 0);
+  assert.equal(coverage.derived, 11);
+
+  const noGuide = structuredClone(trip);
+  delete noGuide.overview.guide;
+  const noGuideResult = validateTrip(noGuide, options);
+  assert.equal(noGuideResult.ok, false);
+  assert.ok(noGuideResult.errors.some((error) => error.code === 'STRICT_GUIDE_MISSING'));
+
+  const noHotelSource = structuredClone(trip);
+  const hotel = noHotelSource.days.flatMap((day) => day.items).find((item) => item.type === 'hotel');
+  hotel.sourceIds = [];
+  const hotelResult = validateTrip(noHotelSource, options);
+  assert.ok(hotelResult.errors.some((error) => error.code === 'ITEM_SOURCE'));
+
+  const noBufferSource = structuredClone(trip);
+  const buffer = noBufferSource.days.flatMap((day) => day.items).find((item) => item.type === 'buffer');
+  delete buffer.sourceIds;
+  delete buffer.derived;
+  delete buffer.derivation;
+  const bufferResult = validateTrip(noBufferSource, options);
+  assert.ok(bufferResult.errors.some((error) => error.code === 'ITEM_UNSOURCED'));
+
+  const badDerived = structuredClone(trip);
+  const anchor = badDerived.days.flatMap((day) => day.items).find((item) => item.type === 'anchor');
+  anchor.derived = true;
+  anchor.derivation = '不应该这样';
+  const derivedResult = validateTrip(badDerived, options);
+  assert.ok(derivedResult.errors.some((error) => error.code === 'DERIVED_TYPE'));
 });

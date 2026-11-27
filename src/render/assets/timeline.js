@@ -69,28 +69,31 @@
     return raw.length > 18 ? `${raw.slice(0, 17)}…` : raw;
   }
 
-  function sourceLinks(trip, ids = [], max = 4) {
+  function sourceLinks(trip, ids = [], max = 4, options = {}) {
     const index = new Map((trip.sources ?? []).map((source) => [source.id, source]));
     const seen = new Set();
     const links = [];
     let manual = false;
+    let manualLabel = '行程整理';
     let overflow = 0;
     for (const id of ids ?? []) {
       if (seen.has(id)) continue;
       seen.add(id);
       const source = index.get(id);
       if (!source) continue;
-      if (!isHttpUrl(source.url)) { manual = true; continue; }
+      if (!isHttpUrl(source.url)) { manual = true; manualLabel = source.label || '行程整理'; continue; }
       if (links.length >= max) { overflow += 1; continue; }
-      const label = source.provider === 'official'
-        ? `官方 · ${shortTitle(source)}`
-        : source.provider === 'open-meteo'
-          ? '天气 · Open-Meteo'
-          : `${source.provider} · ${shortTitle(source)}`;
+      const label = source.label
+        || (source.provider === 'official'
+          ? `官方 · ${shortTitle(source)}`
+          : source.provider === 'open-meteo'
+            ? '天气 · Open-Meteo'
+            : `${source.provider} · ${shortTitle(source)}`);
       links.push(`<a class="source-link" href="${escapeAttr(source.url)}" target="_blank" rel="noopener noreferrer" data-external title="${escapeAttr(source.title || source.url)}">${escapeHtml(label)}</a>`);
     }
     const parts = [...links];
-    if (manual) parts.push('<span class="source-manual" title="由行程整理录入，非官方；请以现场为准">行程整理</span>');
+    if (options.derived === true) parts.push(`<span class="source-derived" title="${escapeAttr(options.derivation || '按路线与交通时间估算')}">估算 · 路线时间</span>`);
+    if (!links.length && manual) parts.push(`<span class="source-manual" title="由行程整理录入，非官方；请以现场为准">${escapeHtml(manualLabel)}</span>`);
     if (overflow) parts.push(`<span class="source-more" title="更多来源见 sources.md">+${overflow}</span>`);
     return parts.length ? `<p class="source-links"><span class="source-kicker">来源</span>${parts.join('')}</p>` : '';
   }
@@ -120,6 +123,18 @@
       ${weather.precipitationProbability != null ? `<span class="weather-label">降雨 ${weather.precipitationProbability}%</span>` : ''}
       ${url ? `<a class="weather-source" href="${escapeAttr(url)}" target="_blank" rel="noopener noreferrer" data-external>天气来源</a>` : ''}
     </div>`;
+  }
+
+  function itemDetail(item) {
+    const detail = item.detail;
+    if (!detail || typeof detail !== 'object') return '';
+    const highlights = Array.isArray(detail.highlights) ? detail.highlights.filter(Boolean) : [];
+    if (!detail.description && !highlights.length && !detail.photoTip) return '';
+    return `<details class="item-story"><summary>看点与故事</summary>
+      ${detail.description ? `<p>${escapeHtml(detail.description)}</p>` : ''}
+      ${highlights.length ? `<ul>${highlights.map((line) => `<li>${escapeHtml(line)}</li>`).join('')}</ul>` : ''}
+      ${detail.photoTip ? `<p class="photo-tip">拍照：${escapeHtml(detail.photoTip)}</p>` : ''}
+    </details>`;
   }
 
   function renderItem(item, dayIndex, trip, sources) {
@@ -153,6 +168,7 @@
     if (item.cost?.amount != null) chips.push(`<span class="chip-static is-cost">${escapeHtml(formatCents(Number(item.cost.amount) * 100, item.cost.currency ?? currency))}</span>`);
     if (item.booking?.required) chips.push(`<span class="chip-static is-booking">预约 ${escapeHtml(BOOKING_STATUS_LABELS[item.booking.status] ?? item.booking.status ?? '待确认')}</span>`);
     if (item.transit) chips.push(`<span class="chip-static">${escapeHtml(TRANSIT_LABELS[item.transit.mode] ?? item.transit.mode)} ${item.transit.durationMin ?? '?'} 分钟</span>`);
+    if (item.derived) chips.push('<span class="chip-static is-derived">估算</span>');
 
     const transit = item.transit
       ? `<div class="transit-line"><span>从上一站</span><span class="transit-mode">${escapeHtml(TRANSIT_LABELS[item.transit.mode] ?? item.transit.mode)}</span><span>${item.transit.durationMin ?? '?'} 分钟</span>${item.transit.distanceKm ? `<span>· ${item.transit.distanceKm} km</span>` : ''}${item.transit.note ? `<span>· ${escapeHtml(item.transit.note)}</span>` : ''}</div>`
@@ -161,17 +177,22 @@
     const booking = item.booking?.required
       ? `<div class="transit-line"><span>预约</span><span>${escapeHtml(BOOKING_STATUS_LABELS[item.booking.status] ?? item.booking.status ?? '待确认')}</span>${item.booking.deadline ? `<span>· 截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}${bookingUrl ? `· <a href="${escapeAttr(bookingUrl)}" target="_blank" rel="noopener noreferrer" data-external>官方链接</a>` : ''}</div>`
       : '';
-    const sourcesHtml = sourceLinks(trip, item.sourceIds ?? []);
+    const sourcesHtml = sourceLinks(trip, item.sourceIds ?? [], 4, {
+      derived: item.derived === true,
+      derivation: item.derivation,
+    });
+    const detail = itemDetail(item);
     return `<article class="item type-${escapeAttr(type)}" id="item-${escapeAttr(item.id)}" data-item-id="${escapeAttr(item.id)}" data-day="${dayIndex + 1}" data-type="${escapeAttr(type)}" data-search="${escapeAttr(search)}">
       <div class="item-rail"><span class="item-time">${escapeHtml(time)}</span><span class="item-duration">${escapeHtml(duration)}</span><span class="item-dot" aria-hidden="true"></span></div>
       <div class="item-card">
-        <div class="item-top"><span class="type-label">${escapeHtml(TYPE_LABELS[type] ?? type)}</span>${item.booking?.deadline ? `<span class="chip-static">截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}</div>
+        <div class="item-top"><span class="type-label">${escapeHtml(TYPE_LABELS[type] ?? type)}</span>${item.derived ? '<span class="chip-static is-derived">估算</span>' : ''}${item.booking?.deadline ? `<span class="chip-static">截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}</div>
         <h3>${escapeHtml(item.title)}</h3>
         ${place.name ? `<p class="place">${escapeHtml(place.name)}${place.address ? ` · <span class="address">${escapeHtml(place.address)}</span>` : ''}</p>` : ''}
         ${transit}
         ${booking}
         ${chips.length ? `<div class="chips">${chips.join('')}</div>` : ''}
         ${item.notes ? `<p class="item-notes">${escapeHtml(item.notes)}</p>` : ''}
+        ${detail}
         ${sourcesHtml}
         ${links.length ? `<div class="item-actions">${links.join('')}</div>` : ''}
       </div>

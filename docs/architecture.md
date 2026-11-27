@@ -58,7 +58,7 @@ trip.json ──enrich──► providers ──► sources[] + days[].weather +
 {
   "id": "src-<hash>",
   "provider": "open-meteo | nominatim | overpass | wikimedia | official | frankfurter | nager | tikhub | manual",
-  "kind": "weather | geocode | poi | wiki | official | ugc | fx | holiday | note",
+  "kind": "weather | geocode | poi | wiki | official | ugc | fx | holiday | note | lodging | transport | route | culture | food | photo | safety",
   "title": "...",
   "url": "https://... 或 manual://...",
   "retrievedAt": "ISO",
@@ -83,7 +83,8 @@ trip.json ──enrich──► providers ──► sources[] + days[].weather +
 - schemaVersion、meta、日期、天数、人数、币种；
 - 来源格式/重复/引用；
 - 一天 >3 锚点；
-- 锚点/餐饮无来源；
+- 锚点/餐饮/住宿/城际交通无来源；
+- buffer 既无 `sourceIds` 也无 `derived: true` + `derivation`；
 - 锚点无坐标；
 - 非首项缺 `transit`；
 - 16 天内缺天气来源；
@@ -93,7 +94,9 @@ trip.json ──enrich──► providers ──► sources[] + days[].weather +
 
 **提醒；strict 可升级**
 
-- 无来源、无饭点、只有 URL 没有官方来源、未核实项、预算不一致、public PII。
+- 无来源、无饭点、只有 URL 没有官方来源、未核实项、预算不一致、public PII；
+- 3 天以上无 guide（`GUIDE_MISSING`，strict 升级）；
+- guide 块缺 title/body/sourceIds，pitfall 缺 severity/category。
 
 ## 渲染
 
@@ -102,7 +105,9 @@ trip.json ──enrich──► providers ──► sources[] + days[].weather +
 - `trip` JSON 内嵌到 `<script type="application/json">`，`<` 转义；编辑草稿存 `localStorage`，不上传；
 - ICS 内嵌到 `<script type="text/plain">`，下载用 Blob；
 - 地图默认 Esri World Street Map（WGS84）；高德底图在客户端做 WGS84→GCJ-02；OSM 可选；瓦片失败或无坐标时显示地址列表；
-- 来源链接放在行程卡片内：官方/天气为 `data-external` 超链接，手工整理项显示不可点“行程整理”；不再渲染来源覆盖统计、来源表或来源筛选；
+- 来源链接放在行程卡片和 guide 块内：官方/天气为 `data-external` 超链接，手工整理项显示不可点“行程整理”；不再渲染来源覆盖统计、来源表或来源筛选；
+- `renderGuide()` 渲染背景/文化/风俗、美食、打卡点、避坑（按高/中/低配色）和贴士；`renderItemDetail()` 渲染景点介绍/看点/拍照建议；
+- 来源覆盖改为全条目：`required/sourced/derived/missing`，buffer 标“估算 · 路线时间”；
 - 外链统一事件委托：`window.open` 被拦截时回退 `location.href`；“地图定位”调用 Leaflet `focusItem`；
 - 编辑模式支持修改/新增/删除/上移/下移和改当天标题；新增项自动补 `src-editor-manual` 来源；导出 `trip.json`，恢复初始删除草稿并刷新；
 - 所有用户数据 `escapeHtml`/`escapeAttr`；链接只允许 http(s)。
@@ -113,7 +118,7 @@ trip.json ──enrich──► providers ──► sources[] + days[].weather +
 
 1. `replaceDirAtomic(out, populate)`：临时目录写全部文件，成功后替换；
 2. 写 `index.html`、`itinerary.md`、`sources.md`、`trip.ics`、`build-receipt.json`；
-3. 回执含输入/输出 SHA-256、来源覆盖率、warnings；
+3. 回执含输入/输出 SHA-256、来源覆盖（有来源/估算/缺失）、warnings；
 4. `--public` 先 `publicTrip()` 脱敏，再渲染。
 
 ## 测试

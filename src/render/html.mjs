@@ -104,7 +104,7 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
 <div class="page">
   <header class="hero">
     <div class="hero-top">
-      <div class="brand"><span class="brand-mark" aria-hidden="true">◐</span> Travel Guide <span class="brand-ver">v0.2</span></div>
+      <div class="brand"><span class="brand-mark" aria-hidden="true">◐</span> Travel Guide <span class="brand-ver">v0.3</span></div>
       <div class="actions">
         <button class="btn btn-icon" type="button" data-action="theme" aria-label="切换主题" title="切换主题"><svg data-theme-icon class="icon-theme" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="icon-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path></g><path class="icon-moon" d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"></path></svg></button>
         <button class="btn btn-edit" type="button" data-action="edit" aria-pressed="false" aria-label="编辑行程" title="编辑行程"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg><span class="btn-label">编辑</span></button>
@@ -131,6 +131,8 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
     ${publicMode || trip.meta.publicMode ? `<div class="banner is-public"><strong>公开分享版</strong><span>已移除姓名、电话、订单号等个人信息；请仍注意不要公开住宿房间号等细节。</span></div>` : ''}
     <div id="draft-banner" class="banner is-draft" hidden><strong>本地修改</strong><span>已载入保存在这个浏览器里的修改；要分享修改版，请导出 JSON 后重新构建。</span><button class="banner-action" type="button" data-action="reset-draft">恢复初始</button></div>
   </header>
+
+  ${renderGuide(trip)}
 
   <div id="edit-bar" class="edit-bar no-print" hidden>
     <span>编辑模式：修改只保存在本机，不会上传。</span>
@@ -181,7 +183,7 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
         <div class="map-foot">底图：Esri / 高德 / OSM，仅地图瓦片请求网络。地图用于看顺序，不替代导航。</div>
       </div>
 
-      ${trip.overview?.risks?.length ? `<div class="panel">
+      ${trip.overview?.risks?.length && !trip.overview?.guide?.pitfalls?.length ? `<div class="panel">
         <div class="section-head"><h2 class="section-title">行前提醒</h2></div>
         <ul class="risk-list">${trip.overview.risks.map((risk) => `<li>${escapeHtml(risk)}</li>`).join('')}</ul>
       </div>` : ''}
@@ -210,7 +212,7 @@ export async function renderHtml(trip, { now = new Date(), publicMode = false } 
 
   <footer class="footer">
     <div class="attrib">${attributionHtml()}</div>
-    <div>由 travel-guide v0.2.0 生成 · ${escapeHtml(new Date(now).toISOString())} · 行程数据来自 trip.json；仅地图底图请求瓦片，行程数据不联网。</div>
+    <div>由 travel-guide v0.3.0 生成 · ${escapeHtml(new Date(now).toISOString())} · 行程数据来自 trip.json；仅地图底图请求瓦片，行程数据不联网。</div>
     <div>信息会变化；营业时间、票价、预约、交通管制等以官方当日公告为准。本工具不提供下单、支付、实时导航或签证法律意见。</div>
     <div>来源链接在各行程卡片上；完整来源记录随 build 生成在 <code>sources.md</code>。重新生成：<code>travel-guide build --trip trip.json</code></div>
   </footer>
@@ -223,6 +225,89 @@ ${renderEditorDialogs(currency)}
 <script>${inlineScript(js)}</script>
 </body>
 </html>`;
+}
+
+const PITFALL_SEVERITY_LABELS = { high: '高', medium: '中', low: '低' };
+const PITFALL_CATEGORY_LABELS = {
+  ticket: '门票',
+  transport: '交通',
+  scam: '消费陷阱',
+  health: '健康',
+  weather: '天气',
+  food: '饮食',
+  custom: '风俗',
+};
+
+function renderGuide(trip) {
+  const guide = trip.overview?.guide;
+  if (!guide || typeof guide !== 'object') return '';
+  const blocks = [];
+  if (guide.intro?.body) {
+    blocks.push(`<article class="guide-card guide-intro">
+      <p class="guide-kicker">目的地手册</p>
+      <h2>${escapeHtml(guide.intro.title || '先读这一段')}</h2>
+      <p>${escapeHtml(guide.intro.body)}</p>
+      ${sourceLinksHtml(trip, guide.intro.sourceIds, 4)}
+    </article>`);
+  }
+  for (const section of guide.sections ?? []) {
+    if (!section?.body) continue;
+    const kicker = { background: '背景', culture: '文化', customs: '风俗' }[section.id] ?? '背景';
+    blocks.push(`<article class="guide-card">
+      <p class="guide-kicker">${escapeHtml(kicker)}</p>
+      <h2>${escapeHtml(section.title || kicker)}</h2>
+      <p>${escapeHtml(section.body)}</p>
+      ${sourceLinksHtml(trip, section.sourceIds, 4)}
+    </article>`);
+  }
+  const food = (guide.food ?? []).filter((item) => item?.name);
+  const photoSpots = (guide.photoSpots ?? []).filter((item) => item?.name);
+  const pitfalls = (guide.pitfalls ?? []).filter((item) => item?.title);
+  const tips = (guide.tips ?? []).filter((item) => item?.body);
+
+  const foodHtml = food.length ? `<article class="guide-card guide-list-card">
+    <p class="guide-kicker">吃什么</p><h2>本地味道</h2>
+    <div class="guide-list">${food.map((item) => `<div class="guide-list-item"><strong>${escapeHtml(item.name)}</strong><p>${escapeHtml(item.description ?? '')}</p>${sourceLinksHtml(trip, item.sourceIds, 3)}</div>`).join('')}</div>
+  </article>` : '';
+  const photoHtml = photoSpots.length ? `<article class="guide-card guide-list-card">
+    <p class="guide-kicker">去哪儿拍</p><h2>打卡点</h2>
+    <div class="guide-list">${photoSpots.map((item) => `<div class="guide-list-item"><strong>${escapeHtml(item.name)} <span class="guide-meta">${escapeHtml(item.area ?? '')} · ${escapeHtml(item.bestTime ?? '')}</span></strong><p>${escapeHtml(item.tip ?? '')}</p>${sourceLinksHtml(trip, item.sourceIds, 3)}</div>`).join('')}</div>
+  </article>` : '';
+  const tipsHtml = tips.length ? `<article class="guide-card guide-list-card">
+    <p class="guide-kicker">实用贴士</p><h2>少走弯路</h2>
+    <ul class="guide-tips">${tips.map((item) => `<li><strong>${escapeHtml(item.title || '贴士')}</strong>：${escapeHtml(item.body)}${sourceLinksHtml(trip, item.sourceIds, 2)}</li>`).join('')}</ul>
+  </article>` : '';
+  const pitfallHtml = pitfalls.length ? `<section class="pitfalls" id="pitfalls" aria-labelledby="pitfalls-title">
+    <div class="section-head"><h2 id="pitfalls-title" class="section-title">避坑与踩雷</h2><p>先看这一节，能省不少麻烦</p></div>
+    <div class="pitfall-grid">${pitfalls.map((item) => `<article class="pitfall-card" data-severity="${escapeAttr(item.severity ?? 'medium')}">
+      <div class="pitfall-top"><span class="pitfall-severity">${escapeHtml(PITFALL_SEVERITY_LABELS[item.severity] ?? '中')}</span><span class="pitfall-category">${escapeHtml(PITFALL_CATEGORY_LABELS[item.category] ?? item.category ?? '提醒')}</span></div>
+      <h3>${escapeHtml(item.title)}</h3>
+      <p>${escapeHtml(item.body)}</p>
+      ${sourceLinksHtml(trip, item.sourceIds, 3)}
+    </article>`).join('')}</div>
+  </section>` : '';
+
+  if (!blocks.length && !foodHtml && !photoHtml && !tipsHtml && !pitfallHtml) return '';
+  return `<section class="guide-section" id="guide" aria-labelledby="guide-title">
+    <div class="section-head"><h2 id="guide-title" class="section-title">目的地手册</h2><p>文化、吃喝、拍照和避坑；每块都带来源</p></div>
+    ${blocks.length ? `<div class="guide-grid">${blocks.join('')}</div>` : ''}
+    ${foodHtml || photoHtml ? `<div class="guide-grid guide-grid-2">${foodHtml}${photoHtml}</div>` : ''}
+    ${tipsHtml}
+    ${pitfallHtml}
+  </section>`;
+}
+
+function renderItemDetail(item) {
+  const detail = item.detail;
+  if (!detail || typeof detail !== 'object') return '';
+  const highlights = Array.isArray(detail.highlights) ? detail.highlights.filter(Boolean) : [];
+  if (!detail.description && !highlights.length && !detail.photoTip) return '';
+  return `<details class="item-story">
+    <summary>看点与故事</summary>
+    ${detail.description ? `<p>${escapeHtml(detail.description)}</p>` : ''}
+    ${highlights.length ? `<ul>${highlights.map((line) => `<li>${escapeHtml(line)}</li>`).join('')}</ul>` : ''}
+    ${detail.photoTip ? `<p class="photo-tip">拍照：${escapeHtml(detail.photoTip)}</p>` : ''}
+  </details>`;
 }
 
 function renderDay(day, index, trip, sources, currency) {
@@ -304,17 +389,23 @@ function renderItem(item, day, dayIndex, trip, sources, currency) {
     : '';
   const bookingUrl = safeUrl(item.booking?.url);
   const booking = item.booking?.required ? `<div class="transit-line"><span>预约</span><span>${escapeHtml(BOOKING_STATUS_LABELS[item.booking.status] ?? item.booking.status ?? '待确认')}</span>${item.booking.deadline ? `<span>· 截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}${bookingUrl ? `· <a href="${escapeAttr(bookingUrl)}" target="_blank" rel="noopener noreferrer" data-external>官方链接</a>` : ''}</div>` : '';
-  const sourceLinks = sourceLinksHtml(trip, item.sourceIds ?? []);
+  const sourceLinks = sourceLinksHtml(trip, item.sourceIds ?? [], 4, {
+    derived: item.derived === true,
+    derivation: item.derivation,
+  });
+  const detail = renderItemDetail(item);
+  const derivedChip = item.derived === true ? '<span class="chip-static is-derived">估算</span>' : '';
   return `<article class="item type-${escapeAttr(type)}" id="item-${escapeAttr(item.id)}" data-item-id="${escapeAttr(item.id)}" data-day="${dayIndex + 1}" data-type="${escapeAttr(type)}" data-search="${escapeAttr(search)}">
     <div class="item-rail"><span class="item-time">${escapeHtml(time)}</span><span class="item-duration">${escapeHtml(duration)}</span><span class="item-dot" aria-hidden="true"></span></div>
     <div class="item-card">
-      <div class="item-top"><span class="type-label">${escapeHtml(TYPE_LABELS[type] ?? type)}</span>${item.booking?.deadline ? `<span class="chip-static">截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}</div>
+      <div class="item-top"><span class="type-label">${escapeHtml(TYPE_LABELS[type] ?? type)}</span>${derivedChip}${item.booking?.deadline ? `<span class="chip-static">截止 ${escapeHtml(item.booking.deadline)}</span>` : ''}</div>
       <h3>${escapeHtml(item.title)}</h3>
       ${place.name ? `<p class="place">${escapeHtml(place.name)}${place.address ? ` · <span class="address">${escapeHtml(place.address)}</span>` : ''}</p>` : ''}
       ${transit}
       ${booking}
       ${chips.length ? `<div class="chips">${chips.join('')}</div>` : ''}
       ${item.notes ? `<p class="item-notes">${escapeHtml(item.notes)}</p>` : ''}
+      ${detail}
       ${sourceLinks}
       ${links.length ? `<div class="item-actions">${links.join('')}</div>` : ''}
     </div>
@@ -405,6 +496,9 @@ function renderEditorDialogs(currency) {
       <label class="field"><span>币种</span><select id="f-cost-currency">${currencyOptions}</select></label>
       <label class="field"><span>费用分类</span><select id="f-cost-category">${categoryOptions}</select></label>
       <label class="field field-wide"><span>备注</span><textarea id="f-notes" rows="3" maxlength="800" placeholder="开放时间、注意事项、为什么这样排…"></textarea></label>
+      <label class="field field-wide"><span>景点介绍（卡片内展开）</span><textarea id="f-detail-description" rows="3" maxlength="1200" placeholder="为什么值得去、历史/文化背景…"></textarea></label>
+      <label class="field field-wide"><span>看点（一行一个）</span><textarea id="f-detail-highlights" rows="3" maxlength="1200" placeholder="三塔倒影&#10;南诏建极大钟"></textarea></label>
+      <label class="field field-wide"><span>拍照建议</span><input id="f-detail-photo" type="text" maxlength="300" placeholder="上午顺光，倒影池…"></label>
       <label class="field"><span>开放时间</span><input id="f-opening-hours" type="text" maxlength="120" placeholder="09:00–17:00，周一闭馆"></label>
       <label class="field"><span>票价</span><input id="f-ticket-price" type="text" maxlength="120" placeholder="免费 / ¥60"></label>
       <label class="field field-wide"><span>预约链接</span><input id="f-booking-url" type="url" maxlength="500" placeholder="https://…"></label>

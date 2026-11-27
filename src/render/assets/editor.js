@@ -120,6 +120,9 @@
     setValue('f-cost-currency', item.cost?.currency ?? trip.meta?.budget?.currency ?? 'CNY');
     setValue('f-cost-category', item.cost?.category ?? document.querySelector('#f-cost-category option')?.value ?? 'other');
     setValue('f-notes', item.notes ?? '');
+    setValue('f-detail-description', item.detail?.description ?? '');
+    setValue('f-detail-highlights', (item.detail?.highlights ?? []).join('\n'));
+    setValue('f-detail-photo', item.detail?.photoTip ?? '');
     setValue('f-opening-hours', item.openingHours ?? '');
     setValue('f-ticket-price', item.ticketPrice ?? '');
     setValue('f-booking-url', item.booking?.url ?? '');
@@ -245,6 +248,19 @@
     const notes = value('f-notes').trim();
     if (notes) item.notes = notes;
     else delete item.notes;
+    const detailDescription = value('f-detail-description').trim();
+    const detailHighlights = value('f-detail-highlights').split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    const detailPhoto = value('f-detail-photo').trim();
+    if (detailDescription || detailHighlights.length || detailPhoto) {
+      item.detail = {
+        ...(existing?.detail ?? {}),
+        ...(detailDescription ? { description: detailDescription } : {}),
+        ...(detailHighlights.length ? { highlights: detailHighlights } : {}),
+        ...(detailPhoto ? { photoTip: detailPhoto } : {}),
+      };
+    } else {
+      delete item.detail;
+    }
     const openingHours = value('f-opening-hours').trim();
     if (openingHours) item.openingHours = openingHours;
     else delete item.openingHours;

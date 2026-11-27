@@ -1,6 +1,6 @@
 ---
 name: travel-guide
-description: 规划、复刻、修订和交付可核验的旅行行程：从攻略链接/截图提取地点，按地理位置与交通排程，查天气/开放/预约/预算，输出单文件交互 HTML（真实地图、可编辑、清单、预算、ICS、卡片内来源链接）。Use when the user asks for a trip plan, itinerary, travel guide, 攻略复刻, 行程修订, 行前检查, or 旅游记账.
+description: 规划、复刻、修订和交付可核验的旅行行程：从攻略链接/截图提取地点，按地理位置与交通排程，查天气/开放/预约/预算，输出单文件交互 HTML（真实地图、目的地手册、避坑清单、可编辑、清单、预算、ICS、卡片内来源链接）。Use when the user asks for a trip plan, itinerary, travel guide, 攻略复刻, 行程修订, 行前检查, or 旅游记账.
 ---
 
 # Travel Guide
@@ -23,7 +23,7 @@ description: 规划、复刻、修订和交付可核验的旅行行程：从攻�
 2. **官方优先。** 开放时间、票价、预约、闭馆只认 `official` 来源；OSM 的 `opening_hours` 只能算 `community`，不能当官方。
 3. **UGC 只是灵感。** 小红书/公众号/点评里的“必去”“排队 2 小时”是社区信息，标 `community`；不能作为票价/预约依据。
 4. **天气是预报。** Open-Meteo 16 天内才是预报，标 `forecast` 并写更新时间；超过 16 天只能写气候估算，不能写“当天天气”。
-5. **每条都要能点开。** `item.sourceIds` 必须能解析到 `sources[]`；没有来源的锚点/餐饮，`check` 会失败。
+5. **每条都要能点开。** `item.sourceIds` 必须能解析到 `sources[]`；没有来源的锚点/餐饮/住宿/城际交通，`check` 会失败；buffer 必须 `derived: true` + `derivation`，不能假装有来源。
 6. **不批量抓取。** Nominatim 1 请求/秒、Overpass 单连接、Wikimedia 串行；遵守缓存与 UA 要求。不要绕过登录/反爬。
 
 ## 标准流程
@@ -54,6 +54,7 @@ node bin/travel-guide.mjs build --trip trips/guangzhou-3d/trip.json \
 - Open-Meteo 地理编码 + 16 天天气预报（超出则气候估算）。
 - Nominatim 地址/POI；Overpass 周边景点/餐厅。
 - Wikimedia 背景、坐标、官网；Frankfurter 汇率；Nager 假期（可选）。
+- 为 3 天以上行程补 `overview.guide`：背景/文化/风俗、美食、打卡点、避坑、贴士；每块都要 `sourceIds`。
 
 然后 agent 用 `web_search`/`web_fetch` 逐项核官方信息：
 
@@ -79,7 +80,7 @@ node bin/travel-guide.mjs build --trip trips/guangzhou-3d/trip.json \
 node bin/travel-guide.mjs check --trip <trip.json> --strict
 ```
 
-硬错误必须修：无来源、无坐标、无交通、一天超过 3 锚点、无饭点、应预约但无官方来源、16 天内无天气、动态字段非官方来源。
+硬错误必须修：无来源、无坐标、无交通、一天超过 3 锚点、无饭点、应预约但无官方来源、16 天内无天气、动态字段非官方来源、3 天以上无 guide、guide 块缺来源。
 
 草稿/示例可以 `--allow-unverified` 构建，但 HTML 必须显著标“示例/待核验”，不能当正式行程交付。
 
@@ -95,7 +96,7 @@ node bin/travel-guide.mjs build --trip <trip.json> --out <dir> [--public] [--str
 - `itinerary.md`：可复制进聊天/文档的版本。
 - `trip.ics`：日历。
 - `sources.md`：来源台账。
-- `build-receipt.json`：输入/输出 hash、来源覆盖率、警告。
+- `build-receipt.json`：输入/输出 hash、来源覆盖（有来源/估算/缺失）、警告。
 
 构建后必须用浏览器打开检查：控制台无错误、桌面/移动布局正常、切天/筛选/清单/主题/打印/ICS 可用。DSH 环境用 `bcdp_*` 工具。
 
@@ -153,7 +154,8 @@ node bin/travel-guide.mjs expenses --trip <trip.json> --csv expenses.csv --settl
 ## 文件约定
 
 - `trip.json`：唯一事实源；所有展示从它生成。
-- `sources[]`：每条来源有 `id/provider/url/retrievedAt/transport/license/confidence`。
+- `sources[]`：每条来源有 `id/provider/kind/url/retrievedAt/transport/license/confidence/label`；kind 覆盖 lodging/transport/route/culture/food/photo/safety。
+- `overview.guide`：目的地手册；`item.detail`：景点故事；`item.derived/derivation`：估算型 buffer。
 - `expenses.csv`：`date,item,category,amount,currency,payer,participants,note,source`。
 - 产物目录不要提交个人行程；`.gitignore` 已忽略 `trips/`、`*.private.json`、缓存。
 - 示例在 `examples/guangzhou-3d/`；`demo` 命令可离线重建。
@@ -167,7 +169,7 @@ node bin/travel-guide.mjs expenses --trip <trip.json> --csv expenses.csv --settl
 - `estimate`：交通时长/预算/节奏等启发式。
 - `unverified`：明确未核验，HTML 红色徽章。
 
-HTML 把来源链接放在每条行程卡片内；`sources.md` 是完整台账。顶部「编辑」可就地修改/新增/删除/排序并导出 `trip.json`，修改只存浏览器 localStorage。
+HTML 把来源链接放在每条行程卡片和手册块内；`sources.md` 是完整台账。顶部「编辑」可就地修改/新增/删除/排序并导出 `trip.json`，修改只存浏览器 localStorage；景点卡片可展开“看点与故事”。
 
 ## 数据源与合规
 

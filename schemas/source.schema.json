@@ -10,8 +10,9 @@
     "provider": {
       "enum": ["open-meteo", "nominatim", "overpass", "wikimedia", "official", "frankfurter", "nager", "tikhub", "manual"]
     },
-    "kind": { "enum": ["weather", "geocode", "poi", "wiki", "official", "ugc", "fx", "holiday", "note"] },
+    "kind": { "enum": ["weather", "geocode", "poi", "wiki", "official", "ugc", "fx", "holiday", "note", "lodging", "transport", "route", "culture", "food", "photo", "safety"] },
     "title": { "type": "string" },
+    "label": { "type": "string", "maxLength": 80 },
     "url": { "type": "string", "pattern": "^(https?://|manual://)" },
     "retrievedAt": { "type": "string", "format": "date-time" },
     "transport": { "enum": ["live", "cache", "snapshot", "manual"] },

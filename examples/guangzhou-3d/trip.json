@@ -24,8 +24,17 @@
       "totalMax": 3050
     },
     "pace": "balanced",
-    "interests": ["老城", "建筑", "早茶", "江景"],
-    "constraints": ["不赶早班车", "每天留 1 段自由时间", "热门馆先预约"],
+    "interests": [
+      "老城",
+      "建筑",
+      "早茶",
+      "江景"
+    ],
+    "constraints": [
+      "不赶早班车",
+      "每天留 1 段自由时间",
+      "热门馆先预约"
+    ],
     "generatedAt": "2026-11-27T02:00:00.000Z",
     "updatedAt": "2026-11-27T02:00:00.000Z",
     "generator": "travel-guide/0.1.0",
@@ -34,8 +43,107 @@
   "overview": {
     "summary": "把广州拆成三段：西关老城、珠江新城—广州塔、白云山—越秀。每天 2–3 个锚点，午晚饭都落在步行或地铁 20 分钟内。",
     "background": "广州的旅行半径很适合“老城 + 江岸 + 公园”的组合：西关看骑楼、祠堂与早茶，珠江新城看现代城市天际线，白云山和越秀公园补一段绿意。示例数据用于展示版式与交互，营业时间、票价、预约规则请在出发前用官方页面复核。",
-    "highlights": ["陈家祠的砖雕与灰塑", "沙面—永庆坊的骑楼街巷", "广东省博物馆到广州塔的江岸线", "白云山俯瞰城市"],
-    "risks": ["广东省博物馆通常需要预约，周一闭馆风险需以官网为准。", "广州塔登塔与非登塔是两种体验，票价和时段以官方为准。", "11 月末仍可能有降雨，白云山路面湿滑时改走越秀公园。", "示例中的天气是快照，不是实时预报。"]
+    "highlights": [
+      "陈家祠的砖雕与灰塑",
+      "沙面—永庆坊的骑楼街巷",
+      "广东省博物馆到广州塔的江岸线",
+      "白云山俯瞰城市"
+    ],
+    "risks": [
+      "广东省博物馆通常需要预约，周一闭馆风险需以官网为准。",
+      "广州塔登塔与非登塔是两种体验，票价和时段以官方为准。",
+      "11 月末仍可能有降雨，白云山路面湿滑时改走越秀公园。",
+      "示例中的天气是快照，不是实时预报。"
+    ],
+    "guide": {
+      "intro": {
+        "title": "广州怎么玩",
+        "body": "广州适合按“老城—江岸—公园”拆成三段：西关看骑楼和早茶，珠江新城看省博与广州塔，白云山—越秀补绿意。示例数据只演示版式，动态信息请出发前查官方。",
+        "sourceIds": [
+          "src-demo-food",
+          "src-demo-museum"
+        ]
+      },
+      "sections": [
+        {
+          "id": "background",
+          "title": "背景：三段式路线",
+          "body": "西关、珠江新城、白云山—越秀各自成片，跨区用地铁；每天 2–3 个锚点，午晚饭放在步行 20 分钟内。",
+          "sourceIds": [
+            "src-demo-beijing-road"
+          ]
+        },
+        {
+          "id": "culture",
+          "title": "文化：骑楼与早茶",
+          "body": "西关骑楼、陈家祠的砖雕灰塑、沙面近代建筑，是广州老城的三种表情；早茶是生活方式，不只是吃饭。",
+          "sourceIds": [
+            "src-demo-chen-clan",
+            "src-demo-shamian"
+          ]
+        },
+        {
+          "id": "customs",
+          "title": "风俗：一盅两件",
+          "body": "早茶“一盅两件”慢慢吃；进祠堂/博物馆保持安静，拍摄前先问。",
+          "sourceIds": [
+            "src-demo-food"
+          ]
+        }
+      ],
+      "food": [
+        {
+          "name": "早茶/午茶",
+          "description": "西关老字号或茶楼，虾饺、烧卖、肠粉、叉烧包；按人数点，别一次点太多。",
+          "sourceIds": [
+            "src-demo-food"
+          ]
+        }
+      ],
+      "photoSpots": [
+        {
+          "name": "沙面—永庆坊",
+          "area": "荔湾",
+          "bestTime": "上午",
+          "tip": "骑楼街巷适合侧光；拍居民先征得同意。",
+          "sourceIds": [
+            "src-demo-shamian",
+            "src-demo-yongqing"
+          ]
+        }
+      ],
+      "pitfalls": [
+        {
+          "id": "museum-booking",
+          "title": "省博通常要预约",
+          "body": "广东省博物馆热门时段需预约，周一闭馆风险以官网为准；别把行程卡在闭馆日。",
+          "severity": "medium",
+          "category": "ticket",
+          "sourceIds": [
+            "src-demo-museum-official"
+          ]
+        },
+        {
+          "id": "tower-ticket",
+          "title": "广州塔登塔与外观是两种体验",
+          "body": "登塔票价、时段和天气影响以官方为准；只想拍照可去花城广场/海心沙。",
+          "severity": "low",
+          "category": "ticket",
+          "sourceIds": [
+            "src-demo-tower"
+          ]
+        }
+      ],
+      "tips": [
+        {
+          "title": "交通",
+          "body": "跨区优先地铁；老城步行多，穿舒服的鞋。",
+          "sourceIds": [
+            "src-demo-beijing-road"
+          ]
+        }
+      ]
+    }
   },
   "days": [
     {
@@ -70,9 +178,15 @@
             "lon": 113.2445,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-chen-clan"],
+          "sourceIds": [
+            "src-demo-chen-clan"
+          ],
           "confidence": "community",
-          "cost": { "amount": 10, "currency": "CNY", "category": "tickets" },
+          "cost": {
+            "amount": 10,
+            "currency": "CNY",
+            "category": "tickets"
+          },
           "notes": "开门后先看中轴线与砖雕，再绕到后院；票价/开放时间以官方为准。"
         },
         {
@@ -88,10 +202,21 @@
             "lon": 113.2467,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-food"],
+          "sourceIds": [
+            "src-demo-food"
+          ],
           "confidence": "community",
-          "cost": { "amount": 120, "currency": "CNY", "category": "food" },
-          "transit": { "mode": "walk", "durationMin": 20, "distanceKm": 1.1, "fromPrevious": true },
+          "cost": {
+            "amount": 120,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 20,
+            "distanceKm": 1.1,
+            "fromPrevious": true
+          },
           "notes": "示例餐点，未做实时排队/营业核验；可选炳胜、陶陶居等替代。"
         },
         {
@@ -107,10 +232,21 @@
             "lon": 113.2431,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-shamian"],
+          "sourceIds": [
+            "src-demo-shamian"
+          ],
           "confidence": "community",
-          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
-          "transit": { "mode": "metro", "durationMin": 20, "distanceKm": 4.2, "fromPrevious": true },
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "metro",
+            "durationMin": 20,
+            "distanceKm": 4.2,
+            "fromPrevious": true
+          },
           "notes": "露天街区，适合慢走；午后光线好，注意防晒。"
         },
         {
@@ -126,10 +262,21 @@
             "lon": 113.2445,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-yongqing"],
+          "sourceIds": [
+            "src-demo-yongqing"
+          ],
           "confidence": "community",
-          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
-          "transit": { "mode": "taxi", "durationMin": 15, "distanceKm": 3.0, "fromPrevious": true },
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 15,
+            "distanceKm": 3,
+            "fromPrevious": true
+          },
           "notes": "街区免费，粤剧艺术博物馆等单点可能需预约/闭馆，现场看公告。"
         },
         {
@@ -145,10 +292,21 @@
             "lon": 113.2451,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-food"],
+          "sourceIds": [
+            "src-demo-food"
+          ],
           "confidence": "community",
-          "cost": { "amount": 160, "currency": "CNY", "category": "food" },
-          "transit": { "mode": "walk", "durationMin": 10, "distanceKm": 0.6, "fromPrevious": true },
+          "cost": {
+            "amount": 160,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "distanceKm": 0.6,
+            "fromPrevious": true
+          },
           "notes": "示例为区域建议，不指定具体餐厅；热门店建议错峰。"
         },
         {
@@ -164,9 +322,16 @@
             "lon": 113.269,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-hotel"],
+          "sourceIds": [
+            "src-demo-hotel"
+          ],
           "confidence": "community",
-          "transit": { "mode": "metro", "durationMin": 15, "distanceKm": 3.5, "fromPrevious": true },
+          "transit": {
+            "mode": "metro",
+            "durationMin": 15,
+            "distanceKm": 3.5,
+            "fromPrevious": true
+          },
           "notes": "住宿仅为区域示例；实际酒店按预算与取消政策另选。"
         }
       ]
@@ -203,9 +368,15 @@
             "lon": 113.3247,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-museum"],
+          "sourceIds": [
+            "src-demo-museum"
+          ],
           "confidence": "community",
-          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
           "booking": {
             "required": false,
             "status": "check-official",
@@ -227,10 +398,21 @@
             "lon": 113.3215,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-food"],
+          "sourceIds": [
+            "src-demo-food"
+          ],
           "confidence": "community",
-          "cost": { "amount": 140, "currency": "CNY", "category": "food" },
-          "transit": { "mode": "walk", "durationMin": 10, "distanceKm": 0.8, "fromPrevious": true },
+          "cost": {
+            "amount": 140,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "distanceKm": 0.8,
+            "fromPrevious": true
+          },
           "notes": "商场餐饮选择多；周末排队，建议 12:15 前到。"
         },
         {
@@ -246,10 +428,21 @@
             "lon": 113.3245,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-tower"],
+          "sourceIds": [
+            "src-demo-tower"
+          ],
           "confidence": "community",
-          "cost": { "amount": 150, "currency": "CNY", "category": "tickets" },
-          "transit": { "mode": "metro", "durationMin": 25, "distanceKm": 5.8, "fromPrevious": true },
+          "cost": {
+            "amount": 150,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "metro",
+            "durationMin": 25,
+            "distanceKm": 5.8,
+            "fromPrevious": true
+          },
           "booking": {
             "required": false,
             "status": "check-official",
@@ -270,10 +463,21 @@
             "lon": 113.269,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-beijing-road"],
+          "sourceIds": [
+            "src-demo-beijing-road"
+          ],
           "confidence": "community",
-          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
-          "transit": { "mode": "metro", "durationMin": 20, "distanceKm": 4.5, "fromPrevious": true },
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "metro",
+            "durationMin": 20,
+            "distanceKm": 4.5,
+            "fromPrevious": true
+          },
           "notes": "人多，注意随身物品；只看骑楼与老字号即可，不必全程走完。"
         },
         {
@@ -289,10 +493,21 @@
             "lon": 113.2702,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-food"],
+          "sourceIds": [
+            "src-demo-food"
+          ],
           "confidence": "community",
-          "cost": { "amount": 180, "currency": "CNY", "category": "food" },
-          "transit": { "mode": "walk", "durationMin": 10, "distanceKm": 0.7, "fromPrevious": true },
+          "cost": {
+            "amount": 180,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "distanceKm": 0.7,
+            "fromPrevious": true
+          },
           "notes": "示例为区域建议；想吃的店先看排队/营业状态。"
         },
         {
@@ -308,9 +523,16 @@
             "lon": 113.269,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-hotel"],
+          "sourceIds": [
+            "src-demo-hotel"
+          ],
           "confidence": "community",
-          "transit": { "mode": "walk", "durationMin": 10, "distanceKm": 0.8, "fromPrevious": true }
+          "transit": {
+            "mode": "walk",
+            "durationMin": 10,
+            "distanceKm": 0.8,
+            "fromPrevious": true
+          }
         }
       ]
     },
@@ -346,9 +568,15 @@
             "lon": 113.3,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-baiyun"],
+          "sourceIds": [
+            "src-demo-baiyun"
+          ],
           "confidence": "community",
-          "cost": { "amount": 5, "currency": "CNY", "category": "tickets" },
+          "cost": {
+            "amount": 5,
+            "currency": "CNY",
+            "category": "tickets"
+          },
           "notes": "走南门—摩星岭或能仁寺短线；索道/电瓶车运营与票价以现场为准。"
         },
         {
@@ -364,10 +592,21 @@
             "lon": 113.2985,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-food"],
+          "sourceIds": [
+            "src-demo-food"
+          ],
           "confidence": "community",
-          "cost": { "amount": 120, "currency": "CNY", "category": "food" },
-          "transit": { "mode": "walk", "durationMin": 20, "distanceKm": 1.0, "fromPrevious": true },
+          "cost": {
+            "amount": 120,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 20,
+            "distanceKm": 1,
+            "fromPrevious": true
+          },
           "notes": "示例为区域建议；下山后按体力选最近的点。"
         },
         {
@@ -383,10 +622,21 @@
             "lon": 113.266,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-yuexiu"],
+          "sourceIds": [
+            "src-demo-yuexiu"
+          ],
           "confidence": "community",
-          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
-          "transit": { "mode": "taxi", "durationMin": 25, "distanceKm": 7.5, "fromPrevious": true },
+          "cost": {
+            "amount": 0,
+            "currency": "CNY",
+            "category": "tickets"
+          },
+          "transit": {
+            "mode": "taxi",
+            "durationMin": 25,
+            "distanceKm": 7.5,
+            "fromPrevious": true
+          },
           "notes": "公园免费；镇海楼/博物馆等单点可能另收费，按现场公告。"
         },
         {
@@ -402,10 +652,21 @@
             "lon": 113.2675,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-food"],
+          "sourceIds": [
+            "src-demo-food"
+          ],
           "confidence": "community",
-          "cost": { "amount": 140, "currency": "CNY", "category": "food" },
-          "transit": { "mode": "walk", "durationMin": 15, "distanceKm": 0.9, "fromPrevious": true },
+          "cost": {
+            "amount": 140,
+            "currency": "CNY",
+            "category": "food"
+          },
+          "transit": {
+            "mode": "walk",
+            "durationMin": 15,
+            "distanceKm": 0.9,
+            "fromPrevious": true
+          },
           "notes": "留出取行李和去车站的时间；具体车次以 12306 为准。"
         },
         {
@@ -421,9 +682,16 @@
             "lon": 113.269,
             "coordSystem": "WGS84"
           },
-          "sourceIds": ["src-demo-hotel"],
+          "sourceIds": [
+            "src-demo-hotel"
+          ],
           "confidence": "community",
-          "transit": { "mode": "metro", "durationMin": 15, "distanceKm": 2.0, "fromPrevious": true },
+          "transit": {
+            "mode": "metro",
+            "durationMin": 15,
+            "distanceKm": 2,
+            "fromPrevious": true
+          },
           "notes": "示意项；请按实际车站/车次重算，预留至少 60 分钟进站。"
         }
       ]
@@ -436,7 +704,9 @@
       "lat": 23.1178,
       "lon": 113.2449,
       "why": "永庆坊旁边的园林式博物馆，雨天备选",
-      "sourceIds": ["src-demo-yongqing"]
+      "sourceIds": [
+        "src-demo-yongqing"
+      ]
     },
     {
       "name": "海心桥",
@@ -444,25 +714,97 @@
       "lat": 23.1115,
       "lon": 113.324,
       "why": "广州塔—珠江新城之间的步行桥，看夜景",
-      "sourceIds": ["src-demo-tower"]
+      "sourceIds": [
+        "src-demo-tower"
+      ]
     }
   ],
   "budget": [
-    { "key": "transport", "label": "交通", "min": 400, "max": 600, "currency": "CNY" },
-    { "key": "lodging", "label": "住宿", "min": 800, "max": 1200, "currency": "CNY" },
-    { "key": "food", "label": "餐饮", "min": 500, "max": 700, "currency": "CNY" },
-    { "key": "tickets", "label": "门票", "min": 150, "max": 250, "currency": "CNY" },
-    { "key": "other", "label": "其他", "min": 200, "max": 300, "currency": "CNY" }
+    {
+      "key": "transport",
+      "label": "交通",
+      "min": 400,
+      "max": 600,
+      "currency": "CNY"
+    },
+    {
+      "key": "lodging",
+      "label": "住宿",
+      "min": 800,
+      "max": 1200,
+      "currency": "CNY"
+    },
+    {
+      "key": "food",
+      "label": "餐饮",
+      "min": 500,
+      "max": 700,
+      "currency": "CNY"
+    },
+    {
+      "key": "tickets",
+      "label": "门票",
+      "min": 150,
+      "max": 250,
+      "currency": "CNY"
+    },
+    {
+      "key": "other",
+      "label": "其他",
+      "min": 200,
+      "max": 300,
+      "currency": "CNY"
+    }
   ],
   "packing": [
-    { "id": "pack-id", "label": "身份证/护照", "category": "证件", "essential": true },
-    { "id": "pack-phone", "label": "手机与充电器", "category": "电子", "essential": true },
-    { "id": "pack-power", "label": "充电宝（随身，不托运）", "category": "电子", "essential": true },
-    { "id": "pack-cash", "label": "少量现金与银行卡", "category": "支付", "essential": true },
-    { "id": "pack-med", "label": "常用药/创可贴", "category": "健康", "essential": true },
-    { "id": "pack-umbrella", "label": "折叠伞/雨衣", "category": "天气", "essential": false },
-    { "id": "pack-shoes", "label": "好走的鞋", "category": "衣物", "essential": true },
-    { "id": "pack-bottle", "label": "水杯", "category": "日用", "essential": false }
+    {
+      "id": "pack-id",
+      "label": "身份证/护照",
+      "category": "证件",
+      "essential": true
+    },
+    {
+      "id": "pack-phone",
+      "label": "手机与充电器",
+      "category": "电子",
+      "essential": true
+    },
+    {
+      "id": "pack-power",
+      "label": "充电宝（随身，不托运）",
+      "category": "电子",
+      "essential": true
+    },
+    {
+      "id": "pack-cash",
+      "label": "少量现金与银行卡",
+      "category": "支付",
+      "essential": true
+    },
+    {
+      "id": "pack-med",
+      "label": "常用药/创可贴",
+      "category": "健康",
+      "essential": true
+    },
+    {
+      "id": "pack-umbrella",
+      "label": "折叠伞/雨衣",
+      "category": "天气",
+      "essential": false
+    },
+    {
+      "id": "pack-shoes",
+      "label": "好走的鞋",
+      "category": "衣物",
+      "essential": true
+    },
+    {
+      "id": "pack-bottle",
+      "label": "水杯",
+      "category": "日用",
+      "essential": false
+    }
   ],
   "bookingChecklist": [
     {
@@ -472,7 +814,9 @@
       "status": "pending",
       "deadline": "2026-11-28",
       "url": "https://www.guangdongmuseum.com/",
-      "sourceIds": ["src-demo-museum-official"],
+      "sourceIds": [
+        "src-demo-museum-official"
+      ],
       "note": "示例只记录官网入口，未抓取正文；请自行确认预约与闭馆。"
     },
     {
@@ -511,7 +855,8 @@
       "license": "CC BY 4.0",
       "confidence": "forecast",
       "rawHash": "demo-weather-20261127",
-      "note": "演示用快照，不是实时预报；构建时不会联网刷新。"
+      "note": "演示用快照，不是实时预报；构建时不会联网刷新。",
+      "label": "示例天气快照"
     },
     {
       "id": "src-demo-chen-clan",
@@ -524,7 +869,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-chen-clan",
-      "note": "坐标用于演示地图，未做实时复核。"
+      "note": "坐标用于演示地图，未做实时复核。",
+      "label": "陈家祠坐标（示例）"
     },
     {
       "id": "src-demo-shamian",
@@ -537,7 +883,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-shamian",
-      "note": "坐标用于演示地图，未做实时复核。"
+      "note": "坐标用于演示地图，未做实时复核。",
+      "label": "沙面坐标（示例）"
     },
     {
       "id": "src-demo-yongqing",
@@ -550,7 +897,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-yongqing",
-      "note": "坐标用于演示地图，未做实时复核。"
+      "note": "坐标用于演示地图，未做实时复核。",
+      "label": "永庆坊坐标（示例）"
     },
     {
       "id": "src-demo-museum",
@@ -563,7 +911,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-museum",
-      "note": "坐标用于演示地图，未做实时复核。"
+      "note": "坐标用于演示地图，未做实时复核。",
+      "label": "省博坐标（示例）"
     },
     {
       "id": "src-demo-tower",
@@ -576,7 +925,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-tower",
-      "note": "坐标用于演示地图，未做实时复核。"
+      "note": "坐标用于演示地图，未做实时复核。",
+      "label": "广州塔坐标（示例）"
     },
     {
       "id": "src-demo-beijing-road",
@@ -589,7 +939,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-beijing-road",
-      "note": "坐标用于演示地图，未做实时复核。"
+      "note": "坐标用于演示地图，未做实时复核。",
+      "label": "北京路坐标（示例）"
     },
     {
       "id": "src-demo-baiyun",
@@ -602,7 +953,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-baiyun",
-      "note": "坐标用于演示地图，未做实时复核。"
+      "note": "坐标用于演示地图，未做实时复核。",
+      "label": "白云山坐标（示例）"
     },
     {
       "id": "src-demo-yuexiu",
@@ -615,7 +967,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-yuexiu",
-      "note": "坐标用于演示地图，未做实时复核。"
+      "note": "坐标用于演示地图，未做实时复核。",
+      "label": "越秀公园坐标（示例）"
     },
     {
       "id": "src-demo-food",
@@ -628,7 +981,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-food",
-      "note": "不指定具体餐厅，未做排队/营业核验。"
+      "note": "不指定具体餐厅，未做排队/营业核验。",
+      "label": "餐饮区域（示例）"
     },
     {
       "id": "src-demo-hotel",
@@ -641,7 +995,8 @@
       "license": "user-provided",
       "confidence": "community",
       "rawHash": "demo-hotel",
-      "note": "仅区域建议，不代表具体酒店库存/价格。"
+      "note": "仅区域建议，不代表具体酒店库存/价格。",
+      "label": "住宿区域（示例）"
     },
     {
       "id": "src-demo-museum-official",
@@ -654,7 +1009,8 @@
       "license": "官方页面条款",
       "confidence": "unverified",
       "rawHash": "demo-museum-official",
-      "note": "示例只记录官网入口，未抓取正文；请自行确认预约与闭馆。"
+      "note": "示例只记录官网入口，未抓取正文；请自行确认预约与闭馆。",
+      "label": "广东省博物馆官网"
     }
   ],
   "provenance": {

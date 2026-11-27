@@ -36,5 +36,7 @@ jobs:
           test -s .tmp/ci-dist/index.html
           test -s .tmp/ci-dist/trip.ics
           test -s .tmp/ci-dist/build-receipt.json
-          grep -q 'map-svg' .tmp/ci-dist/index.html
+          grep -q 'id="trip-map"' .tmp/ci-dist/index.html
+          grep -q '目的地手册' .tmp/ci-dist/index.html
+          grep -q 'pitfall-card' .tmp/ci-dist/index.html
           grep -q 'BEGIN:VCALENDAR' .tmp/ci-dist/trip.ics

@@ -22,6 +22,13 @@ export const SOURCE_KINDS = [
   'fx',
   'holiday',
   'note',
+  'lodging',
+  'transport',
+  'route',
+  'culture',
+  'food',
+  'photo',
+  'safety',
 ];
 
 export const TRANSPORTS = ['live', 'cache', 'snapshot', 'manual'];
@@ -95,6 +102,7 @@ export function makeSource({
   confidence = 'community',
   rawHash,
   note,
+  label = '',
   extra = {},
 }) {
   if (!PROVIDERS.includes(provider)) throw new Error(`未知 provider：${provider}`);
@@ -114,6 +122,7 @@ export function makeSource({
     confidence,
     rawHash: rawHash ?? '',
     note: note ?? '',
+    label: label ?? '',
     ...extra,
   };
 }
@@ -133,6 +142,9 @@ export function validateSource(source) {
     errors.push('source.retrievedAt 必须是可解析的 ISO 时间');
   }
   if (!source.license) errors.push('source.license 不能为空');
+  if (source.label != null && (typeof source.label !== 'string' || source.label.length > 80)) {
+    errors.push('source.label 必须是不超过 80 字的字符串');
+  }
   return errors;
 }
 
@@ -174,18 +186,48 @@ export function sourceCoverage(trip) {
     byConfidence[source.confidence] = (byConfidence[source.confidence] ?? 0) + 1;
   }
   const items = (trip.days ?? []).flatMap((day) => day.items ?? []);
+  const required = items.filter((item) => item.type !== 'rest');
+  const hasSource = (item) => (item.sourceIds ?? []).length > 0;
+  const sourced = required.filter(hasSource);
+  const derived = required.filter((item) => item.derived === true);
+  const missing = required.filter((item) => !hasSource(item) && item.derived !== true);
+  const byType = {};
+  for (const item of required) {
+    const type = item.type ?? 'unknown';
+    byType[type] ??= { required: 0, sourced: 0, derived: 0, missing: 0 };
+    byType[type].required += 1;
+    if (hasSource(item)) byType[type].sourced += 1;
+    if (item.derived === true) byType[type].derived += 1;
+    if (!hasSource(item) && item.derived !== true) byType[type].missing += 1;
+  }
   const anchored = items.filter((item) => item.type === 'anchor' || item.type === 'meal');
-  const sourced = anchored.filter((item) => (item.sourceIds ?? []).length > 0);
   const official = sources.filter((source) => source.confidence === 'official');
+  const guide = trip.overview?.guide ?? {};
+  const guideBlocks = [
+    ...(guide.intro ? [guide.intro] : []),
+    ...(guide.sections ?? []),
+    ...(guide.food ?? []),
+    ...(guide.photoSpots ?? []),
+    ...(guide.pitfalls ?? []),
+    ...(guide.tips ?? []),
+  ];
+  const guideSourced = guideBlocks.filter((block) => (block.sourceIds ?? []).length > 0);
   return {
     sources: sources.length,
     byProvider,
     byConfidence,
     items: items.length,
+    required: required.length,
     anchored: anchored.length,
     sourced: sourced.length,
+    derived: derived.length,
+    missing: missing.length,
+    missingByType: byType,
     official: official.length,
-    sourcedPct: anchored.length ? Math.round((sourced.length / anchored.length) * 100) : 100,
+    sourcedPct: required.length ? Math.round((sourced.length / required.length) * 100) : 100,
+    guideBlocks: guideBlocks.length,
+    guideSourced: guideSourced.length,
+    guideMissing: guideBlocks.length - guideSourced.length,
   };
 }
 
@@ -202,5 +244,6 @@ export function dedupeSources(sources) {
 }
 
 export function sourceLabel(source) {
+  if (source?.label) return source.label;
   return `${PROVIDER_LABELS[source.provider] ?? source.provider} · ${CONFIDENCE_LABELS[source.confidence] ?? source.confidence}`;
 }

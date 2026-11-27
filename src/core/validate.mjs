@@ -160,8 +160,23 @@ export function validateTrip(trip, options = {}) {
         }
       }
       const sourceIds = Array.isArray(item.sourceIds) ? item.sourceIds : [];
-      if ((item.type === 'anchor' || item.type === 'meal') && sourceIds.length === 0) {
-        addError('ITEM_SOURCE', '锚点/餐饮必须有 sourceIds', `${itemWhere}.sourceIds`);
+      const sourceRequired = ['anchor', 'meal', 'hotel', 'transit'].includes(item.type);
+      if (sourceRequired && sourceIds.length === 0) {
+        addError('ITEM_SOURCE', `${item.type} 必须有 sourceIds`, `${itemWhere}.sourceIds`);
+      }
+      if (!sourceRequired && item.type !== 'rest' && sourceIds.length === 0 && item.derived !== true) {
+        addError('ITEM_UNSOURCED', '条目必须有 sourceIds，或标记 derived 并说明估算方式', `${itemWhere}.sourceIds`);
+      }
+      if (item.derived === true) {
+        if (item.type !== 'buffer') {
+          addError('DERIVED_TYPE', 'derived 只允许用于 buffer 路线缓冲', `${itemWhere}.derived`);
+        }
+        if (!isNonEmptyString(item.derivation)) {
+          addError('DERIVED_NOTE', 'derived 条目必须说明 derivation', `${itemWhere}.derivation`);
+        }
+      }
+      if (item.detail != null && !isObject(item.detail)) {
+        addError('ITEM_DETAIL', 'item.detail 必须是对象', `${itemWhere}.detail`);
       }
       const itemSources = [];
       for (const sourceId of sourceIds) {
@@ -235,6 +250,55 @@ export function validateTrip(trip, options = {}) {
       addWarning('WEATHER_CLIMATE', '行程超过 16 天，只能用气候估算，不能写当天预报', `${where}.weather`);
     }
   });
+
+  const guide = trip.overview?.guide;
+  if (guide && isObject(guide)) {
+    const blocks = [
+      ...(guide.intro ? [{ block: guide.intro, where: 'overview.guide.intro', label: 'intro' }] : []),
+      ...(Array.isArray(guide.sections) ? guide.sections.map((block, index) => ({ block, where: `overview.guide.sections[${index}]`, label: 'section' })) : []),
+      ...(Array.isArray(guide.food) ? guide.food.map((block, index) => ({ block, where: `overview.guide.food[${index}]`, label: 'food' })) : []),
+      ...(Array.isArray(guide.photoSpots) ? guide.photoSpots.map((block, index) => ({ block, where: `overview.guide.photoSpots[${index}]`, label: 'photoSpot' })) : []),
+      ...(Array.isArray(guide.pitfalls) ? guide.pitfalls.map((block, index) => ({ block, where: `overview.guide.pitfalls[${index}]`, label: 'pitfall' })) : []),
+      ...(Array.isArray(guide.tips) ? guide.tips.map((block, index) => ({ block, where: `overview.guide.tips[${index}]`, label: 'tip' })) : []),
+    ];
+    for (const { block, where, label } of blocks) {
+      if (!isObject(block)) {
+        addError('GUIDE_BLOCK', `${label} 必须是对象`, where);
+        continue;
+      }
+      if (label === 'food' || label === 'photoSpot') {
+        if (!isNonEmptyString(block.name)) addError('GUIDE_NAME', `${label} 缺少 name`, `${where}.name`);
+      } else if (label === 'pitfall') {
+        if (!isNonEmptyString(block.title)) addError('GUIDE_TITLE', 'pitfall 缺少 title', `${where}.title`);
+      } else if (!isNonEmptyString(block.title)) {
+        addError('GUIDE_TITLE', `${label} 缺少 title`, `${where}.title`);
+      }
+      if (label === 'food') {
+        if (!isNonEmptyString(block.description)) addError('GUIDE_BODY', 'food 缺少 description', `${where}.description`);
+      } else if (label === 'photoSpot') {
+        if (!isNonEmptyString(block.tip)) addError('GUIDE_BODY', 'photoSpot 缺少 tip', `${where}.tip`);
+      } else if (!isNonEmptyString(block.body)) {
+        addError('GUIDE_BODY', `${label} 缺少 body`, `${where}.body`);
+      }
+      const ids = Array.isArray(block.sourceIds) ? block.sourceIds : [];
+      if (ids.length === 0) {
+        addError('GUIDE_SOURCE', `${label} 必须有 sourceIds`, `${where}.sourceIds`);
+      }
+      for (const sourceId of ids) {
+        if (!sourceIndex.has(sourceId)) addError('SOURCE_MISSING', `来源不存在：${sourceId}`, `${where}.sourceIds`);
+      }
+      if (label === 'pitfall') {
+        if (!['high', 'medium', 'low'].includes(block.severity)) {
+          addError('PITFALL_SEVERITY', '严重程度必须是 high/medium/low', `${where}.severity`);
+        }
+        if (!['ticket', 'transport', 'scam', 'health', 'weather', 'food', 'custom'].includes(block.category)) {
+          addError('PITFALL_CATEGORY', '避坑分类无效', `${where}.category`);
+        }
+      }
+    }
+  } else if (Number.isInteger(meta.days) && meta.days >= 3) {
+    addWarning('GUIDE_MISSING', '3 天以上行程应提供 overview.guide 目的地手册', 'overview.guide', true);
+  }
 
   if (Array.isArray(trip.budget) && trip.budget.length) {
     try {

@@ -6,7 +6,7 @@ import {
 
 export function sourceBadgeHtml(source) {
   if (!source) return '';
-  const label = `${PROVIDER_LABELS[source.provider] ?? source.provider} · ${CONFIDENCE_LABELS[source.confidence] ?? source.confidence}`;
+  const label = source.label || `${PROVIDER_LABELS[source.provider] ?? source.provider} · ${CONFIDENCE_LABELS[source.confidence] ?? source.confidence}`;
   const title = [
     source.title,
     source.url,
@@ -43,12 +43,13 @@ function shortSourceTitle(source) {
  * Render compact source links inside an itinerary card.
  * Manual sources are deliberately plain text, not fake buttons.
  */
-export function sourceLinksHtml(trip, ids = [], max = 4) {
+export function sourceLinksHtml(trip, ids = [], max = 4, options = {}) {
   const index = new Map((trip.sources ?? []).map((source) => [source.id, source]));
   const seen = new Set();
   const seenUrls = new Set();
   const links = [];
   let manual = false;
+  let manualLabel = '行程整理';
   let overflow = 0;
 
   for (const id of ids ?? []) {
@@ -58,6 +59,7 @@ export function sourceLinksHtml(trip, ids = [], max = 4) {
     if (!source) continue;
     if (!isHttpUrl(source.url)) {
       manual = true;
+      manualLabel = source.label || '行程整理';
       continue;
     }
     if (seenUrls.has(source.url)) continue;
@@ -66,12 +68,12 @@ export function sourceLinksHtml(trip, ids = [], max = 4) {
       continue;
     }
     seenUrls.add(source.url);
-    const provider = PROVIDER_LABELS[source.provider] ?? source.provider;
-    const label = source.provider === 'official'
-      ? `官方 · ${shortSourceTitle(source)}`
-      : source.provider === 'open-meteo'
-        ? '天气 · Open-Meteo'
-        : `${provider} · ${shortSourceTitle(source)}`;
+    const label = source.label
+      || (source.provider === 'official'
+        ? `官方 · ${shortSourceTitle(source)}`
+        : source.provider === 'open-meteo'
+          ? '天气 · Open-Meteo'
+          : `${PROVIDER_LABELS[source.provider] ?? source.provider} · ${shortSourceTitle(source)}`);
     const title = [
       source.title,
       source.url,
@@ -82,7 +84,10 @@ export function sourceLinksHtml(trip, ids = [], max = 4) {
   }
 
   const parts = [...links];
-  if (!links.length && manual) parts.push('<span class="source-manual" title="由行程整理录入，非官方；请以现场为准">行程整理</span>');
+  if (options.derived === true) {
+    parts.push(`<span class="source-derived" title="${escapeAttr(options.derivation || '按路线与交通时间估算')}">估算 · 路线时间</span>`);
+  }
+  if (!links.length && manual) parts.push(`<span class="source-manual" title="由行程整理录入，非官方；请以现场为准">${escapeHtml(manualLabel)}</span>`);
   if (overflow > 0) parts.push(`<span class="source-more" title="更多来源见 sources.md">+${overflow}</span>`);
   if (!parts.length) return '';
   return `<p class="source-links"><span class="source-kicker">来源</span>${parts.join('')}</p>`;

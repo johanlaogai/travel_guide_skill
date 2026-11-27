@@ -43,7 +43,9 @@
 
 ## 硬规则
 
-- 锚点/餐饮必须有 `sourceIds`；
+- 锚点/餐饮/住宿/城际交通必须有 `sourceIds`；
+- buffer 必须有 `sourceIds`，或 `derived: true` + `derivation`（只能用于 buffer）；
+- 3 天以上行程必须有 `overview.guide`，每个 guide 块和 pitfall 都要有 `sourceIds`；
 - `sourceIds` 必须能解析；
 - `openingHours`/`ticketPrice` 必须至少有一个 `provider: official & confidence: official`；
 - `booking.required` 必须有官方来源或预约 URL；

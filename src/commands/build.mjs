@@ -18,7 +18,7 @@ import { renderHtml } from '../render/html.mjs';
 import { buildMarkdown, buildSourcesMarkdown } from '../render/markdown.mjs';
 import { buildIcs } from '../render/ics.mjs';
 
-const VERSION = '0.1.0';
+const VERSION = '0.3.0';
 
 export async function run(argv) {
   const { values } = parse('build', argv, {
@@ -117,7 +117,7 @@ export async function run(argv) {
   for (const name of ['index.html', 'itinerary.md', 'sources.md', 'trip.ics', 'build-receipt.json']) {
     console.log(`  ${name}`);
   }
-  console.log(`\n来源：${coverage.sources} 条 / 官方 ${coverage.official} / 覆盖 ${coverage.sourced}/${coverage.anchored}（${coverage.sourcedPct}%）`);
+  console.log(`\n来源：${coverage.sources} 条 / 官方 ${coverage.official} / 覆盖 ${coverage.sourced}/${coverage.required} 有来源 · ${coverage.derived} 条估算 · ${coverage.missing} 条缺失`);
   if (validation.warnings.length) {
     console.log(`⚠ ${validation.warnings.length} 个提醒，详见 build-receipt.json 或 sources.md`);
   }
@@ -167,9 +167,12 @@ function makeReceipt({
       days: outputTrip.days.length,
       items: coverage.items,
       anchors: coverage.anchored,
+      required: coverage.required,
       sources: coverage.sources,
       officialSources: coverage.official,
       sourcedAnchors: coverage.sourced,
+      derived: coverage.derived,
+      missing: coverage.missing,
       sourcedPct: coverage.sourcedPct,
     },
     providerTransports: transports,

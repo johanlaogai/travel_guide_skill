@@ -121,13 +121,21 @@ export function buildSourcesMarkdown(trip) {
   }
   lines.push('', '## 未核实项', '');
   const unresolved = [];
+  const derived = [];
   for (const day of trip.days ?? []) {
     for (const item of day.items ?? []) {
-      if (!item.sourceIds?.length) unresolved.push(`${day.date} ${item.title}（无来源）`);
+      if (!item.sourceIds?.length) {
+        if (item.derived) derived.push(`${day.date} ${item.title}（估算：${item.derivation || '路线时间估算'}）`);
+        else unresolved.push(`${day.date} ${item.title}（无来源）`);
+      }
     }
   }
-  if (!unresolved.length) lines.push('未发现无来源的锚点/餐饮。');
+  if (!unresolved.length) lines.push('未发现无来源且未标注估算的条目。');
   else for (const line of unresolved) lines.push(`- ${line}`);
+  if (derived.length) {
+    lines.push('', '## 估算项', '');
+    for (const line of derived) lines.push(`- ${line}`);
+  }
   lines.push('', '天气数据：Open-Meteo（CC BY 4.0）。地图数据：© OpenStreetMap contributors（ODbL）。背景资料：Wikimedia（CC BY-SA 4.0）。', '');
   return lines.join('\n');
 }

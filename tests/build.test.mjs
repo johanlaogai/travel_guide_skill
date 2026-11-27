@@ -32,6 +32,9 @@ test('渲染：单文件 HTML、Leaflet 地图、Markdown 与 ICS 都包含关�
   assert.match(html, /id="item-dialog"/);
   assert.match(html, /data-external/);
   assert.match(html, /source-link/);
+  assert.match(html, /目的地手册/);
+  assert.match(html, /避坑与踩雷/);
+  assert.match(html, /pitfall-card/);
   assert.doesNotMatch(html, /id="map-svg"/);
   assert.doesNotMatch(html, /id="sources-section"/);
   assert.doesNotMatch(html, /来源覆盖/);

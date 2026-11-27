@@ -46,7 +46,7 @@ export async function run(argv) {
     }
   }
   console.log(`\n${coverage.items} 个项目 / ${coverage.anchored} 个锚点餐饮 / ${coverage.sources} 条来源 / 官方 ${coverage.official}`);
-  console.log(`来源覆盖：${coverage.sourced}/${coverage.anchored}（${coverage.sourcedPct}%）`);
+  console.log(`来源覆盖：${coverage.sourced}/${coverage.required} 有来源 · ${coverage.derived} 条估算 · ${coverage.missing} 条缺失`);
   if (!result.ok) {
     console.log('\n先修错误，再 build。正式行程请用 --strict。');
     return 1;

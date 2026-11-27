@@ -5,6 +5,18 @@
   "type": "object",
   "additionalProperties": true,
   "required": ["schemaVersion", "meta", "days", "budget", "sources"],
+  "$defs": {
+    "guideBlock": {
+      "type": "object",
+      "required": ["title", "body", "sourceIds"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "sourceIds": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
   "properties": {
     "schemaVersion": { "const": "0.1" },
     "meta": {
@@ -57,7 +69,63 @@
         "summary": { "type": "string" },
         "background": { "type": "string" },
         "highlights": { "type": "array", "items": { "type": "string" } },
-        "risks": { "type": "array", "items": { "type": "string" } }
+        "risks": { "type": "array", "items": { "type": "string" } },
+        "guide": {
+          "type": "object",
+          "properties": {
+            "intro": { "$ref": "#/$defs/guideBlock" },
+            "sections": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/guideBlock" }
+            },
+            "food": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "description", "sourceIds"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "description": { "type": "string" },
+                  "sourceIds": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            },
+            "photoSpots": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "area", "bestTime", "tip", "sourceIds"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "area": { "type": "string" },
+                  "bestTime": { "type": "string" },
+                  "tip": { "type": "string" },
+                  "sourceIds": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            },
+            "pitfalls": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "title", "body", "severity", "category", "sourceIds"],
+                "properties": {
+                  "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+                  "title": { "type": "string" },
+                  "body": { "type": "string" },
+                  "severity": { "enum": ["high", "medium", "low"] },
+                  "category": { "enum": ["ticket", "transport", "scam", "health", "weather", "food", "custom"] },
+                  "appliesTo": { "type": "array", "items": { "type": "string" } },
+                  "sourceIds": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            },
+            "tips": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/guideBlock" }
+            }
+          }
+        }
       }
     },
     "days": {
@@ -121,6 +189,16 @@
                   }
                 },
                 "sourceIds": { "type": "array", "items": { "type": "string" } },
+                "derived": { "type": "boolean" },
+                "derivation": { "type": "string" },
+                "detail": {
+                  "type": "object",
+                  "properties": {
+                    "description": { "type": "string" },
+                    "highlights": { "type": "array", "items": { "type": "string" } },
+                    "photoTip": { "type": "string" }
+                  }
+                },
                 "confidence": { "enum": ["official", "verified", "forecast", "community", "estimate", "unverified"] },
                 "cost": {
                   "type": "object",
