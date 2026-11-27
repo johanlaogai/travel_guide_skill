@@ -1,0 +1,9 @@
+date,item,category,amount,currency,payer,participants,note,source
+2026-11-28,陈家祠门票,tickets,20,CNY,小林,小林;小周,2 人,manual://demo/chen-clan
+2026-11-28,西关早茶,food,120,CNY,小周,小林;小周,2 人,manual://demo/food
+2026-11-28,地铁与打车,transport,80,CNY,小林,小林;小周,2 人,manual://demo/transport
+2026-11-29,珠江新城午饭,food,140,CNY,小林,小林;小周,2 人,manual://demo/food
+2026-11-29,广州塔门票,tickets,300,CNY,小周,小林;小周,按登塔估算,manual://demo/tower
+2026-11-30,白云山门票,tickets,10,CNY,小林,小林;小周,2 人,manual://demo/baiyun
+2026-11-30,返程前晚饭,food,140,CNY,小周,小林;小周,2 人,manual://demo/food
+2026-11-30,高铁/城际,transport,150,CNY,小林,小林;小周,按深圳往返估算,manual://demo/transport

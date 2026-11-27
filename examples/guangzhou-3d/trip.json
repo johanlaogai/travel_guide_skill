@@ -1,0 +1,664 @@
+{
+  "schemaVersion": "0.1",
+  "meta": {
+    "id": "guangzhou-3d-20261128",
+    "title": "广州 3 天 2 晚：老城、江岸与早茶",
+    "destination": {
+      "name": "广州",
+      "country": "CN",
+      "admin1": "广东省",
+      "lat": 23.1291,
+      "lon": 113.2644,
+      "timezone": "Asia/Shanghai",
+      "coordSystem": "WGS84"
+    },
+    "origin": "深圳",
+    "startDate": "2026-11-28",
+    "endDate": "2026-11-30",
+    "days": 3,
+    "travelers": 2,
+    "budget": {
+      "currency": "CNY",
+      "level": "mid",
+      "totalMin": 2050,
+      "totalMax": 3050
+    },
+    "pace": "balanced",
+    "interests": ["老城", "建筑", "早茶", "江景"],
+    "constraints": ["不赶早班车", "每天留 1 段自由时间", "热门馆先预约"],
+    "generatedAt": "2026-11-27T02:00:00.000Z",
+    "updatedAt": "2026-11-27T02:00:00.000Z",
+    "generator": "travel-guide/0.1.0",
+    "demo": true
+  },
+  "overview": {
+    "summary": "把广州拆成三段：西关老城、珠江新城—广州塔、白云山—越秀。每天 2–3 个锚点，午晚饭都落在步行或地铁 20 分钟内。",
+    "background": "广州的旅行半径很适合“老城 + 江岸 + 公园”的组合：西关看骑楼、祠堂与早茶，珠江新城看现代城市天际线，白云山和越秀公园补一段绿意。示例数据用于展示版式与交互，营业时间、票价、预约规则请在出发前用官方页面复核。",
+    "highlights": ["陈家祠的砖雕与灰塑", "沙面—永庆坊的骑楼街巷", "广东省博物馆到广州塔的江岸线", "白云山俯瞰城市"],
+    "risks": ["广东省博物馆通常需要预约，周一闭馆风险需以官网为准。", "广州塔登塔与非登塔是两种体验，票价和时段以官方为准。", "11 月末仍可能有降雨，白云山路面湿滑时改走越秀公园。", "示例中的天气是快照，不是实时预报。"]
+  },
+  "days": [
+    {
+      "date": "2026-11-28",
+      "weekday": "星期六",
+      "title": "西关：祠堂、沙面与永庆坊",
+      "area": "荔湾区",
+      "weather": {
+        "sourceId": "src-demo-weather",
+        "summary": "多云间晴",
+        "weatherCode": 2,
+        "high": 24,
+        "low": 17,
+        "precipitationProbability": 20,
+        "precipitationSum": 0,
+        "sunrise": "06:48",
+        "sunset": "17:42",
+        "updatedAt": "2026-11-27T01:00:00.000Z",
+        "climate": false
+      },
+      "items": [
+        {
+          "id": "d1-chen-clan",
+          "type": "anchor",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "陈家祠（广东民间工艺博物馆）",
+          "place": {
+            "name": "陈家祠",
+            "address": "荔湾区中山七路恩龙里 34 号",
+            "lat": 23.1291,
+            "lon": 113.2445,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-chen-clan"],
+          "confidence": "community",
+          "cost": { "amount": 10, "currency": "CNY", "category": "tickets" },
+          "notes": "开门后先看中轴线与砖雕，再绕到后院；票价/开放时间以官方为准。"
+        },
+        {
+          "id": "d1-lunch",
+          "type": "meal",
+          "start": "11:30",
+          "end": "12:30",
+          "title": "西关早茶/午茶",
+          "place": {
+            "name": "点都德（中山七路一带）",
+            "address": "荔湾区中山七路",
+            "lat": 23.1284,
+            "lon": 113.2467,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-food"],
+          "confidence": "community",
+          "cost": { "amount": 120, "currency": "CNY", "category": "food" },
+          "transit": { "mode": "walk", "durationMin": 20, "distanceKm": 1.1, "fromPrevious": true },
+          "notes": "示例餐点，未做实时排队/营业核验；可选炳胜、陶陶居等替代。"
+        },
+        {
+          "id": "d1-shamian",
+          "type": "anchor",
+          "start": "13:00",
+          "end": "15:00",
+          "title": "沙面岛",
+          "place": {
+            "name": "沙面",
+            "address": "荔湾区沙面南街",
+            "lat": 23.1097,
+            "lon": 113.2431,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-shamian"],
+          "confidence": "community",
+          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
+          "transit": { "mode": "metro", "durationMin": 20, "distanceKm": 4.2, "fromPrevious": true },
+          "notes": "露天街区，适合慢走；午后光线好，注意防晒。"
+        },
+        {
+          "id": "d1-yongqing",
+          "type": "anchor",
+          "start": "15:30",
+          "end": "17:30",
+          "title": "永庆坊与恩宁路",
+          "place": {
+            "name": "永庆坊",
+            "address": "荔湾区恩宁路",
+            "lat": 23.1168,
+            "lon": 113.2445,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-yongqing"],
+          "confidence": "community",
+          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
+          "transit": { "mode": "taxi", "durationMin": 15, "distanceKm": 3.0, "fromPrevious": true },
+          "notes": "街区免费，粤剧艺术博物馆等单点可能需预约/闭馆，现场看公告。"
+        },
+        {
+          "id": "d1-dinner",
+          "type": "meal",
+          "start": "18:00",
+          "end": "19:30",
+          "title": "西关晚饭",
+          "place": {
+            "name": "恩宁路—第十甫路一带",
+            "address": "荔湾区恩宁路",
+            "lat": 23.1172,
+            "lon": 113.2451,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-food"],
+          "confidence": "community",
+          "cost": { "amount": 160, "currency": "CNY", "category": "food" },
+          "transit": { "mode": "walk", "durationMin": 10, "distanceKm": 0.6, "fromPrevious": true },
+          "notes": "示例为区域建议，不指定具体餐厅；热门店建议错峰。"
+        },
+        {
+          "id": "d1-hotel",
+          "type": "hotel",
+          "start": "20:00",
+          "end": "20:30",
+          "title": "回酒店办理入住/休息",
+          "place": {
+            "name": "北京路—海珠广场一带",
+            "address": "越秀区北京路附近",
+            "lat": 23.125,
+            "lon": 113.269,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-hotel"],
+          "confidence": "community",
+          "transit": { "mode": "metro", "durationMin": 15, "distanceKm": 3.5, "fromPrevious": true },
+          "notes": "住宿仅为区域示例；实际酒店按预算与取消政策另选。"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-29",
+      "weekday": "星期日",
+      "title": "珠江新城：博物馆与广州塔",
+      "area": "天河区/海珠区",
+      "weather": {
+        "sourceId": "src-demo-weather",
+        "summary": "多云",
+        "weatherCode": 3,
+        "high": 25,
+        "low": 18,
+        "precipitationProbability": 25,
+        "precipitationSum": 0.2,
+        "sunrise": "06:49",
+        "sunset": "17:42",
+        "updatedAt": "2026-11-27T01:00:00.000Z",
+        "climate": false
+      },
+      "items": [
+        {
+          "id": "d2-museum",
+          "type": "anchor",
+          "start": "09:00",
+          "end": "12:00",
+          "title": "广东省博物馆",
+          "place": {
+            "name": "广东省博物馆",
+            "address": "天河区珠江东路 2 号",
+            "lat": 23.1146,
+            "lon": 113.3247,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-museum"],
+          "confidence": "community",
+          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
+          "booking": {
+            "required": false,
+            "status": "check-official",
+            "url": "https://www.guangdongmuseum.com/",
+            "note": "示例只记录官网入口；是否需预约、是否闭馆以官方为准。"
+          },
+          "notes": "免费馆通常需预约；周一闭馆风险高，周日上午也建议提前看官网。"
+        },
+        {
+          "id": "d2-lunch",
+          "type": "meal",
+          "start": "12:30",
+          "end": "13:30",
+          "title": "珠江新城午饭",
+          "place": {
+            "name": "花城汇一带",
+            "address": "天河区花城大道",
+            "lat": 23.1185,
+            "lon": 113.3215,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-food"],
+          "confidence": "community",
+          "cost": { "amount": 140, "currency": "CNY", "category": "food" },
+          "transit": { "mode": "walk", "durationMin": 10, "distanceKm": 0.8, "fromPrevious": true },
+          "notes": "商场餐饮选择多；周末排队，建议 12:15 前到。"
+        },
+        {
+          "id": "d2-tower",
+          "type": "anchor",
+          "start": "14:00",
+          "end": "16:30",
+          "title": "广州塔（外观/登塔二选一）",
+          "place": {
+            "name": "广州塔",
+            "address": "海珠区阅江西路 222 号",
+            "lat": 23.1066,
+            "lon": 113.3245,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-tower"],
+          "confidence": "community",
+          "cost": { "amount": 150, "currency": "CNY", "category": "tickets" },
+          "transit": { "mode": "metro", "durationMin": 25, "distanceKm": 5.8, "fromPrevious": true },
+          "booking": {
+            "required": false,
+            "status": "check-official",
+            "note": "登塔需另购票并选时段；不登塔也可在江边看夜景。"
+          },
+          "notes": "票价/时段以官方为准；恐高或排队长时可只走滨江步道。"
+        },
+        {
+          "id": "d2-beijing-road",
+          "type": "anchor",
+          "start": "17:00",
+          "end": "18:30",
+          "title": "北京路步行街",
+          "place": {
+            "name": "北京路",
+            "address": "越秀区北京路",
+            "lat": 23.125,
+            "lon": 113.269,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-beijing-road"],
+          "confidence": "community",
+          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
+          "transit": { "mode": "metro", "durationMin": 20, "distanceKm": 4.5, "fromPrevious": true },
+          "notes": "人多，注意随身物品；只看骑楼与老字号即可，不必全程走完。"
+        },
+        {
+          "id": "d2-dinner",
+          "type": "meal",
+          "start": "19:00",
+          "end": "20:30",
+          "title": "北京路晚饭",
+          "place": {
+            "name": "北京路—惠福东路一带",
+            "address": "越秀区惠福东路",
+            "lat": 23.1239,
+            "lon": 113.2702,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-food"],
+          "confidence": "community",
+          "cost": { "amount": 180, "currency": "CNY", "category": "food" },
+          "transit": { "mode": "walk", "durationMin": 10, "distanceKm": 0.7, "fromPrevious": true },
+          "notes": "示例为区域建议；想吃的店先看排队/营业状态。"
+        },
+        {
+          "id": "d2-hotel",
+          "type": "hotel",
+          "start": "21:00",
+          "end": "21:30",
+          "title": "回酒店",
+          "place": {
+            "name": "北京路—海珠广场一带",
+            "address": "越秀区北京路附近",
+            "lat": 23.125,
+            "lon": 113.269,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-hotel"],
+          "confidence": "community",
+          "transit": { "mode": "walk", "durationMin": 10, "distanceKm": 0.8, "fromPrevious": true }
+        }
+      ]
+    },
+    {
+      "date": "2026-11-30",
+      "weekday": "星期一",
+      "title": "白云山与越秀：城市绿意",
+      "area": "白云区/越秀区",
+      "weather": {
+        "sourceId": "src-demo-weather",
+        "summary": "晴间多云",
+        "weatherCode": 1,
+        "high": 24,
+        "low": 16,
+        "precipitationProbability": 10,
+        "precipitationSum": 0,
+        "sunrise": "06:49",
+        "sunset": "17:41",
+        "updatedAt": "2026-11-27T01:00:00.000Z",
+        "climate": false
+      },
+      "items": [
+        {
+          "id": "d3-baiyun",
+          "type": "anchor",
+          "start": "08:30",
+          "end": "11:30",
+          "title": "白云山（南门上山）",
+          "place": {
+            "name": "白云山南门",
+            "address": "白云区云山南路",
+            "lat": 23.183,
+            "lon": 113.3,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-baiyun"],
+          "confidence": "community",
+          "cost": { "amount": 5, "currency": "CNY", "category": "tickets" },
+          "notes": "走南门—摩星岭或能仁寺短线；索道/电瓶车运营与票价以现场为准。"
+        },
+        {
+          "id": "d3-lunch",
+          "type": "meal",
+          "start": "12:00",
+          "end": "13:00",
+          "title": "下山午饭",
+          "place": {
+            "name": "白云山南门一带",
+            "address": "白云区云山南路",
+            "lat": 23.1802,
+            "lon": 113.2985,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-food"],
+          "confidence": "community",
+          "cost": { "amount": 120, "currency": "CNY", "category": "food" },
+          "transit": { "mode": "walk", "durationMin": 20, "distanceKm": 1.0, "fromPrevious": true },
+          "notes": "示例为区域建议；下山后按体力选最近的点。"
+        },
+        {
+          "id": "d3-yuexiu",
+          "type": "anchor",
+          "start": "14:00",
+          "end": "16:00",
+          "title": "越秀公园与五羊石像",
+          "place": {
+            "name": "越秀公园",
+            "address": "越秀区解放北路 988 号",
+            "lat": 23.14,
+            "lon": 113.266,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-yuexiu"],
+          "confidence": "community",
+          "cost": { "amount": 0, "currency": "CNY", "category": "tickets" },
+          "transit": { "mode": "taxi", "durationMin": 25, "distanceKm": 7.5, "fromPrevious": true },
+          "notes": "公园免费；镇海楼/博物馆等单点可能另收费，按现场公告。"
+        },
+        {
+          "id": "d3-dinner",
+          "type": "meal",
+          "start": "18:00",
+          "end": "19:00",
+          "title": "返程前晚饭",
+          "place": {
+            "name": "越秀公园—解放北路一带",
+            "address": "越秀区解放北路",
+            "lat": 23.1412,
+            "lon": 113.2675,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-food"],
+          "confidence": "community",
+          "cost": { "amount": 140, "currency": "CNY", "category": "food" },
+          "transit": { "mode": "walk", "durationMin": 15, "distanceKm": 0.9, "fromPrevious": true },
+          "notes": "留出取行李和去车站的时间；具体车次以 12306 为准。"
+        },
+        {
+          "id": "d3-depart",
+          "type": "transit",
+          "start": "19:15",
+          "end": "20:00",
+          "title": "取行李/前往车站",
+          "place": {
+            "name": "广州南站方向",
+            "address": "按实际车票调整",
+            "lat": 22.989,
+            "lon": 113.269,
+            "coordSystem": "WGS84"
+          },
+          "sourceIds": ["src-demo-hotel"],
+          "confidence": "community",
+          "transit": { "mode": "metro", "durationMin": 15, "distanceKm": 2.0, "fromPrevious": true },
+          "notes": "示意项；请按实际车站/车次重算，预留至少 60 分钟进站。"
+        }
+      ]
+    }
+  ],
+  "discoveries": [
+    {
+      "name": "粤剧艺术博物馆",
+      "area": "荔湾区",
+      "lat": 23.1178,
+      "lon": 113.2449,
+      "why": "永庆坊旁边的园林式博物馆，雨天备选",
+      "sourceIds": ["src-demo-yongqing"]
+    },
+    {
+      "name": "海心桥",
+      "area": "海珠区",
+      "lat": 23.1115,
+      "lon": 113.324,
+      "why": "广州塔—珠江新城之间的步行桥，看夜景",
+      "sourceIds": ["src-demo-tower"]
+    }
+  ],
+  "budget": [
+    { "key": "transport", "label": "交通", "min": 400, "max": 600, "currency": "CNY" },
+    { "key": "lodging", "label": "住宿", "min": 800, "max": 1200, "currency": "CNY" },
+    { "key": "food", "label": "餐饮", "min": 500, "max": 700, "currency": "CNY" },
+    { "key": "tickets", "label": "门票", "min": 150, "max": 250, "currency": "CNY" },
+    { "key": "other", "label": "其他", "min": 200, "max": 300, "currency": "CNY" }
+  ],
+  "packing": [
+    { "id": "pack-id", "label": "身份证/护照", "category": "证件", "essential": true },
+    { "id": "pack-phone", "label": "手机与充电器", "category": "电子", "essential": true },
+    { "id": "pack-power", "label": "充电宝（随身，不托运）", "category": "电子", "essential": true },
+    { "id": "pack-cash", "label": "少量现金与银行卡", "category": "支付", "essential": true },
+    { "id": "pack-med", "label": "常用药/创可贴", "category": "健康", "essential": true },
+    { "id": "pack-umbrella", "label": "折叠伞/雨衣", "category": "天气", "essential": false },
+    { "id": "pack-shoes", "label": "好走的鞋", "category": "衣物", "essential": true },
+    { "id": "pack-bottle", "label": "水杯", "category": "日用", "essential": false }
+  ],
+  "bookingChecklist": [
+    {
+      "id": "book-museum",
+      "label": "广东省博物馆预约（以官网为准）",
+      "required": false,
+      "status": "pending",
+      "deadline": "2026-11-28",
+      "url": "https://www.guangdongmuseum.com/",
+      "sourceIds": ["src-demo-museum-official"],
+      "note": "示例只记录官网入口，未抓取正文；请自行确认预约与闭馆。"
+    },
+    {
+      "id": "book-tower",
+      "label": "广州塔登塔时段（如登塔）",
+      "required": false,
+      "status": "pending",
+      "deadline": "2026-11-28",
+      "note": "不登塔可改为滨江步道/海心桥；票价与时段以官方为准。"
+    },
+    {
+      "id": "book-hotel",
+      "label": "确认酒店入住/退房与取消政策",
+      "required": false,
+      "status": "pending",
+      "deadline": "2026-11-27"
+    }
+  ],
+  "emergency": {
+    "contacts": [],
+    "notes": [
+      "中国报警 110，急救 120，火警 119。",
+      "把酒店地址、车票、保险单和使领馆电话放在离线可查的位置。",
+      "示例版本不含个人紧急联系人；公开分享前请用 --public 脱敏。"
+    ]
+  },
+  "sources": [
+    {
+      "id": "src-demo-weather",
+      "provider": "open-meteo",
+      "kind": "weather",
+      "title": "示例天气快照（广州，2026-11-27 获取）",
+      "url": "https://open-meteo.com/",
+      "retrievedAt": "2026-11-27T01:00:00.000Z",
+      "transport": "snapshot",
+      "license": "CC BY 4.0",
+      "confidence": "forecast",
+      "rawHash": "demo-weather-20261127",
+      "note": "演示用快照，不是实时预报；构建时不会联网刷新。"
+    },
+    {
+      "id": "src-demo-chen-clan",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "陈家祠坐标（示例整理）",
+      "url": "manual://demo/chen-clan",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-chen-clan",
+      "note": "坐标用于演示地图，未做实时复核。"
+    },
+    {
+      "id": "src-demo-shamian",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "沙面坐标（示例整理）",
+      "url": "manual://demo/shamian",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-shamian",
+      "note": "坐标用于演示地图，未做实时复核。"
+    },
+    {
+      "id": "src-demo-yongqing",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "永庆坊坐标（示例整理）",
+      "url": "manual://demo/yongqing",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-yongqing",
+      "note": "坐标用于演示地图，未做实时复核。"
+    },
+    {
+      "id": "src-demo-museum",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "广东省博物馆坐标（示例整理）",
+      "url": "manual://demo/museum",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-museum",
+      "note": "坐标用于演示地图，未做实时复核。"
+    },
+    {
+      "id": "src-demo-tower",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "广州塔坐标（示例整理）",
+      "url": "manual://demo/tower",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-tower",
+      "note": "坐标用于演示地图，未做实时复核。"
+    },
+    {
+      "id": "src-demo-beijing-road",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "北京路坐标（示例整理）",
+      "url": "manual://demo/beijing-road",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-beijing-road",
+      "note": "坐标用于演示地图，未做实时复核。"
+    },
+    {
+      "id": "src-demo-baiyun",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "白云山南门坐标（示例整理）",
+      "url": "manual://demo/baiyun",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-baiyun",
+      "note": "坐标用于演示地图，未做实时复核。"
+    },
+    {
+      "id": "src-demo-yuexiu",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "越秀公园坐标（示例整理）",
+      "url": "manual://demo/yuexiu",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-yuexiu",
+      "note": "坐标用于演示地图，未做实时复核。"
+    },
+    {
+      "id": "src-demo-food",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "餐饮区域建议（示例）",
+      "url": "manual://demo/food",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-food",
+      "note": "不指定具体餐厅，未做排队/营业核验。"
+    },
+    {
+      "id": "src-demo-hotel",
+      "provider": "manual",
+      "kind": "poi",
+      "title": "住宿区域建议（示例）",
+      "url": "manual://demo/hotel",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "user-provided",
+      "confidence": "community",
+      "rawHash": "demo-hotel",
+      "note": "仅区域建议，不代表具体酒店库存/价格。"
+    },
+    {
+      "id": "src-demo-museum-official",
+      "provider": "official",
+      "kind": "official",
+      "title": "广东省博物馆官网（预约入口，待核验）",
+      "url": "https://www.guangdongmuseum.com/",
+      "retrievedAt": "2026-11-27T02:00:00.000Z",
+      "transport": "manual",
+      "license": "官方页面条款",
+      "confidence": "unverified",
+      "rawHash": "demo-museum-official",
+      "note": "示例只记录官网入口，未抓取正文；请自行确认预约与闭馆。"
+    }
+  ],
+  "provenance": {
+    "policyVersion": "0.1",
+    "lastCheckedAt": "2026-11-27T02:00:00.000Z"
+  }
+}

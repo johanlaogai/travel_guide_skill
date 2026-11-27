@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/johanlaogai/travel_guide_skill/schemas/source.schema.json",
+  "title": "travel-guide source",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["id", "provider", "kind", "title", "retrievedAt", "transport", "license", "confidence"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^src-[a-z0-9-]+$" },
+    "provider": {
+      "enum": ["open-meteo", "nominatim", "overpass", "wikimedia", "official", "frankfurter", "nager", "tikhub", "manual"]
+    },
+    "kind": { "enum": ["weather", "geocode", "poi", "wiki", "official", "ugc", "fx", "holiday", "note"] },
+    "title": { "type": "string" },
+    "url": { "type": "string", "pattern": "^(https?://|manual://)" },
+    "retrievedAt": { "type": "string", "format": "date-time" },
+    "transport": { "enum": ["live", "cache", "snapshot", "manual"] },
+    "license": { "type": "string", "minLength": 1 },
+    "confidence": { "enum": ["official", "verified", "forecast", "community", "estimate", "unverified"] },
+    "rawHash": { "type": "string" },
+    "note": { "type": "string" }
+  }
+}

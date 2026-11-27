@@ -1,0 +1,28 @@
+{
+  "name": "travel-guide-skill",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Verifiable, interactive travel-guide skill for DeepSeek Harness",
+  "type": "module",
+  "bin": {
+    "travel-guide": "./bin/travel-guide.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "demo": "node bin/travel-guide.mjs demo --out .tmp/demo",
+    "check": "node bin/travel-guide.mjs check --trip examples/guangzhou-3d/trip.json",
+    "build": "node bin/travel-guide.mjs build --trip examples/guangzhou-3d/trip.json --out examples/guangzhou-3d/dist",
+    "lint": "node scripts/lint.mjs"
+  },
+  "keywords": [
+    "travel",
+    "itinerary",
+    "travel-guide",
+    "deepseek-harness",
+    "skill"
+  ],
+  "license": "MIT"
+}

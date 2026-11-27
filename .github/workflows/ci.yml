@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - name: Install (no runtime deps)
+        run: npm install --ignore-scripts
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm test
+      - name: Check example (strict)
+        run: node bin/travel-guide.mjs check --trip examples/guangzhou-3d/trip.json --strict
+      - name: Build example
+        run: node bin/travel-guide.mjs build --trip examples/guangzhou-3d/trip.json --out .tmp/ci-dist --allow-unverified
+      - name: Assert artifacts
+        run: |
+          test -s .tmp/ci-dist/index.html
+          test -s .tmp/ci-dist/trip.ics
+          test -s .tmp/ci-dist/build-receipt.json
+          grep -q 'map-svg' .tmp/ci-dist/index.html
+          grep -q 'BEGIN:VCALENDAR' .tmp/ci-dist/trip.ics
